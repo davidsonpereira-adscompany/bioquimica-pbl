@@ -116,6 +116,21 @@ p,.item{font-size:clamp(0.8rem,1.5vw,1.15rem);line-height:1.5;font-weight:400}
 /* FINAL */
 .final-quote{font-size:clamp(1.2rem,2.5vw,2rem);font-weight:300;font-style:italic;line-height:1.5;max-width:70%;text-align:center;opacity:0.9}
 .final-quote strong{font-weight:700;color:#14a3a3;font-style:normal}
+
+/* SUB-STEPS within a slide */
+.step{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease, transform 0.7s ease;pointer-events:none}
+.step.step-left{transform:translateX(-40px)}
+.step.visible{opacity:1;transform:translateX(0);pointer-events:auto}
+
+/* CASO CLÍNICO LAYOUT */
+.caso-full{display:grid;grid-template-columns:1fr 1fr;gap:3vw;width:100%;height:100%;padding:4vh 4vw;align-items:start;align-content:start}
+.caso-col{display:flex;flex-direction:column;justify-content:flex-start}
+.caso-col h3{font-size:clamp(0.8rem,1.2vw,1rem);color:#14a3a3;margin-bottom:0.6vh;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.caso-col .caso-item{font-size:clamp(0.65rem,1vw,0.85rem);line-height:1.45;margin-bottom:0.2vh;opacity:0.9}
+.caso-col .caso-section{margin-bottom:1.5vh}
+.caso-col .dado-box{font-size:clamp(0.6rem,0.9vw,0.8rem);padding:2px 10px}
+.exame-title{font-size:clamp(0.7rem,1vw,0.85rem);color:#ef5350;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.6vh}
+.exame-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5vh}
 </style>
 </head>
 <body>
@@ -141,35 +156,112 @@ p,.item{font-size:clamp(0.8rem,1.5vw,1.15rem);line-height:1.5;font-weight:400}
   </div>
 </div>
 
-<!-- SLIDE 1: CASO CLÍNICO -->
-<div class="slide overlay-left">
+<!-- SLIDE 1: CASO CLÍNICO (2 tempos) -->
+<div class="slide overlay-heavy" data-steps="2">
   <div class="slide-bg" style="background-image:url('img/sickle-cells-vessel.png')"></div>
-  <div class="content" style="padding:4vh 4vw">
-    <div style="max-width:52%">
-      <div class="tag tag-red anim-up d1">Caso Clínico</div>
-      <h2 class="anim-up d2" style="margin-bottom:2vh">Lucas, 18 anos</h2>
-      <div class="caso-section anim-up d3">
-        <h3>Identificação</h3>
-        <div class="caso-item">Masculino, 18 anos, pardo, estudante</div>
-        <div class="caso-item">Diagnóstico: Anemia Falciforme (HbSS) desde os 2 anos</div>
-        <div class="caso-item">Primo com Fenilcetonúria (PKU)</div>
+  <div class="content" style="padding:3.5vh 4vw">
+    <div class="caso-full">
+
+      <!-- TEMPO 1: HISTÓRIA (aparece no primeiro clique / ao entrar no slide) -->
+      <div class="caso-col step step-left" data-step="1">
+        <div class="tag tag-red" style="margin-bottom:1.5vh">Caso Clínico</div>
+        <h2 style="font-size:clamp(1.3rem,2.5vw,2rem);margin-bottom:1.5vh">Lucas, 18 anos</h2>
+
+        <div class="caso-section">
+          <h3>Identificação</h3>
+          <div class="caso-item">Masculino, 18 anos, pardo, estudante universitário</div>
+          <div class="caso-item">Natural de Barreiras-BA</div>
+          <div class="caso-item">Diagnóstico de <strong>Anemia Falciforme (HbSS)</strong> desde os 2 anos</div>
+          <div class="caso-item">Primo de 1º grau com <strong>Fenilcetonúria (PKU)</strong></div>
+        </div>
+
+        <div class="caso-section">
+          <h3>História da doença atual</h3>
+          <div class="caso-item">Dor intensa em joelhos e região lombar há <strong>48 horas</strong></div>
+          <div class="caso-item">Febre intermitente, fraqueza progressiva, falta de ar</div>
+          <div class="caso-item">Infecção respiratória há 3 semanas (gatilho da crise)</div>
+          <div class="caso-item">Dieta pobre em proteínas nas últimas 3 semanas (inapetência)</div>
+          <div class="caso-item">3+ internações prévias por crises vaso-oclusivas</div>
+        </div>
+
+        <div class="caso-section">
+          <h3>Medicações em uso</h3>
+          <div class="caso-item"><span class="dado-box dado-teal">Hidroxiureia</span> (↑ HbF) + <span class="dado-box dado-teal">Ácido Fólico</span></div>
+        </div>
+
+        <div class="caso-section">
+          <h3>Admissão na UPA</h3>
+          <div class="caso-item">Dor: <span class="dado-box dado-red">9/10</span> | Febre: <span class="dado-box dado-red">38,4°C</span></div>
+          <div class="caso-item">Paciente consciente, orientado, mas em <strong>sofrimento agudo</strong></div>
+          <div class="caso-item">Pele e mucosas: <strong>palidez +++</strong>, <strong>icterícia</strong> em escleras</div>
+        </div>
       </div>
-      <div class="caso-section anim-up d4">
-        <h3>Queixa principal</h3>
-        <div class="caso-item">Dor intensa em joelhos e região lombar há 48h</div>
-        <div class="caso-item">Dor: <span class="dado-box dado-red">9/10</span> Febre: <span class="dado-box dado-red">38,4°C</span></div>
+
+      <!-- TEMPO 2: EXAME + LABS (aparece no segundo clique) -->
+      <div class="caso-col step" data-step="2">
+        <div class="exame-title" style="margin-top:4vh">Exame Físico</div>
+        <div class="caso-section">
+          <h3>Sinais vitais</h3>
+          <div class="exame-row">
+            <span class="dado-box">FC 118 bpm</span>
+            <span class="dado-box">FR 28 irpm</span>
+            <span class="dado-box">PA 100×60</span>
+          </div>
+          <div class="caso-item">SpO₂ <span class="dado-box dado-red">89%</span> em ar ambiente</div>
+        </div>
+        <div class="caso-section">
+          <h3>Achados do exame</h3>
+          <div class="caso-item">Tórax: <strong>estertores crepitantes</strong> em base pulmonar direita</div>
+          <div class="caso-item">Abdome: dor à palpação em hipocôndrio E — baço <strong>não palpável</strong> (autoesplenectomia)</div>
+          <div class="caso-item">MMII: <strong>edema maleolar bilateral</strong> (+/4+)</div>
+          <div class="caso-item">Articulações: dor intensa à mobilização de joelhos</div>
+        </div>
+
+        <div class="exame-title">Exames laboratoriais</div>
+        <div class="caso-section">
+          <h3>Hemograma</h3>
+          <div class="exame-row">
+            <span class="dado-box dado-red">Hb 6,8 g/dL</span>
+            <span class="dado-box dado-red">Ht 20%</span>
+            <span class="dado-box">Reticulócitos 12%</span>
+          </div>
+        </div>
+        <div class="caso-section">
+          <h3>Marcadores de hemólise</h3>
+          <div class="exame-row">
+            <span class="dado-box dado-red">BI 3,9 mg/dL</span>
+            <span class="dado-box dado-red">LDH 980 U/L</span>
+            <span class="dado-box dado-red">Haptoglobina indetect.</span>
+          </div>
+        </div>
+        <div class="caso-section">
+          <h3>Gasometria arterial</h3>
+          <div class="exame-row">
+            <span class="dado-box dado-red">pH 7,28</span>
+            <span class="dado-box">pO₂ 58 mmHg</span>
+            <span class="dado-box dado-red">HCO₃⁻ 16</span>
+            <span class="dado-box dado-red">Lactato 3,4</span>
+          </div>
+        </div>
+        <div class="caso-section">
+          <h3>Proteínas e eletroforese</h3>
+          <div class="exame-row">
+            <span class="dado-box dado-red">Albumina 2,3 g/dL</span>
+            <span class="dado-box">Prot. totais 5,1</span>
+          </div>
+          <div class="exame-row" style="margin-top:4px">
+            <span class="dado-box">HbS 86%</span>
+            <span class="dado-box dado-red">HbA1 0%</span>
+            <span class="dado-box">HbA2 2%</span>
+            <span class="dado-box dado-teal">HbF 12%</span>
+          </div>
+        </div>
+        <div class="caso-section">
+          <h3>Hematoscopia</h3>
+          <div class="caso-item">Drepanócitos (foice) • Hemácias em alvo • Corpúsculos de Howell-Jolly</div>
+        </div>
       </div>
-      <div class="caso-section anim-up d5">
-        <h3>Sinais vitais</h3>
-        <div class="caso-item">FC <span class="dado-box">118 bpm</span> FR <span class="dado-box">28 irpm</span> PA <span class="dado-box">100×60</span></div>
-        <div class="caso-item">SpO₂ <span class="dado-box dado-red">89%</span> (ar ambiente)</div>
-      </div>
-      <div class="caso-section anim-up d6">
-        <h3>Exames-chave</h3>
-        <div class="caso-item">Hb <span class="dado-box dado-red">6,8 g/dL</span> pH <span class="dado-box dado-red">7,28</span> Lactato <span class="dado-box dado-red">3,4</span></div>
-        <div class="caso-item">Albumina <span class="dado-box dado-red">2,3 g/dL</span> LDH <span class="dado-box">980 U/L</span></div>
-        <div class="caso-item">HbS <span class="dado-box">86%</span> HbA1 <span class="dado-box">0%</span> HbF <span class="dado-box">12%</span></div>
-      </div>
+
     </div>
   </div>
 </div>
@@ -416,23 +508,75 @@ const navhint = document.getElementById('navhint');
 let current = 0;
 const total = slides.length;
 
+let currentStep = 0;
+
+function getSteps(slide) {
+  return slide.querySelectorAll('.step');
+}
+
+function getTotalSteps(slide) {
+  const attr = slide.getAttribute('data-steps');
+  return attr ? parseInt(attr) : 0;
+}
+
+function showStepsUpTo(slide, step) {
+  const steps = getSteps(slide);
+  steps.forEach(s => {
+    const sNum = parseInt(s.getAttribute('data-step'));
+    if (sNum <= step) s.classList.add('visible');
+    else s.classList.remove('visible');
+  });
+}
+
 function goTo(n) {
   if (n < 0 || n >= total) return;
   slides[current].classList.remove('active');
   slides[current].classList.add('prev');
+  const oldSteps = getSteps(slides[current]);
+  oldSteps.forEach(s => s.classList.remove('visible'));
   current = n;
+  currentStep = 0;
   slides.forEach((s, i) => {
     s.classList.remove('active', 'prev');
     if (i === current) s.classList.add('active');
   });
+  const totalSteps = getTotalSteps(slides[current]);
+  if (totalSteps > 0) {
+    currentStep = 1;
+    showStepsUpTo(slides[current], 1);
+  }
+  updateUI();
+}
+
+function updateUI() {
   progress.style.width = ((current / (total - 1)) * 100) + '%';
   counter.textContent = (current + 1) + ' / ' + total;
   if (current > 0) navhint.classList.remove('show');
 }
 
+function advance() {
+  const totalSteps = getTotalSteps(slides[current]);
+  if (totalSteps > 0 && currentStep < totalSteps) {
+    currentStep++;
+    showStepsUpTo(slides[current], currentStep);
+  } else {
+    goTo(current + 1);
+  }
+}
+
+function goBack() {
+  const totalSteps = getTotalSteps(slides[current]);
+  if (totalSteps > 0 && currentStep > 1) {
+    currentStep--;
+    showStepsUpTo(slides[current], currentStep);
+  } else {
+    goTo(current - 1);
+  }
+}
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goBack(); }
   if (e.key === 'Home') { e.preventDefault(); goTo(0); }
   if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
   if (e.key === 'f' || e.key === 'F') {
@@ -445,7 +589,7 @@ let touchStartX = 0;
 document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
 document.addEventListener('touchend', (e) => {
   const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+  if (Math.abs(diff) > 50) { diff > 0 ? advance() : goBack(); }
 });
 
 goTo(0);
