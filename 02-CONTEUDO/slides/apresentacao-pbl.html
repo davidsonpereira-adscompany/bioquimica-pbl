@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PBL — Caso Clínico Lucas | Anemia Falciforme</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Montserrat',sans-serif;color:#fff}
+
+/* SLIDE SYSTEM */
+.deck{width:100%;height:100%;position:relative}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.8s ease, transform 0.8s ease;transform:scale(1.02)}
+.slide.active{opacity:1;pointer-events:auto;transform:scale(1);z-index:10}
+.slide.prev{opacity:0;transform:scale(0.95)}
+
+/* BACKGROUNDS */
+.slide-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;z-index:1}
+.slide-bg::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%}
+.overlay-dark .slide-bg::after{background:rgba(0,0,0,0.55)}
+.overlay-gradient .slide-bg::after{background:linear-gradient(135deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.6) 100%)}
+.overlay-left .slide-bg::after{background:linear-gradient(90deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.6) 40%,rgba(0,0,0,0.2) 100%)}
+.overlay-right .slide-bg::after{background:linear-gradient(270deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.6) 40%,rgba(0,0,0,0.2) 100%)}
+.overlay-heavy .slide-bg::after{background:rgba(0,0,0,0.7)}
+.overlay-bottom .slide-bg::after{background:linear-gradient(0deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.4) 40%,rgba(0,0,0,0.15) 100%)}
+
+/* CONTENT */
+.content{position:relative;z-index:5;width:100%;height:100%;padding:5vh 5vw;display:flex;flex-direction:column;justify-content:center}
+.content-left{align-items:flex-start;max-width:55%}
+.content-center{align-items:center;text-align:center}
+.content-full{max-width:100%}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.slide.active .anim-up{animation:fadeUp 0.7s ease forwards}
+.slide.active .anim-in{animation:fadeIn 0.8s ease forwards}
+.slide.active .anim-left{animation:slideLeft 0.7s ease forwards}
+.slide.active .anim-right{animation:slideRight 0.7s ease forwards}
+.slide.active .anim-scale{animation:scaleIn 0.6s ease forwards}
+.d1{animation-delay:0.1s!important;opacity:0}.d2{animation-delay:0.3s!important;opacity:0}.d3{animation-delay:0.5s!important;opacity:0}.d4{animation-delay:0.7s!important;opacity:0}.d5{animation-delay:0.9s!important;opacity:0}.d6{animation-delay:1.1s!important;opacity:0}
+
+/* TYPOGRAPHY */
+h1{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;text-shadow:0 4px 30px rgba(0,0,0,0.5)}
+h2{font-size:clamp(1.5rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;text-shadow:0 3px 20px rgba(0,0,0,0.5)}
+h3{font-size:clamp(1.1rem,2.5vw,1.8rem);font-weight:700;line-height:1.2}
+.subtitle{font-size:clamp(0.9rem,1.8vw,1.4rem);font-weight:400;opacity:0.85;margin-top:1vh;line-height:1.4}
+.label{font-size:clamp(0.65rem,1vw,0.85rem);font-weight:700;text-transform:uppercase;letter-spacing:3px;opacity:0.7;margin-bottom:1vh}
+p,.item{font-size:clamp(0.8rem,1.5vw,1.15rem);line-height:1.5;font-weight:400}
+
+/* COMPONENTS */
+.tag{display:inline-block;padding:6px 18px;border-radius:50px;font-size:clamp(0.6rem,0.9vw,0.8rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:2vh}
+.tag-teal{background:rgba(13,110,110,0.9);border:1px solid rgba(20,163,163,0.4)}
+.tag-red{background:rgba(198,40,40,0.9);border:1px solid rgba(239,83,80,0.4)}
+.tag-blue{background:rgba(21,101,192,0.9);border:1px solid rgba(66,165,245,0.4)}
+.tag-green{background:rgba(46,125,50,0.9);border:1px solid rgba(102,187,106,0.4)}
+.tag-purple{background:rgba(106,27,154,0.9);border:1px solid rgba(171,71,188,0.4)}
+.tag-orange{background:rgba(230,81,0,0.9);border:1px solid rgba(255,152,0,0.4)}
+
+.dado-box{display:inline-block;background:rgba(255,255,255,0.12);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 14px;font-weight:700;font-size:clamp(0.75rem,1.2vw,1rem);margin:3px}
+.dado-red{background:rgba(198,40,40,0.3);border-color:rgba(239,83,80,0.3)}
+.dado-teal{background:rgba(13,110,110,0.3);border-color:rgba(20,163,163,0.3)}
+
+.divider{width:80px;height:3px;background:linear-gradient(90deg,#14a3a3,transparent);margin:2vh 0;border-radius:2px}
+.divider-center{margin:2vh auto}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2vw;width:100%}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5vw;width:100%}
+
+.card-glass{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:clamp(12px,2vw,24px);transition:transform 0.3s}
+.card-glass:hover{transform:translateY(-4px)}
+.card-glass h3{margin-bottom:0.8vh}
+.card-glass p{opacity:0.85;font-size:clamp(0.7rem,1.1vw,0.95rem)}
+
+.bullet{padding-left:0;list-style:none}
+.bullet li{position:relative;padding-left:20px;margin-bottom:1vh;font-size:clamp(0.75rem,1.3vw,1.05rem);line-height:1.45}
+.bullet li::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;background:#14a3a3;border-radius:50%}
+
+.caso-grid{display:grid;grid-template-columns:1fr 1fr;gap:3vw;align-items:start}
+.caso-section{margin-bottom:2vh}
+.caso-section h3{font-size:clamp(0.85rem,1.4vw,1.1rem);color:#14a3a3;margin-bottom:0.8vh;font-weight:700}
+.caso-item{font-size:clamp(0.7rem,1.1vw,0.9rem);line-height:1.5;margin-bottom:0.3vh;opacity:0.9}
+
+/* PROGRESS BAR */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0D6E6E,#14a3a3);z-index:100;transition:width 0.5s ease}
+
+/* SLIDE COUNTER */
+.counter{position:fixed;bottom:3vh;right:4vw;font-size:0.75rem;font-weight:600;opacity:0.4;z-index:100;letter-spacing:1px}
+
+/* NAV HINT */
+.nav-hint{position:fixed;bottom:3vh;left:50%;transform:translateX(-50%);font-size:0.7rem;font-weight:500;opacity:0;z-index:100;transition:opacity 1s;letter-spacing:1px}
+.nav-hint.show{opacity:0.4}
+
+/* SPECIAL: COVER */
+.cover-title{font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;background:linear-gradient(135deg,#fff 0%,#b2dfdb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-case{font-size:clamp(1.2rem,2.5vw,2rem);font-weight:300;opacity:0.8;margin-top:1vh}
+.cover-info{margin-top:4vh;font-size:clamp(0.7rem,1vw,0.9rem);opacity:0.5;line-height:1.8}
+
+/* SPECIAL: CICLO */
+.ciclo-flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1vw;margin-top:2vh}
+.ciclo-step{background:rgba(198,40,40,0.2);border:1px solid rgba(239,83,80,0.4);border-radius:12px;padding:10px 18px;font-size:clamp(0.7rem,1.1vw,0.9rem);font-weight:600;text-align:center;min-width:140px}
+.ciclo-arrow{font-size:1.5rem;color:#ef5350;opacity:0.7}
+
+/* EIXO COLORS */
+.eixo-bio{border-left:4px solid #42a5f5;padding-left:16px}
+.eixo-farm{border-left:4px solid #ab47bc;padding-left:16px}
+.eixo-nutri{border-left:4px solid #66bb6a;padding-left:16px}
+.eixo-fisio{border-left:4px solid #ff9800;padding-left:16px}
+.eixo-enf{border-left:4px solid #ef5350;padding-left:16px}
+
+/* FINAL */
+.final-quote{font-size:clamp(1.2rem,2.5vw,2rem);font-weight:300;font-style:italic;line-height:1.5;max-width:70%;text-align:center;opacity:0.9}
+.final-quote strong{font-weight:700;color:#14a3a3;font-style:normal}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<div class="nav-hint show" id="navhint">Pressione <strong>→</strong> ou <strong>ESPAÇO</strong> para avançar</div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 0: CAPA -->
+<div class="slide active overlay-gradient" data-bg="img/cover-hero.png">
+  <div class="slide-bg" style="background-image:url('img/cover-hero.png')"></div>
+  <div class="content content-center">
+    <div class="label anim-up d1">Bioquímica Humana — PBL</div>
+    <h1 class="cover-title anim-up d2">Caso Clínico Lucas</h1>
+    <div class="cover-case anim-up d3">Anemia Falciforme — Genótipo HbSS</div>
+    <div class="divider divider-center anim-in d4"></div>
+    <div class="cover-info anim-up d5">
+      Turma C — Nutrição | UNINASSAU Barreiras-BA<br>
+      Professora Dayane Ribas | 2026.2
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 1: CASO CLÍNICO -->
+<div class="slide overlay-left">
+  <div class="slide-bg" style="background-image:url('img/sickle-cells-vessel.png')"></div>
+  <div class="content" style="padding:4vh 4vw">
+    <div style="max-width:52%">
+      <div class="tag tag-red anim-up d1">Caso Clínico</div>
+      <h2 class="anim-up d2" style="margin-bottom:2vh">Lucas, 18 anos</h2>
+      <div class="caso-section anim-up d3">
+        <h3>Identificação</h3>
+        <div class="caso-item">Masculino, 18 anos, pardo, estudante</div>
+        <div class="caso-item">Diagnóstico: Anemia Falciforme (HbSS) desde os 2 anos</div>
+        <div class="caso-item">Primo com Fenilcetonúria (PKU)</div>
+      </div>
+      <div class="caso-section anim-up d4">
+        <h3>Queixa principal</h3>
+        <div class="caso-item">Dor intensa em joelhos e região lombar há 48h</div>
+        <div class="caso-item">Dor: <span class="dado-box dado-red">9/10</span> Febre: <span class="dado-box dado-red">38,4°C</span></div>
+      </div>
+      <div class="caso-section anim-up d5">
+        <h3>Sinais vitais</h3>
+        <div class="caso-item">FC <span class="dado-box">118 bpm</span> FR <span class="dado-box">28 irpm</span> PA <span class="dado-box">100×60</span></div>
+        <div class="caso-item">SpO₂ <span class="dado-box dado-red">89%</span> (ar ambiente)</div>
+      </div>
+      <div class="caso-section anim-up d6">
+        <h3>Exames-chave</h3>
+        <div class="caso-item">Hb <span class="dado-box dado-red">6,8 g/dL</span> pH <span class="dado-box dado-red">7,28</span> Lactato <span class="dado-box dado-red">3,4</span></div>
+        <div class="caso-item">Albumina <span class="dado-box dado-red">2,3 g/dL</span> LDH <span class="dado-box">980 U/L</span></div>
+        <div class="caso-item">HbS <span class="dado-box">86%</span> HbA1 <span class="dado-box">0%</span> HbF <span class="dado-box">12%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: IANE - AMINOÁCIDOS -->
+<div class="slide overlay-right">
+  <div class="slide-bg" style="background-image:url('img/amino-acids-glu-val.png')"></div>
+  <div class="content" style="align-items:flex-end">
+    <div style="max-width:48%;text-align:right">
+      <div class="tag tag-teal anim-up d1">Pesquisador 1 — Iane</div>
+      <h2 class="anim-right d2">Aminoácidos</h2>
+      <div class="divider anim-in d3" style="margin-left:auto"></div>
+      <ul class="bullet anim-up d4" style="text-align:left">
+        <li>20 aminoácidos padrão — 9 essenciais, 11 não essenciais</li>
+        <li>Grupo R define propriedades: apolar, polar, ácido, básico, aromático</li>
+        <li><strong>Mutação:</strong> Glu (polar, carga –1) → Val (apolar, neutra)</li>
+        <li>Cria um <strong>ponto hidrofóbico</strong> na superfície da hemoglobina</li>
+        <li><strong>PKU do primo:</strong> Phe acumula → restrição dietética + suplementação de Tyr</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: ALMIR - ÁCIDO-BASE / ELETROFORESE -->
+<div class="slide overlay-left">
+  <div class="slide-bg" style="background-image:url('img/electrophoresis-gel.png')"></div>
+  <div class="content">
+    <div style="max-width:50%">
+      <div class="tag tag-blue anim-up d1">Pesquisador 2 — Almir</div>
+      <h2 class="anim-left d2">Ácido-Base e Eletroforese</h2>
+      <div class="divider anim-in d3"></div>
+      <ul class="bullet anim-up d4" style="margin-bottom:2vh">
+        <li><strong>Acidose metabólica:</strong> pH <span class="dado-box dado-red">7,28</span> — isquemia → lactato → H⁺ acumula</li>
+        <li>Tampão bicarbonato esgotado: HCO₃⁻ <span class="dado-box">16 mEq/L</span></li>
+        <li>Compensação respiratória: hiperventilação (FR 28)</li>
+      </ul>
+      <ul class="bullet anim-up d5">
+        <li><strong>Eletroforese (pH 8,6):</strong> separa proteínas por carga elétrica</li>
+        <li>HbA migra mais rápido (Glu = carga –1)</li>
+        <li>HbS migra mais devagar (Val = neutra)</li>
+        <li>Resultado: <span class="dado-box">HbS 86%</span> <span class="dado-box">HbA1 0%</span> → <strong>homozigoto HbSS</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: NATALLY - LIGAÇÃO PEPTÍDICA -->
+<div class="slide overlay-heavy">
+  <div class="slide-bg" style="background-image:url('img/amino-acids-glu-val.png');filter:blur(3px) brightness(0.6)"></div>
+  <div class="content content-center">
+    <div style="max-width:70%">
+      <div class="tag tag-orange anim-up d1">Pesquisador 3 — Natally Aguiar</div>
+      <h2 class="anim-up d2">Ligação Peptídica</h2>
+      <div class="divider divider-center anim-in d3"></div>
+      <div class="grid-2 anim-up d4" style="text-align:left;margin-top:2vh">
+        <div class="card-glass">
+          <h3 style="color:#ff9800">Formação</h3>
+          <p>Reação de condensação: –COOH + –NH₂ → C–N + H₂O</p>
+          <p style="margin-top:1vh"><strong>Propriedades:</strong> planar, caráter parcial de dupla ligação, configuração trans</p>
+        </div>
+        <div class="card-glass">
+          <h3 style="color:#ff9800">No caso do Lucas</h3>
+          <p>Cadeia β da hemoglobina: <strong>146 aminoácidos</strong> = 145 ligações peptídicas</p>
+          <p style="margin-top:1vh">Posição 6: ligação peptídica mantida, <strong>grupo R alterado</strong> (Glu→Val)</p>
+        </div>
+      </div>
+      <div class="card-glass anim-up d5" style="margin-top:2vh;text-align:left">
+        <h3 style="color:#66bb6a">Conexão com a Nutrição</h3>
+        <p>Digestão de proteínas = quebra de ligações peptídicas (pepsina → tripsina → quimotripsina) → aminoácidos livres → fígado sintetiza albumina. Albumina do Lucas: <span class="dado-box dado-red">2,3 g/dL</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: MARCOS - ESTRUTURA DAS PROTEÍNAS -->
+<div class="slide overlay-left">
+  <div class="slide-bg" style="background-image:url('img/protein-folding.png')"></div>
+  <div class="content">
+    <div style="max-width:48%">
+      <div class="tag tag-purple anim-up d1">Pesquisador 4 — Marcos Vinícius</div>
+      <h2 class="anim-left d2">Estrutura das Proteínas</h2>
+      <div class="divider anim-in d3"></div>
+      <div class="anim-up d4" style="margin-bottom:1.5vh">
+        <div class="card-glass" style="margin-bottom:1vh;border-left:3px solid #42a5f5">
+          <h3 style="color:#42a5f5;font-size:clamp(0.8rem,1.2vw,1rem)">1ª Primária — Sequência</h3>
+          <p>146 aminoácidos na β-globina. <strong>Mutação Glu6Val</strong> altera tudo.</p>
+        </div>
+        <div class="card-glass" style="margin-bottom:1vh;border-left:3px solid #66bb6a">
+          <h3 style="color:#66bb6a;font-size:clamp(0.8rem,1.2vw,1rem)">2ª Secundária — Padrões</h3>
+          <p>Hemoglobina: ~75% alfa-hélice. Pontes de hidrogênio.</p>
+        </div>
+        <div class="card-glass" style="margin-bottom:1vh;border-left:3px solid #ff9800">
+          <h3 style="color:#ff9800;font-size:clamp(0.8rem,1.2vw,1rem)">3ª Terciária — Forma 3D</h3>
+          <p>Val6 expõe <strong>patch hidrofóbico</strong> na superfície.</p>
+        </div>
+        <div class="card-glass" style="border-left:3px solid #ab47bc">
+          <h3 style="color:#ab47bc;font-size:clamp(0.8rem,1.2vw,1rem)">4ª Quaternária — Montagem</h3>
+          <p>Tetrâmero 2α + 2β + 4 hemes. Desoxi-HbS <strong>polimeriza</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: CHARLES - ENOVELAMENTO / DESNATURAÇÃO -->
+<div class="slide overlay-right">
+  <div class="slide-bg" style="background-image:url('img/protein-folding.png');transform:scaleX(-1)"></div>
+  <div class="content" style="align-items:flex-end">
+    <div style="max-width:50%;text-align:left">
+      <div class="tag tag-teal anim-up d1">Pesquisador 5 — Charles</div>
+      <h2 class="anim-right d2">Enovelamento e Desnaturação</h2>
+      <div class="divider anim-in d3"></div>
+      <ul class="bullet anim-up d4">
+        <li><strong>Enovelamento:</strong> guiado pelo efeito hidrofóbico — apolares vão para o interior</li>
+        <li><strong>Chaperonas</strong> (Hsp70 e Hsp60) auxiliam o dobramento correto</li>
+        <li><strong>Desnaturação:</strong> perda da forma 3D por calor, pH extremo, ureia (mantém 1ª)</li>
+      </ul>
+      <div class="card-glass anim-up d5" style="margin-top:2vh;border-left:3px solid #ef5350">
+        <h3 style="color:#ef5350">Na HbS do Lucas</h3>
+        <p>Não é desnaturação clássica — é <strong>enovelamento intermolecular patológico</strong>. Val6 de uma molécula encaixa no bolsão Phe85-Leu88 de outra → fibras rígidas → foice.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: VINÍCIUS - HEMOGLOBINA -->
+<div class="slide overlay-gradient">
+  <div class="slide-bg" style="background-image:url('img/hemoglobin-3d.png')"></div>
+  <div class="content content-center">
+    <div style="max-width:75%">
+      <div class="tag tag-red anim-up d1">Pesquisador 6 — Vinícius Amorim</div>
+      <h2 class="anim-up d2">Hemoglobina e Anemia Falciforme</h2>
+      <div class="divider divider-center anim-in d3"></div>
+      <div class="grid-3 anim-up d4" style="margin-top:2vh">
+        <div class="card-glass">
+          <h3 style="color:#42a5f5">Estrutura</h3>
+          <p>Tetrâmero: 2α + 2β<br>4 grupos heme (Fe²⁺)<br>Curva sigmoide (cooperatividade)</p>
+        </div>
+        <div class="card-glass">
+          <h3 style="color:#ef5350">Estado R ↔ T</h3>
+          <p><strong>R</strong> (relaxado): alta afinidade O₂<br><strong>T</strong> (tenso): baixa afinidade<br>Regulado por H⁺, CO₂, 2,3-BPG</p>
+        </div>
+        <div class="card-glass">
+          <h3 style="color:#66bb6a">HbF — Proteção</h3>
+          <p>Cadeia γ (sem mutação)<br>Não polimeriza<br><span class="dado-box">HbF 12%</span> via Hidroxiureia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: EFEITO BOHR / CICLO VICIOSO -->
+<div class="slide overlay-heavy">
+  <div class="slide-bg" style="background-image:url('img/sickle-cells-vessel.png');filter:brightness(0.4)"></div>
+  <div class="content content-center">
+    <div style="max-width:85%">
+      <div class="tag tag-red anim-up d1">Efeito Bohr</div>
+      <h2 class="anim-up d2" style="margin-bottom:3vh">Ciclo Vicioso da Crise Vaso-Oclusiva</h2>
+      <div class="ciclo-flow anim-scale d3">
+        <div class="ciclo-step">Desoxi-HbS<br><small>Estado T</small></div>
+        <div class="ciclo-arrow">→</div>
+        <div class="ciclo-step">Polimerização<br><small>Val6 exposta</small></div>
+        <div class="ciclo-arrow">→</div>
+        <div class="ciclo-step">Hemácia em foice<br><small>Drepanócitos</small></div>
+        <div class="ciclo-arrow">→</div>
+        <div class="ciclo-step">Vaso-oclusão<br><small>Capilares bloqueados</small></div>
+      </div>
+      <div class="ciclo-flow anim-scale d4" style="margin-top:1vh">
+        <div class="ciclo-arrow" style="transform:rotate(180deg)">→</div>
+        <div class="ciclo-step" style="background:rgba(198,40,40,0.4)">↑ Estado T<br><small>Efeito Bohr</small></div>
+        <div class="ciclo-arrow" style="transform:rotate(180deg)">→</div>
+        <div class="ciclo-step">↓ pH / ↑ Lactato<br><small>3,4 mmol/L</small></div>
+        <div class="ciclo-arrow" style="transform:rotate(180deg)">→</div>
+        <div class="ciclo-step">Metabolismo anaeróbico<br><small>Sem O₂</small></div>
+        <div class="ciclo-arrow" style="transform:rotate(180deg)">→</div>
+        <div class="ciclo-step">Isquemia tecidual<br><small>Dor 9/10</small></div>
+      </div>
+      <p class="anim-up d5" style="margin-top:3vh;font-weight:600;opacity:0.8;font-size:clamp(0.8rem,1.3vw,1.1rem)">
+        A acidose (pH 7,28) protona histidinas → estabiliza Estado T → mais desoxi-HbS → mais polimerização → mais foice
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: PORTA-VOZ - INTEGRAÇÃO -->
+<div class="slide overlay-gradient">
+  <div class="slide-bg" style="background-image:url('img/multiprofessional-team.png')"></div>
+  <div class="content content-center">
+    <div style="max-width:75%">
+      <div class="label anim-up d1">Porta-Voz — Davidson</div>
+      <h2 class="anim-up d2" style="margin-bottom:1vh">Integração Multiprofissional</h2>
+      <p class="subtitle anim-up d3">Como cada área da saúde atua no caso do Lucas</p>
+      <div class="divider divider-center anim-in d4"></div>
+      <div class="grid-3 anim-up d5" style="margin-top:2vh">
+        <div class="card-glass" style="border-top:3px solid #42a5f5">
+          <h3 style="color:#42a5f5;font-size:0.95rem">Biomedicina</h3>
+          <p>Eletroforese, gasometria, hematoscopia — diagnóstico laboratorial</p>
+        </div>
+        <div class="card-glass" style="border-top:3px solid #ab47bc">
+          <h3 style="color:#ab47bc;font-size:0.95rem">Farmácia</h3>
+          <p>Hidroxiureia (↑HbF), analgesia ajustada ao pH/pKa</p>
+        </div>
+        <div class="card-glass" style="border-top:3px solid #66bb6a">
+          <h3 style="color:#66bb6a;font-size:0.95rem">Nutrição</h3>
+          <p>Albumina 2,3 → edema (Starling), dieta hiperproteica, PKU</p>
+        </div>
+      </div>
+      <div class="grid-2 anim-up d6" style="margin-top:1.5vh;max-width:66%;margin-left:auto;margin-right:auto">
+        <div class="card-glass" style="border-top:3px solid #ff9800">
+          <h3 style="color:#ff9800;font-size:0.95rem">Fisioterapia</h3>
+          <p>Cinesioterapia respiratória, SpO₂ 89%, prevenir Síndrome Torácica</p>
+        </div>
+        <div class="card-glass" style="border-top:3px solid #ef5350">
+          <h3 style="color:#ef5350;font-size:0.95rem">Enfermagem</h3>
+          <p>SAE, hidratação IV, oxigenoterapia >93%, dor 9/10, úlceras</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: FECHAMENTO -->
+<div class="slide overlay-dark">
+  <div class="slide-bg" style="background-image:url('img/cover-hero.png')"></div>
+  <div class="content content-center" style="justify-content:center">
+    <div class="final-quote anim-up d2">
+      "Uma troca em um <strong>único aminoácido</strong><br>mobilizou <strong>5 profissões</strong> inteiras."
+    </div>
+    <div class="divider divider-center anim-in d4"></div>
+    <div class="anim-up d5" style="margin-top:3vh;opacity:0.5;font-size:clamp(0.7rem,1vw,0.85rem);text-align:center;line-height:1.8">
+      Bioquímica Humana — PBL | Turma C — Nutrição<br>
+      UNINASSAU Barreiras-BA | 2026.2
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+const navhint = document.getElementById('navhint');
+let current = 0;
+const total = slides.length;
+
+function goTo(n) {
+  if (n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  slides[current].classList.add('prev');
+  current = n;
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i === current) s.classList.add('active');
+  });
+  progress.style.width = ((current / (total - 1)) * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + total;
+  if (current > 0) navhint.classList.remove('show');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+  if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+});
+
+goTo(0);
+</script>
+</body>
+</html>
