@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto de Intervenção — Extensão I</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4 portrait;margin:20mm 25mm 20mm 30mm}
+html{font-family:'Montserrat',sans-serif;font-size:11pt;color:#222;line-height:1.6;background:#f5f5f5}
+body{max-width:210mm;margin:0 auto;background:#fff;padding:20mm 25mm 20mm 30mm}
+@media print{
+  html{background:#fff}
+  body{padding:0;max-width:none;box-shadow:none}
+  .no-print{display:none!important}
+}
+
+/* Cabeçalho institucional */
+.header{text-align:center;margin-bottom:8mm;border-bottom:2px solid #333;padding-bottom:5mm}
+.header h1{font-size:13pt;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:2mm}
+.header h2{font-size:11pt;font-weight:700;margin-bottom:1mm}
+.header p{font-size:9pt;font-weight:500;color:#555}
+
+/* Capa */
+.capa{page-break-after:always;display:flex;flex-direction:column;min-height:247mm;text-align:center}
+.capa .spacer{flex:1}
+.capa .titulo{font-size:18pt;font-weight:800;line-height:1.3;text-transform:uppercase;margin-bottom:10mm}
+.capa .nomes{font-size:10pt;font-weight:500;line-height:2;text-align:center}
+.capa .cidade{font-size:11pt;font-weight:600;margin-top:auto;padding-top:15mm}
+
+/* Tabela de dados */
+table.dados{width:100%;border-collapse:collapse;margin-bottom:6mm;font-size:10pt}
+table.dados td{border:1px solid #999;padding:3mm 4mm;vertical-align:top}
+table.dados td.label{font-weight:700;width:45%;background:#f0f0f0}
+table.dados .header-row{background:#333;color:#fff;font-weight:700;font-size:10pt;text-align:center}
+table.dados .header-row td{border-color:#333}
+
+/* Seções */
+.section{margin-bottom:6mm;page-break-inside:avoid}
+.section-header{background:#333;color:#fff;font-weight:700;font-size:10pt;padding:2.5mm 4mm;margin-bottom:0}
+.section-body{border:1px solid #999;border-top:none;padding:4mm 5mm;font-size:10.5pt;line-height:1.7;text-align:justify}
+.section-body p{margin-bottom:3mm}
+.section-body p:last-child{margin-bottom:0}
+.section-body ul{margin-left:5mm;margin-bottom:2mm}
+.section-body li{margin-bottom:1.5mm}
+
+/* Cronograma */
+table.crono{width:100%;border-collapse:collapse;font-size:9pt;margin-top:2mm}
+table.crono th,table.crono td{border:1px solid #999;padding:2mm 3mm;text-align:center}
+table.crono th{background:#eee;font-weight:700}
+table.crono td.mark{background:#2ECC71;color:#fff;font-weight:700}
+
+/* Referências */
+.ref{font-size:9.5pt;line-height:1.6;text-align:left}
+.ref p{margin-bottom:2mm;text-indent:-10mm;padding-left:10mm}
+
+.no-print{position:fixed;top:10px;right:10px;z-index:100}
+.no-print button{background:#333;color:#fff;border:none;padding:10px 20px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;border-radius:6px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="no-print"><button onclick="window.print()">Imprimir / PDF</button></div>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="header">
+    <h1>UNINASSAU — Centro Universitário Maurício de Nassau</h1>
+    <h2>Campus Barreiras-BA</h2>
+    <p>Atividades Práticas Interdisciplinares de Extensão I</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="titulo">
+    Mãos Limpas, Saúde de Sobra!<br>
+    <span style="font-size:13pt;font-weight:600;text-transform:none">Educação em Higiene para Crianças em Idade Escolar</span>
+  </div>
+  <div class="nomes">
+    Charles Yure<br>
+    Davidson Soledade Pereira<br>
+    Iane Dias<br>
+    Kleber Alves<br>
+    Maisa da Costa<br>
+    Marcos Vinícius<br>
+    Natally Aguiar Santana<br>
+    Thayama Rodrigues<br>
+    Vinicius Amorim
+  </div>
+  <div class="cidade">
+    Barreiras-BA<br>2026
+  </div>
+</div>
+
+<!-- DADOS DO PROJETO -->
+<table class="dados">
+  <tr class="header-row"><td colspan="2">DADOS DO PROJETO</td></tr>
+  <tr>
+    <td class="label">INSTITUIÇÃO DE ENSINO SUPERIOR:</td>
+    <td>UNINASSAU — Centro Universitário Maurício de Nassau, Campus Barreiras-BA</td>
+  </tr>
+  <tr>
+    <td class="label">DISCIPLINA:</td>
+    <td>Atividades Práticas Interdisciplinares de Extensão I</td>
+  </tr>
+  <tr>
+    <td class="label">CURSO(S) PARTICIPANTE(S) DO PROJETO:</td>
+    <td>Gerenciadas em Saúde (Nutrição, Biomedicina, Enfermagem, Farmácia, Fisioterapia, Psicologia, Educação Física, Estética e Cosmética, Radiologia)</td>
+  </tr>
+  <tr>
+    <td class="label">ÁREA TEMÁTICA:</td>
+    <td>Saúde</td>
+  </tr>
+  <tr>
+    <td class="label">DISCENTES RESPONSÁVEIS:<br>(nomes em ordem alfabética e matrícula)</td>
+    <td>
+      1. Charles Yure — Mat.: ___________<br>
+      2. Davidson Soledade Pereira — Mat.: ___________<br>
+      3. Iane Dias — Mat.: ___________<br>
+      4. Kleber Alves — Mat.: ___________<br>
+      5. Maisa da Costa — Mat.: ___________<br>
+      6. Marcos Vinícius — Mat.: ___________<br>
+      7. Natally Aguiar Santana — Mat.: ___________<br>
+      8. Thayama Rodrigues — Mat.: ___________<br>
+      9. Vinicius Amorim — Mat.: ___________
+    </td>
+  </tr>
+  <tr>
+    <td class="label">QUANTIDADE DE ALUNOS NO PROJETO:</td>
+    <td>9 (nove)</td>
+  </tr>
+</table>
+
+<!-- INTRODUÇÃO -->
+<div class="section">
+  <div class="section-header">Introdução</div>
+  <div class="section-body">
+    <p>A higiene pessoal constitui um dos pilares fundamentais da saúde coletiva, especialmente quando direcionada à população infantil em fase escolar. Segundo a Organização Mundial da Saúde (OMS), a simples lavagem adequada das mãos com água e sabão pode reduzir em até 50% a incidência de doenças diarreicas e em 25% as infecções respiratórias agudas, enfermidades que figuram entre as principais causas de absenteísmo escolar e morbidade infantil no Brasil (WHO, 2020).</p>
+
+    <p>No município de Barreiras, situado no oeste baiano, a realidade não difere do panorama nacional: crianças em idade escolar estão constantemente expostas a agentes patogênicos em ambientes de convívio coletivo, como salas de aula, refeitórios e áreas de recreação. A faixa etária entre 6 e 8 anos é particularmente relevante, pois corresponde ao período em que os hábitos de higiene pessoal estão sendo consolidados e podem ser internalizados como rotina para toda a vida (BRASIL, 2018).</p>
+
+    <p>A educação em saúde realizada no ambiente escolar configura-se como estratégia eficaz de promoção da saúde, alinhada aos princípios do Programa Saúde na Escola (PSE) do Ministério da Saúde. Ao abordar temas como higienização das mãos, escovação dentária correta e cuidados com os alimentos de forma lúdica e acessível, é possível transformar conhecimento científico em prática cotidiana, contribuindo para a formação de cidadãos mais conscientes sobre autocuidado (BRASIL, 2017).</p>
+
+    <p>Nesse contexto, o presente projeto de extensão universitária propõe a realização de uma intervenção educativa junto a crianças de 6 a 8 anos de uma escola cooperativa do município de Barreiras-BA, utilizando metodologias ativas e materiais educativos como estratégia de sensibilização e promoção de hábitos saudáveis de higiene.</p>
+  </div>
+</div>
+
+<!-- OBJETIVOS -->
+<div class="section">
+  <div class="section-header">Objetivos</div>
+  <div class="section-body">
+    <p><strong>Objetivo geral:</strong></p>
+    <p>Promover a educação em higiene pessoal para crianças de 6 a 8 anos em uma escola do município de Barreiras-BA, contribuindo para a adoção de hábitos saudáveis e a prevenção de doenças.</p>
+
+    <p><strong>Objetivos específicos:</strong></p>
+    <ul>
+      <li>Apresentar, de forma lúdica e acessível, conceitos sobre a existência de microrganismos e sua relação com a transmissão de doenças;</li>
+      <li>Ensinar a técnica correta de lavagem das mãos, reforçando os momentos essenciais em que o hábito deve ser praticado;</li>
+      <li>Orientar as crianças sobre a higiene bucal adequada, incluindo frequência e técnica de escovação;</li>
+      <li>Demonstrar a importância da higienização de frutas, verduras e legumes antes do consumo;</li>
+      <li>Realizar dinâmica prática com produto fluorescente para sensibilizar as crianças sobre a presença invisível de germes nas mãos;</li>
+      <li>Distribuir kit educativo contendo álcool em gel, sabonete líquido e folheto informativo como material de reforço;</li>
+      <li>Contribuir para a formação profissional dos acadêmicos participantes, desenvolvendo competências em educação em saúde e trabalho comunitário.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CARACTERIZAÇÃO DA ÁREA -->
+<div class="section">
+  <div class="section-header">Caracterização da Área</div>
+  <div class="section-body">
+    <p>O município de Barreiras está localizado na região oeste do estado da Bahia, às margens do rio Grande, com população estimada de aproximadamente 160 mil habitantes (IBGE, 2023). A cidade é polo econômico do oeste baiano, com forte presença do agronegócio, notadamente a produção de soja, algodão e milho, além de um setor de serviços em expansão que atende toda a região.</p>
+
+    <p>Do ponto de vista socioeconômico, Barreiras apresenta Índice de Desenvolvimento Humano Municipal (IDHM) de 0,721, classificado como alto, porém com disparidades significativas entre os diferentes bairros e localidades. A rede municipal de educação atende milhares de crianças no ensino fundamental, sendo que muitas escolas enfrentam desafios estruturais relacionados à infraestrutura sanitária e ao acesso regular a insumos de higiene (IBGE, 2023).</p>
+
+    <p>A COPEB (Cooperativa Educacional de Barreiras) é uma instituição de ensino cooperativo que atende crianças e adolescentes em diferentes faixas etárias. A escola está localizada na zona urbana de Barreiras e mantém turmas regulares no período vespertino, incluindo turmas de 1.º e 2.º anos do ensino fundamental, compostas por crianças na faixa de 6 a 8 anos de idade. O contato com a instituição foi facilitado por uma integrante do grupo que possui vínculo familiar com a direção da escola, o que possibilitou o acesso e o planejamento conjunto da atividade.</p>
+  </div>
+</div>
+
+<!-- LOCAL E PÚBLICO-ALVO -->
+<div class="section">
+  <div class="section-header">Local de Execução e Público-Alvo</div>
+  <div class="section-body">
+    <p><strong>Local de execução:</strong> COPEB — Cooperativa Educacional de Barreiras, Barreiras-BA.</p>
+    <p><strong>Público-alvo:</strong> Aproximadamente 20 crianças, com idade entre 6 e 8 anos, matriculadas em turmas do período vespertino do ensino fundamental.</p>
+    <p><strong>Data prevista:</strong> A ser definida entre outubro e novembro de 2026, conforme agendamento com a escola e cronograma da disciplina.</p>
+  </div>
+</div>
+
+<!-- MATERIAIS E MÉTODOS -->
+<div class="section">
+  <div class="section-header">Materiais e Métodos de Abordagem</div>
+  <div class="section-body">
+    <p>A intervenção será estruturada em quatro momentos sequenciais, totalizando aproximadamente 60 minutos de atividade:</p>
+
+    <p><strong>1. Contato prévio com a instituição</strong><br>
+    O contato inicial com a COPEB será realizado pela discente Thayama Rodrigues, que possui vínculo familiar com a direção da escola. Será entregue um ofício de solicitação formal, emitido pela UNINASSAU, solicitando autorização para a realização da atividade. Após aprovação, será agendada a data e o horário da intervenção em comum acordo com a coordenação pedagógica da escola.</p>
+
+    <p><strong>2. Mini palestra educativa com recursos audiovisuais (20 min)</strong><br>
+    Será realizada uma apresentação interativa com slides projetados, utilizando linguagem simples e visual atrativo, adequado à faixa etária de 6 a 8 anos. Os temas abordados serão: a) o que são germes e bactérias; b) quando e como lavar as mãos corretamente; c) higiene bucal (escovação adequada); d) cuidados com a higienização dos alimentos; e) uso correto do álcool em gel. Durante a apresentação, os alunos serão incentivados a participar respondendo perguntas e compartilhando suas experiências.</p>
+
+    <p><strong>3. Dinâmica prática — "Caça aos germes" (20 min)</strong><br>
+    Após a palestra, será realizada uma dinâmica lúdica com produto fluorescente ou quimioluminescente. Um produto seguro será aplicado nas mãos das crianças, que serão orientadas a tocar em superfícies como mesas, cadeiras e materiais escolares, simulando atividades cotidianas. Em seguida, com auxílio de luz ultravioleta (UV) em ambiente escurecido, as crianças poderão visualizar a dispersão do produto nas superfícies e em suas próprias mãos, representando de forma concreta como os germes se espalham de maneira invisível. A atividade tem caráter demonstrativo e sensibilizador, reforçando a importância da higiene adequada.</p>
+
+    <p><strong>4. Encerramento e distribuição de kits (20 min)</strong><br>
+    Ao final, os conceitos principais serão revisados com as crianças por meio de perguntas interativas. Em seguida, será distribuído a cada aluno um kit educativo contendo:</p>
+    <ul>
+      <li>Uma bisnaga de álcool em gel 70% (embalagem personalizada com rótulo do projeto);</li>
+      <li>Uma bisnaga de sabonete líquido (embalagem personalizada);</li>
+      <li>Um folheto educativo impresso com orientações ilustradas sobre higiene das mãos, escovação dentária e higienização de alimentos.</li>
+    </ul>
+
+    <p><strong>Materiais necessários:</strong></p>
+    <ul>
+      <li>Notebook e projetor multimídia;</li>
+      <li>Slides educativos (formato digital);</li>
+      <li>Produto fluorescente/quimioluminescente e lanterna UV;</li>
+      <li>Bisnagas de álcool em gel e sabonete líquido (com rótulos personalizados);</li>
+      <li>Folhetos educativos impressos (1 por aluno + reservas);</li>
+      <li>Luvas descartáveis para aplicação do produto.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- RESULTADOS ESPERADOS -->
+<div class="section">
+  <div class="section-header">Resultados Esperados</div>
+  <div class="section-body">
+    <p><strong>Impacto no público-alvo:</strong></p>
+    <ul>
+      <li>Espera-se que as crianças participantes desenvolvam maior consciência sobre a importância dos hábitos de higiene pessoal, incorporando práticas como a lavagem correta das mãos, a escovação adequada dos dentes e o cuidado com os alimentos em sua rotina diária;</li>
+      <li>A dinâmica com produto fluorescente visa proporcionar uma experiência sensorial e visual que torne o aprendizado significativo e memorável, aumentando a probabilidade de adesão aos hábitos ensinados;</li>
+      <li>O material educativo (folheto + kit) funcionará como instrumento de multiplicação do conhecimento, uma vez que as crianças poderão compartilhar as informações com seus familiares, ampliando o alcance da ação.</li>
+    </ul>
+
+    <p><strong>Impacto na formação profissional:</strong></p>
+    <ul>
+      <li>A atividade proporcionará aos acadêmicos a vivência prática de uma ação de educação em saúde, desenvolvendo competências essenciais como comunicação, planejamento, trabalho em equipe e empatia;</li>
+      <li>O contato direto com a comunidade permitirá aos estudantes compreender a realidade social e as necessidades de saúde da população local, fortalecendo sua formação humanística e cidadã;</li>
+      <li>A experiência contribuirá para o desenvolvimento do raciocínio crítico sobre o papel do profissional de saúde como agente promotor de mudanças na comunidade.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CRONOGRAMA -->
+<div class="section">
+  <div class="section-header">Cronograma</div>
+  <div class="section-body" style="padding:3mm">
+    <table class="crono">
+      <thead>
+        <tr>
+          <th style="text-align:left;width:40%">Atividade</th>
+          <th>Set/2026</th>
+          <th>Out/2026</th>
+          <th>Nov/2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left">Definição do tema, local e público-alvo</td>
+          <td class="mark">X</td><td></td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Elaboração do Projeto de Intervenção</td>
+          <td class="mark">X</td><td></td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Assessoramento com a professora</td>
+          <td class="mark">X</td><td class="mark">X</td><td class="mark">X</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Contato formal com a escola (ofício)</td>
+          <td></td><td class="mark">X</td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Produção dos materiais educativos (slides, folheto, rótulos)</td>
+          <td class="mark">X</td><td class="mark">X</td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Aquisição e montagem dos kits</td>
+          <td></td><td class="mark">X</td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Apresentação do Projeto (AV1)</td>
+          <td></td><td class="mark">X</td><td></td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Execução da intervenção na escola</td>
+          <td></td><td></td><td class="mark">X</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Apresentação da intervenção (AV2)</td>
+          <td></td><td></td><td class="mark">X</td>
+        </tr>
+        <tr>
+          <td style="text-align:left">Elaboração e entrega do Relatório Final</td>
+          <td></td><td></td><td class="mark">X</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- REFERÊNCIAS -->
+<div class="section">
+  <div class="section-header">Referências Bibliográficas</div>
+  <div class="section-body ref">
+    <p>BRASIL. Ministério da Saúde. Secretaria de Atenção à Saúde. Departamento de Atenção Básica. <strong>Saúde na escola.</strong> Brasília: Ministério da Saúde, 2017. (Cadernos de Atenção Básica, n.º 24).</p>
+
+    <p>BRASIL. Ministério da Saúde. <strong>Guia de orientações para a promoção da higiene das mãos em serviços de saúde.</strong> Brasília: ANVISA, 2018.</p>
+
+    <p>IBGE — Instituto Brasileiro de Geografia e Estatística. <strong>Cidades e Estados: Barreiras-BA.</strong> 2023. Disponível em: https://cidades.ibge.gov.br/brasil/ba/barreiras/panorama. Acesso em: 16 set. 2026.</p>
+
+    <p>ORGANIZAÇÃO MUNDIAL DA SAÚDE (OMS). <strong>Guidelines on hand hygiene in health care.</strong> Genebra: WHO, 2020.</p>
+
+    <p>SOUZA, I. P. M. A.; JACOBINA, R. R. Educação em saúde e suas versões na história brasileira. <strong>Revista Baiana de Saúde Pública,</strong> Salvador, v. 33, n. 4, p. 618-628, 2009.</p>
+
+    <p>VASCONCELOS, E. M. <strong>Educação popular e a atenção à saúde da família.</strong> 4. ed. São Paulo: Hucitec, 2008.</p>
+  </div>
+</div>
+
+</body>
+</html>

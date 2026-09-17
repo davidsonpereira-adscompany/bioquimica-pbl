@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mãos Limpas, Saúde de Sobra!</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-serif;background:#000}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.overlay-gradient::before{content:'';position:absolute;inset:0;z-index:1}
+.content{position:relative;z-index:2;width:90%;max-width:1200px;color:#fff;text-align:center}
+
+/* PALETTE: Fun, bright, child-friendly */
+:root{
+  --green:#2ECC71;--blue:#3498DB;--orange:#F39C12;--pink:#E91E63;--purple:#9B59B6;
+  --teal:#00BCD4;--yellow:#FFC107;--red:#E74C3C;--white:#fff;--dark:#1a1a2e;
+}
+
+/* Typography - LARGE for projector + children */
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.15;margin-bottom:1.5vh;text-shadow:2px 3px 8px rgba(0,0,0,.5)}
+h2{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:800;line-height:1.2;margin-bottom:1vh;text-shadow:2px 2px 6px rgba(0,0,0,.4)}
+h3{font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:700;margin-bottom:.8vh}
+p,.subtitle{font-size:clamp(1rem,1.8vw,1.35rem);line-height:1.5;font-weight:500}
+.subtitle{opacity:.9;font-size:clamp(1rem,2vw,1.4rem)}
+.label{display:inline-block;padding:6px 18px;border-radius:50px;font-size:clamp(.7rem,1.2vw,.9rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5vh}
+.big-number{font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1}
+
+/* Cards */
+.card-fun{background:rgba(255,255,255,.15);backdrop-filter:blur(12px);border-radius:20px;padding:clamp(12px,2vw,24px);text-align:center;border:3px solid rgba(255,255,255,.2)}
+.card-fun h3{font-size:clamp(1rem,1.8vw,1.4rem)}
+.card-fun p{font-size:clamp(.85rem,1.4vw,1.1rem)}
+
+/* Grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2vw,20px)}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,2vw,20px)}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:clamp(8px,1.5vw,16px)}
+
+/* Step badges */
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:clamp(40px,4vw,60px);height:clamp(40px,4vw,60px);border-radius:50%;font-size:clamp(1.2rem,2.5vw,2rem);font-weight:900;margin-bottom:8px}
+
+/* Animations */
+.anim-up{animation:slideUp .7s ease both}
+.anim-in{animation:fadeIn .7s ease both}
+.anim-bounce{animation:bounce 1s ease both}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-15px)}60%{transform:translateY(-8px)}}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}.d6{animation-delay:.85s}.d7{animation-delay:1s}.d8{animation-delay:1.15s}
+
+/* Fun decorative elements */
+.emoji-float{position:absolute;font-size:clamp(2rem,4vw,4rem);animation:float 3s ease-in-out infinite;opacity:.7;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+
+/* Step system */
+.step{display:none}.step.active,.step.step-left.active{display:block}
+.step-left{display:none}
+
+/* Divider */
+.divider{height:4px;width:80px;background:linear-gradient(90deg,var(--yellow),var(--orange));border-radius:2px;margin:1.5vh auto}
+
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:5px;background:linear-gradient(90deg,var(--green),var(--teal),var(--blue));z-index:100;transition:width .3s ease}
+.slide-counter{position:fixed;bottom:15px;right:20px;color:rgba(255,255,255,.5);font-size:.75rem;font-weight:600;z-index:100}
+
+/* Specific slide backgrounds */
+.bg-green{background:linear-gradient(135deg,#1a8f5c,#2ECC71,#27ae60)}
+.bg-blue{background:linear-gradient(135deg,#1a5276,#3498DB,#2980b9)}
+.bg-orange{background:linear-gradient(135deg,#b35900,#F39C12,#e67e22)}
+.bg-pink{background:linear-gradient(135deg,#880e4f,#E91E63,#c2185b)}
+.bg-purple{background:linear-gradient(135deg,#4a148c,#9B59B6,#7b1fa2)}
+.bg-teal{background:linear-gradient(135deg,#00695c,#00BCD4,#00838f)}
+.bg-dark{background:linear-gradient(135deg,#0d1b2a,#1b2838,#16213e)}
+
+/* List for kids */
+.kid-list{list-style:none;text-align:left;margin:0 auto;max-width:85%}
+.kid-list li{font-size:clamp(.95rem,1.6vw,1.25rem);font-weight:600;padding:8px 0;display:flex;align-items:center;gap:12px}
+.kid-list li span.icon{font-size:clamp(1.5rem,2.5vw,2rem)}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: CAPA -->
+<div class="slide active">
+  <div class="slide-bg" style="background-image:url('img/cover-kids-washing.png')"></div>
+  <div class="overlay-gradient" style="--grad:linear-gradient(to top,rgba(0,0,0,.85) 10%,rgba(0,0,0,.3) 60%,rgba(0,0,0,.5))"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 10%,rgba(0,0,0,.3) 60%,rgba(0,0,0,.5));z-index:1"></div>
+  <div class="content" style="margin-top:15vh">
+    <div class="label anim-up d1" style="background:var(--green)">Projeto de Extensão</div>
+    <h1 class="anim-up d2" style="font-size:clamp(2.5rem,6vw,4.5rem)">Mãos Limpas,<br>Saúde de Sobra!</h1>
+    <p class="subtitle anim-up d3" style="margin-top:1vh">Aprendendo a se proteger dos bichinhos invisíveis</p>
+    <div class="divider anim-in d4"></div>
+    <p class="anim-up d5" style="font-size:clamp(.8rem,1.2vw,1rem);opacity:.7;margin-top:1vh">UNINASSAU Barreiras-BA &bull; Gerenciadas em Saúde &bull; 2026.2</p>
+  </div>
+</div>
+
+<!-- SLIDE 2: VOCÊS SABIAM? -->
+<div class="slide bg-dark">
+  <div class="content">
+    <div class="label anim-up d1" style="background:var(--red)">Vocês sabiam?</div>
+    <h2 class="anim-up d2">Nossas mãos carregam<br>milhares de bichinhos invisíveis!</h2>
+    <div class="grid-3 anim-up d3" style="margin-top:3vh">
+      <div class="card-fun" style="border-color:var(--red)">
+        <div class="big-number" style="color:var(--red)">800</div>
+        <p style="font-weight:700;margin-top:.5vh">tipos de bactérias<br>vivem nas mãos</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--orange)">
+        <div class="big-number" style="color:var(--orange)">80%</div>
+        <p style="font-weight:700;margin-top:.5vh">das doenças passam<br>pelas mãos</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--green)">
+        <div class="big-number" style="color:var(--green)">50%</div>
+        <p style="font-weight:700;margin-top:.5vh">das infecções evitadas<br>lavando as mãos</p>
+      </div>
+    </div>
+    <p class="anim-up d4" style="margin-top:2.5vh;font-size:clamp(1rem,1.6vw,1.3rem)">Por isso precisamos aprender a <strong style="color:var(--green)">lavar as mãos direitinho!</strong></p>
+  </div>
+</div>
+
+<!-- SLIDE 3: MUNDO INVISÍVEL -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/germs-magnified.png')"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.9) 35%,rgba(0,0,0,.3));z-index:1"></div>
+  <div class="content" style="text-align:left">
+    <div class="label anim-up d1" style="background:var(--purple)">O mundo invisível</div>
+    <h2 class="anim-up d2">O que são germes<br>e bactérias?</h2>
+    <ul class="kid-list anim-up d3" style="margin-top:2vh">
+      <li><span class="icon">🦠</span> São seres tão pequenos que <strong>não conseguimos ver</strong></li>
+      <li><span class="icon">🤧</span> Alguns deles podem nos deixar <strong style="color:var(--red)">doentes</strong></li>
+      <li><span class="icon">🍽️</span> Eles ficam na comida, nos objetos e nas <strong>nossas mãos</strong></li>
+      <li><span class="icon">🧼</span> A boa notícia: <strong style="color:var(--green)">água e sabão acabam com eles!</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 4: QUANDO LAVAR? -->
+<div class="slide bg-blue">
+  <div class="content">
+    <div class="label anim-up d1" style="background:var(--yellow);color:#333">Atenção!</div>
+    <h2 class="anim-up d2">Quando devemos<br>lavar as mãos?</h2>
+    <div class="grid-3 anim-up d3" style="margin-top:2vh">
+      <div class="card-fun">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🍽️</div>
+        <h3>Antes de comer</h3>
+        <p>Sempre antes de qualquer refeição ou lanche!</p>
+      </div>
+      <div class="card-fun">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🚽</div>
+        <h3>Depois do banheiro</h3>
+        <p>Toda vez que usar o banheiro, sem exceção!</p>
+      </div>
+      <div class="card-fun">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🐕</div>
+        <h3>Depois de brincar</h3>
+        <p>Depois de tocar animais, brincar no chão ou na terra!</p>
+      </div>
+    </div>
+    <div class="grid-2 anim-up d4" style="margin-top:1.5vh;max-width:66%;margin-left:auto;margin-right:auto">
+      <div class="card-fun">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🤧</div>
+        <h3>Depois de espirrar</h3>
+        <p>Espirrou ou tossiu? Lave as mãos!</p>
+      </div>
+      <div class="card-fun">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🏠</div>
+        <h3>Ao chegar em casa</h3>
+        <p>Primeira coisa: lavar as mãos!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: COMO LAVAR (passo a passo) -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/handwash-bubbles.png')"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,.9) 40%,rgba(0,0,0,.3));z-index:1"></div>
+  <div class="content" style="text-align:left;display:flex;justify-content:flex-end">
+    <div style="max-width:55%">
+      <div class="label anim-up d1" style="background:var(--green)">Passo a passo</div>
+      <h2 class="anim-up d2">Como lavar as mãos<br>do jeito certo</h2>
+      <div style="margin-top:2vh">
+        <div class="anim-up d3" style="display:flex;align-items:center;gap:12px;margin-bottom:clamp(8px,1.2vh,14px)">
+          <span class="step-badge" style="background:var(--blue);color:#fff;flex-shrink:0">1</span>
+          <p style="font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem)">Molhe as mãos com água limpa</p>
+        </div>
+        <div class="anim-up d4" style="display:flex;align-items:center;gap:12px;margin-bottom:clamp(8px,1.2vh,14px)">
+          <span class="step-badge" style="background:var(--teal);color:#fff;flex-shrink:0">2</span>
+          <p style="font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem)">Coloque sabão e esfregue bem: palma, costas, entre os dedos e unhas</p>
+        </div>
+        <div class="anim-up d5" style="display:flex;align-items:center;gap:12px;margin-bottom:clamp(8px,1.2vh,14px)">
+          <span class="step-badge" style="background:var(--green);color:#fff;flex-shrink:0">3</span>
+          <p style="font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem)">Continue esfregando por 20 segundos (cante "Parabéns" 2 vezes!)</p>
+        </div>
+        <div class="anim-up d6" style="display:flex;align-items:center;gap:12px;margin-bottom:clamp(8px,1.2vh,14px)">
+          <span class="step-badge" style="background:var(--orange);color:#fff;flex-shrink:0">4</span>
+          <p style="font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem)">Enxágue bem com água corrente</p>
+        </div>
+        <div class="anim-up d7" style="display:flex;align-items:center;gap:12px">
+          <span class="step-badge" style="background:var(--pink);color:#fff;flex-shrink:0">5</span>
+          <p style="font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem)">Seque com toalha limpa ou papel</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: HIGIENE BUCAL -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/brushing-teeth.png')"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 40%,rgba(0,0,0,.25));z-index:1"></div>
+  <div class="content" style="text-align:left">
+    <div style="max-width:50%">
+      <div class="label anim-up d1" style="background:var(--pink)">Sorriso saudável</div>
+      <h2 class="anim-up d2">Escovação dos dentes</h2>
+      <ul class="kid-list anim-up d3" style="margin-top:2vh;margin-left:0">
+        <li><span class="icon">🪥</span> Escove <strong>3 vezes ao dia:</strong> manhã, após o almoço e antes de dormir</li>
+        <li><span class="icon">⏱️</span> Escove por pelo menos <strong style="color:var(--yellow)">2 minutos</strong></li>
+        <li><span class="icon">😛</span> Não esqueça de escovar a <strong>língua</strong> também!</li>
+        <li><span class="icon">🦷</span> Use <strong>pouca pasta:</strong> do tamanho de uma ervilha</li>
+        <li><span class="icon">💧</span> Cuspa a pasta, mas <strong>não precisa enxaguar</strong> com muita água</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: ALIMENTOS -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/washing-food.png')"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 20%,rgba(0,0,0,.3) 60%,rgba(0,0,0,.5));z-index:1"></div>
+  <div class="content" style="margin-top:20vh">
+    <div class="label anim-up d1" style="background:var(--orange)">Alimentação segura</div>
+    <h2 class="anim-up d2">Cuidados com os alimentos</h2>
+    <div class="grid-3 anim-up d3" style="margin-top:2vh">
+      <div class="card-fun" style="border-color:var(--green)">
+        <div style="font-size:clamp(2rem,3.5vw,3rem)">🍎</div>
+        <h3 style="color:var(--green)">Frutas</h3>
+        <p>Lave bem em água corrente antes de comer. Esfregue a casca com as mãos!</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--teal)">
+        <div style="font-size:clamp(2rem,3.5vw,3rem)">🥬</div>
+        <h3 style="color:var(--teal)">Verduras</h3>
+        <p>Lave folha por folha. Deixe de molho em água com vinagre por 15 minutos!</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--orange)">
+        <div style="font-size:clamp(2rem,3.5vw,3rem)">🍞</div>
+        <h3 style="color:var(--orange)">Na hora de comer</h3>
+        <p>Sempre lave as mãos antes! Não coma nada que caiu no chão!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: ÁLCOOL GEL -->
+<div class="slide bg-teal">
+  <div class="content">
+    <div class="label anim-up d1" style="background:var(--yellow);color:#333">Dica especial</div>
+    <h2 class="anim-up d2">E o álcool em gel?</h2>
+    <div class="grid-2 anim-up d3" style="margin-top:2.5vh;max-width:80%;margin-left:auto;margin-right:auto">
+      <div class="card-fun" style="border-color:var(--green)">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">✅</div>
+        <h3 style="color:var(--green)">Quando usar</h3>
+        <ul class="kid-list" style="margin-top:1vh">
+          <li><span class="icon">🚌</span> No ônibus ou transporte</li>
+          <li><span class="icon">🏪</span> Depois de tocar em coisas na rua</li>
+          <li><span class="icon">📱</span> Quando não tem pia por perto</li>
+        </ul>
+      </div>
+      <div class="card-fun" style="border-color:var(--red)">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">⚠️</div>
+        <h3 style="color:var(--yellow)">Lembre-se</h3>
+        <ul class="kid-list" style="margin-top:1vh">
+          <li><span class="icon">🧼</span> Ele <strong>não substitui</strong> água e sabão</li>
+          <li><span class="icon">👐</span> Se as mãos estiverem sujas de terra, lave com água</li>
+          <li><span class="icon">💧</span> Use uma quantidade que cubra todas as mãos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: HORA DA ATIVIDADE -->
+<div class="slide bg-purple">
+  <div class="content">
+    <div class="label anim-bounce d1" style="background:var(--yellow);color:#333">Hora da diversão!</div>
+    <h2 class="anim-up d2" style="font-size:clamp(2rem,5vw,3.5rem)">Vamos ver os bichinhos<br>nas nossas mãos?</h2>
+    <p class="subtitle anim-up d3" style="margin-top:1.5vh;font-size:clamp(1.1rem,2vw,1.5rem)">Agora vamos fazer uma experiência para ver como<br>os germes ficam escondidos nas nossas mãos!</p>
+    <div class="grid-3 anim-up d4" style="margin-top:3vh">
+      <div class="card-fun" style="border-color:var(--yellow)">
+        <span class="step-badge" style="background:var(--yellow);color:#333">1</span>
+        <h3>Passem o produto</h3>
+        <p>Vamos colocar um pouco do líquido especial nas mãos de vocês</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--orange)">
+        <span class="step-badge" style="background:var(--orange);color:#fff">2</span>
+        <h3>Toquem nas coisas</h3>
+        <p>Toquem na mesa, na cadeira, no chão... como fazem normalmente</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--pink)">
+        <span class="step-badge" style="background:var(--pink);color:#fff">3</span>
+        <h3>Apaguem a luz!</h3>
+        <p>Vamos ver o que acontece quando apagamos a luz e olhamos para as mãos!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: RESUMO -->
+<div class="slide bg-green">
+  <div class="content">
+    <div class="label anim-up d1" style="background:var(--white);color:var(--green)">O que aprendemos</div>
+    <h2 class="anim-up d2" style="font-size:clamp(1.8rem,4vw,3rem)">Vamos lembrar de tudo!</h2>
+    <div class="grid-4 anim-up d3" style="margin-top:2.5vh">
+      <div class="card-fun" style="border-color:rgba(255,255,255,.4)">
+        <div style="font-size:clamp(2rem,3vw,2.8rem)">🦠</div>
+        <h3>Germes existem</h3>
+        <p>Mesmo que a gente não veja, eles estão lá!</p>
+      </div>
+      <div class="card-fun" style="border-color:rgba(255,255,255,.4)">
+        <div style="font-size:clamp(2rem,3vw,2.8rem)">🧼</div>
+        <h3>Água + sabão</h3>
+        <p>É o jeito mais fácil de se proteger!</p>
+      </div>
+      <div class="card-fun" style="border-color:rgba(255,255,255,.4)">
+        <div style="font-size:clamp(2rem,3vw,2.8rem)">🪥</div>
+        <h3>Escove os dentes</h3>
+        <p>3 vezes ao dia para um sorriso bonito!</p>
+      </div>
+      <div class="card-fun" style="border-color:rgba(255,255,255,.4)">
+        <div style="font-size:clamp(2rem,3vw,2.8rem)">🍎</div>
+        <h3>Lave os alimentos</h3>
+        <p>Frutas e verduras sempre limpinhas!</p>
+      </div>
+    </div>
+    <p class="anim-up d4" style="margin-top:3vh;font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:800">Mãos limpas = menos doenças = mais diversão! 🎉</p>
+  </div>
+</div>
+
+<!-- SLIDE 11: ENCERRAMENTO -->
+<div class="slide bg-dark">
+  <div class="content">
+    <h2 class="anim-up d1" style="font-size:clamp(2rem,5vw,3.5rem);color:var(--yellow)">Obrigado por aprenderem<br>com a gente!</h2>
+    <div class="divider anim-in d2" style="background:linear-gradient(90deg,var(--green),var(--yellow),var(--orange))"></div>
+    <p class="subtitle anim-up d3" style="margin-top:2vh">Agora vocês vão receber um presente:</p>
+    <div class="grid-2 anim-up d4" style="margin-top:2vh;max-width:60%;margin-left:auto;margin-right:auto">
+      <div class="card-fun" style="border-color:var(--teal)">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🧴</div>
+        <h3>Álcool em gel</h3>
+        <p>Para usar quando não tiver pia por perto</p>
+      </div>
+      <div class="card-fun" style="border-color:var(--pink)">
+        <div style="font-size:clamp(2.5rem,4vw,3.5rem)">🧼</div>
+        <h3>Sabonete líquido</h3>
+        <p>Para lavar as mãozinhas sempre!</p>
+      </div>
+    </div>
+    <p class="anim-up d5" style="margin-top:3vh;font-size:clamp(.8rem,1.2vw,1rem);opacity:.6">UNINASSAU Barreiras-BA &bull; Gerenciadas em Saúde &bull; Extensão Universitária 2026.2</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+const slides=document.querySelectorAll('.slide'),total=slides.length;
+let cur=0;
+function show(n){
+  if(n<0||n>=total)return;
+  const prev=slides[cur],next=slides[n];
+  // Handle sub-steps
+  const steps=next.querySelectorAll('.step');
+  if(steps.length>0){
+    const maxStep=parseInt(next.dataset.steps||steps.length);
+    if(n>cur){
+      // Going forward
+      const activeSteps=next.querySelectorAll('.step.active');
+      if(n===cur){
+        // Same slide, advance step
+      }
+    }
+  }
+  prev.classList.remove('active');
+  next.classList.add('active');
+  // Reset animations
+  next.querySelectorAll('[class*="anim-"]').forEach(el=>{
+    el.style.animation='none';el.offsetHeight;el.style.animation='';
+  });
+  cur=n;
+  updateUI();
+}
+function updateUI(){
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+}
+function advance(){if(cur<total-1)show(cur+1)}
+function goBack(){if(cur>0)show(cur-1)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter')advance();
+  if(e.key==='ArrowLeft'||e.key==='Backspace')goBack();
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-tx;if(dx<-50)advance();if(dx>50)goBack()},{passive:true});
+document.addEventListener('click',e=>{if(e.clientX>window.innerWidth/2)advance();else goBack()});
+updateUI();
+</script>
+</body>
+</html>
