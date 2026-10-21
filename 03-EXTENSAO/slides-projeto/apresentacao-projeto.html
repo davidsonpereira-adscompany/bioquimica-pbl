@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conhecendo o Mundo Micro — Apresentação do Projeto</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-serif;background:#000}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.content{position:relative;z-index:2;width:90%;max-width:1100px;color:#fff}
+
+:root{
+  --navy:#0a1628;--navy-light:#132240;--teal:#00BCD4;--teal-dark:#00838f;
+  --gold:#F5A623;--green:#2ECC71;--white:#fff;--gray:#94a3b8;
+  --accent:#00BCD4;
+}
+
+h1{font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:900;line-height:1.15;text-shadow:2px 3px 10px rgba(0,0,0,.6)}
+h2{font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:1.5vh}
+h3{font-size:clamp(1rem,1.8vw,1.3rem);font-weight:700;margin-bottom:.6vh}
+p{font-size:clamp(.85rem,1.4vw,1.05rem);line-height:1.6;font-weight:400}
+.subtitle{font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:500;opacity:.85;line-height:1.5}
+
+.label{display:inline-block;padding:5px 16px;border-radius:50px;font-size:clamp(.6rem,1vw,.75rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2vh;background:var(--teal)}
+.section-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(32px,3vw,44px);height:clamp(32px,3vw,44px);border-radius:50%;background:var(--teal);color:#fff;font-size:clamp(.9rem,1.5vw,1.2rem);font-weight:900;margin-right:12px;flex-shrink:0}
+
+.card{background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:clamp(10px,1.5vw,18px)}
+.card-accent{border-left:3px solid var(--teal)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,18px)}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.2vw,14px)}
+
+ul.obj{list-style:none;margin:0}
+ul.obj li{font-size:clamp(.78rem,1.2vw,.95rem);font-weight:500;padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1em;flex-shrink:0;margin-top:1px}
+
+.anim-up{animation:slideUp .7s ease both}
+.anim-in{animation:fadeIn .7s ease both}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.35s}.d4{animation-delay:.5s}.d5{animation-delay:.65s}.d6{animation-delay:.8s}
+
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--green));z-index:100;transition:width .3s ease}
+.slide-counter{position:fixed;bottom:12px;right:18px;color:rgba(255,255,255,.4);font-size:.7rem;font-weight:600;z-index:100}
+.logo-bar{position:fixed;bottom:12px;left:18px;color:rgba(255,255,255,.3);font-size:.6rem;font-weight:500;z-index:100;letter-spacing:1px}
+
+.overlay-dark{position:absolute;inset:0;z-index:1}
+
+.highlight{color:var(--teal);font-weight:700}
+.divider{height:2px;width:60px;background:var(--teal);border-radius:1px;margin:1vh 0}
+
+.step-timeline{display:flex;flex-direction:column;gap:clamp(6px,1vh,10px)}
+.step-item{display:flex;align-items:flex-start;gap:10px}
+.step-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);margin-top:5px;flex-shrink:0}
+.step-line{width:2px;background:rgba(0,188,212,.3);margin-left:4px;flex-shrink:0}
+
+.ref-text{font-size:clamp(.6rem,.9vw,.72rem);line-height:1.5;text-align:left;color:rgba(255,255,255,.7)}
+.ref-text p{margin-bottom:4px;text-indent:-8mm;padding-left:8mm;font-size:inherit}
+
+.data-pill{display:inline-block;background:rgba(0,188,212,.15);border:1px solid rgba(0,188,212,.3);border-radius:8px;padding:4px 12px;margin:3px 4px;font-size:clamp(.7rem,1.1vw,.85rem);font-weight:600}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+<div class="logo-bar">UNINASSAU BARREIRAS &bull; EXTENSÃO I &bull; 2026.2</div>
+
+<div class="deck" id="deck">
+
+<!-- ==================== SLIDE 1: CAPA ==================== -->
+<div class="slide active">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to top,rgba(10,22,40,.95) 15%,rgba(10,22,40,.7) 50%,rgba(10,22,40,.85))"></div>
+  <div class="content" style="text-align:center">
+    <div class="label anim-up d1">Projeto de Extensão</div>
+    <h1 class="anim-up d2" style="margin-bottom:.5vh">CONHECENDO O MUNDO MICRO</h1>
+    <p class="subtitle anim-up d3" style="max-width:85%;margin:0 auto;font-weight:400;font-size:clamp(.8rem,1.3vw,1rem)">A simulação fluorescente da contaminação cruzada como método ativo de ensino em Barreiras-BA</p>
+    <div class="divider anim-in d3" style="margin:.8vh auto"></div>
+    <div class="anim-up d4" style="margin-top:1.5vh;font-size:clamp(.65rem,1vw,.78rem);line-height:1.8;opacity:.75;font-weight:400">
+      Charles Yure da Silva Ribeiro &bull; Davidson Soledade Pereira &bull; Iane Dias Gomes<br>
+      Jeicy de Jesus Pereira &bull; Kleber Alves dos Santos &bull; Marcos Vinicius Modesto Campos<br>
+      Maria Carminha Rodrigues da Silva &bull; Natally Santana Aguiar<br>
+      Thayama da Silva Rodrigues &bull; Vinicius Jorge de Amorim Francischini
+    </div>
+    <div class="anim-up d5" style="margin-top:2vh">
+      <p style="font-size:clamp(.6rem,.9vw,.72rem);opacity:.5;font-weight:500">Centro Universitário Maurício de Nassau — UNINASSAU Barreiras<br>Atividades Práticas Interdisciplinares de Extensão I<br>Biomedicina &bull; Fisioterapia &bull; Nutrição &bull; Farmácia &bull; Enfermagem</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 2: INTRODUÇÃO ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.92)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">1</span>
+      <h2 style="margin-bottom:0">Introdução</h2>
+    </div>
+    <div class="grid-2 anim-up d2">
+      <div>
+        <div class="card card-accent" style="margin-bottom:clamp(8px,1.2vh,14px)">
+          <h3 style="color:var(--teal)">Problema central</h3>
+          <p>As mãos estão em contato constante com pessoas, objetos e superfícies, participando da transferência de microrganismos transitórios que podem causar infecções evitáveis.</p>
+        </div>
+        <div class="card card-accent" style="margin-bottom:clamp(8px,1.2vh,14px)">
+          <h3 style="color:var(--teal)">Evidência científica</h3>
+          <p>A OMS e a UNICEF recomendam a higiene das mãos como medida de saúde pública em contextos comunitários, incluindo escolas, para reduzir doenças diarreicas e infecções respiratórias agudas (WHO; UNICEF, 2025).</p>
+        </div>
+      </div>
+      <div>
+        <div class="card card-accent" style="margin-bottom:clamp(8px,1.2vh,14px)">
+          <h3 style="color:var(--teal)">Contexto local</h3>
+          <p>Barreiras-BA, Oeste da Bahia, 159.734 habitantes (Censo 2022). Estação seca de abril a outubro com criticidade jul-set. Taxa de escolarização de 98,33% para 6-14 anos.</p>
+        </div>
+        <div class="card card-accent">
+          <h3 style="color:var(--teal)">Proposta</h3>
+          <p>Uso de marcador fluorescente e luz negra para transformar conceitos microbiológicos abstratos em experiências concretas e compreensíveis para estudantes do Ensino Fundamental.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 3: OBJETIVO GERAL ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.93)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">2</span>
+      <h2 style="margin-bottom:0">Objetivo Geral</h2>
+    </div>
+    <div class="card anim-up d2" style="border:2px solid var(--teal);padding:clamp(16px,2.5vw,30px);text-align:center">
+      <p style="font-size:clamp(1rem,1.6vw,1.25rem);font-weight:600;line-height:1.7;color:var(--white)">
+        Promover a conscientização de estudantes do Ensino Fundamental sobre a presença e a disseminação de microrganismos no cotidiano e sobre a importância da higienização correta das mãos para a prevenção de doenças.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 4: OBJETIVOS ESPECÍFICOS ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.93)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">2</span>
+      <h2 style="margin-bottom:0">Objetivos Específicos</h2>
+    </div>
+    <div class="anim-up d2">
+      <ul class="obj">
+        <li>Apresentar conceitos básicos de microbiologia, com ênfase na microbiota humana, nos microrganismos potencialmente patogênicos e nas principais vias de transmissão por contato e feco-oral no cotidiano escolar.</li>
+        <li>Demonstrar a dinâmica da contaminação cruzada entre mãos, pessoas, objetos e superfícies mediante recurso fluorescente e luz negra/UV-A.</li>
+        <li>Capacitar os estudantes na técnica correta de higienização das mãos, com atenção às regiões frequentemente negligenciadas, como espaços interdigitais, polegares e pontas dos dedos/unhas.</li>
+        <li>Fomentar o protagonismo dos escolares como multiplicadores de boas práticas de higiene no ambiente familiar e escolar.</li>
+        <li>Avaliar a compreensão dos escolares sobre contaminação cruzada e higienização das mãos antes e imediatamente após a intervenção.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 5: CARACTERIZAÇÃO DA ÁREA ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/barreiras-city.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(10,22,40,.93) 45%,rgba(10,22,40,.6))"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">3</span>
+      <h2 style="margin-bottom:0">Caracterização da Área</h2>
+    </div>
+    <div style="max-width:58%" class="anim-up d2">
+      <div style="display:flex;flex-wrap:wrap;margin-bottom:1.5vh">
+        <span class="data-pill">Barreiras-BA</span>
+        <span class="data-pill">Oeste da Bahia</span>
+        <span class="data-pill">Bacia do Rio Grande</span>
+        <span class="data-pill">8.059 km²</span>
+      </div>
+      <div class="card card-accent" style="margin-bottom:clamp(6px,1vh,10px)">
+        <p><span class="highlight">159.734 habitantes</span> (Censo 2022). IDHM 0,721. Taxa de escolarização de <span class="highlight">98,33%</span> na faixa de 6 a 14 anos.</p>
+      </div>
+      <div class="card card-accent" style="margin-bottom:clamp(6px,1vh,10px)">
+        <p>Clima tropical subúmido (Aw). Estação seca de abril a outubro, com estiagem crítica <span class="highlight">julho-setembro</span>.</p>
+      </div>
+      <div class="card card-accent">
+        <p>O ambiente escolar constitui espaço estratégico para ações de educação em saúde, reunindo crianças em fase de consolidação de autonomia e hábitos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 6: LOCAL E PÚBLICO-ALVO ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/school-building.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(10,22,40,.92) 40%,rgba(10,22,40,.5))"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">4</span>
+      <h2 style="margin-bottom:0">Local de Execução e Público-Alvo</h2>
+    </div>
+    <div style="max-width:55%" class="anim-up d2">
+      <div class="card" style="border:2px solid var(--teal);margin-bottom:clamp(8px,1.5vh,16px)">
+        <h3 style="color:var(--teal);font-size:clamp(.9rem,1.4vw,1.1rem)">Cooperativa Educacional de Barreiras — COOPEB</h3>
+        <p style="margin-top:4px">Rede Privada &bull; Barreiras-BA<br>Aproximadamente 572 estudantes<br>Oferta: maternal ao 3.º ano do Ensino Médio</p>
+      </div>
+      <div class="card card-accent" style="margin-bottom:clamp(8px,1.5vh,16px)">
+        <h3 style="color:var(--teal)">Público-alvo</h3>
+        <p>Aproximadamente <span class="highlight">20 estudantes</span> do 2.º ano do Ensino Fundamental, acompanhados por professores e equipe pedagógica.</p>
+      </div>
+      <div class="card card-accent">
+        <h3 style="color:var(--teal)">Espaço</h3>
+        <p>Sala de aula, biblioteca ou sala multimídia, conforme definição com a direção escolar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 7: MATERIAIS E MÉTODOS (1/2) ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/uv-fluorescence.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to left,rgba(10,22,40,.94) 50%,rgba(10,22,40,.7))"></div>
+  <div class="content" style="display:flex;justify-content:flex-end">
+    <div style="max-width:55%">
+      <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+        <span class="section-num">5</span>
+        <h2 style="margin-bottom:0">Materiais e Métodos</h2>
+      </div>
+      <p class="anim-up d2" style="font-size:clamp(.75rem,1.1vw,.88rem);opacity:.7;margin-bottom:1.5vh">Duração total estimada: 120 minutos (2h)</p>
+      <div class="step-timeline anim-up d3">
+        <div class="step-item">
+          <div class="card card-accent" style="flex:1">
+            <h3 style="color:var(--gold)">1. Acolhimento e sondagem (15 min)</h3>
+            <p>Questionário pré-intervenção: 5 questões objetivas sobre microrganismos, contaminação cruzada e higienização.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="card card-accent" style="flex:1">
+            <h3 style="color:var(--gold)">2. Exposição dialogada (25 min)</h3>
+            <p>Conceitos de microbiologia em linguagem acessível: microbiota, patógenos, vias de transmissão no ambiente escolar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="card card-accent" style="flex:1">
+            <h3 style="color:var(--gold)">3. Oficina "Microrganismo Oculto" (35 min)</h3>
+            <p>Gel fluorescente + luz negra/UV-A (~395 nm) para visualizar a transferência simulada em caixa escura.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 8: MATERIAIS E MÉTODOS (2/2) ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/uv-fluorescence.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(10,22,40,.94) 50%,rgba(10,22,40,.7))"></div>
+  <div class="content">
+    <div style="max-width:55%">
+      <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+        <span class="section-num">5</span>
+        <h2 style="margin-bottom:0">Materiais e Métodos <span style="font-weight:400;font-size:.7em;opacity:.6">(continuação)</span></h2>
+      </div>
+      <div class="step-timeline anim-up d2">
+        <div class="step-item">
+          <div class="card card-accent" style="flex:1">
+            <h3 style="color:var(--gold)">4. Capacitação na higienização (25 min)</h3>
+            <p>Demonstração da técnica: palmas, dorsos, espaços interdigitais, polegares e pontas dos dedos. Verificação sob UV após lavagem.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="card card-accent" style="flex:1">
+            <h3 style="color:var(--gold)">5. Síntese e avaliação (20 min)</h3>
+            <p>Pós-intervenção com as mesmas 5 questões. Comparação de acertos. Distribuição de folders educativos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="anim-up d3" style="margin-top:2vh">
+        <h3 style="color:var(--teal);margin-bottom:.8vh">Principais recursos</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="data-pill">Gel fluorescente atóxico</span>
+          <span class="data-pill">Caixa escura (TNT preto)</span>
+          <span class="data-pill">Luz negra/UV-A 395nm</span>
+          <span class="data-pill">Projetor multimídia</span>
+          <span class="data-pill">Sabonete líquido</span>
+          <span class="data-pill">Papel-toalha</span>
+          <span class="data-pill">Álcool 70%</span>
+          <span class="data-pill">Folders educativos</span>
+          <span class="data-pill">Questionário pré/pós</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 9: RESULTADOS ESPERADOS ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.93)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">6</span>
+      <h2 style="margin-bottom:0">Resultados Esperados</h2>
+    </div>
+    <div class="grid-2 anim-up d2">
+      <div class="card" style="border-top:3px solid var(--teal)">
+        <h3 style="color:var(--teal);margin-bottom:1vh">Para os discentes</h3>
+        <ul class="obj">
+          <li>Desenvolvimento de competências em educação em saúde e comunicação científica acessível</li>
+          <li>Trabalho multiprofissional e planejamento de ações coletivas</li>
+          <li>Integração entre conteúdos acadêmicos e situações concretas de promoção da saúde</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green)">
+        <h3 style="color:var(--green);margin-bottom:1vh">Para os escolares</h3>
+        <ul class="obj">
+          <li>Compreensão sobre presença e transferência de microrganismos no cotidiano</li>
+          <li>Melhoria imediata na execução da técnica de higienização das mãos</li>
+          <li>Reconhecimento de regiões frequentemente esquecidas na lavagem</li>
+          <li>Atuação como multiplicadores no ambiente familiar e escolar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card anim-up d3" style="margin-top:1.5vh;border-left:3px solid var(--gold);text-align:center">
+      <p style="font-weight:600"><span style="color:var(--gold)">Indicador mensurável:</span> aumento do percentual de acertos no questionário pós-intervenção em comparação com a sondagem inicial.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 10: CRONOGRAMA ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.93)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num">7</span>
+      <h2 style="margin-bottom:0">Cronograma</h2>
+    </div>
+    <div class="anim-up d2" style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:clamp(.7rem,1.1vw,.85rem);color:#fff">
+        <thead>
+          <tr style="background:rgba(0,188,212,.2)">
+            <th style="text-align:left;padding:8px 12px;border-bottom:2px solid var(--teal);width:45%">Atividade</th>
+            <th style="padding:8px 10px;border-bottom:2px solid var(--teal)">Set</th>
+            <th style="padding:8px 10px;border-bottom:2px solid var(--teal)">Out</th>
+            <th style="padding:8px 10px;border-bottom:2px solid var(--teal)">Nov</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Definição do tema, local e público-alvo</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td><td></td><td></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Elaboração e revisão do Projeto</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td><td></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Assessoramento com a professora</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Apresentação do Projeto (AV1)</td>
+            <td></td><td style="text-align:center;color:var(--gold);font-weight:700">&#x25CF;</td><td></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Contato formal e articulação com a COOPEB</td>
+            <td></td><td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td><td></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Aquisição de materiais e produção dos folders</td>
+            <td></td><td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+            <td style="text-align:center;color:var(--teal);font-weight:700">&#x25CF;</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Execução da intervenção na escola</td>
+            <td></td><td></td><td style="text-align:center;color:var(--green);font-weight:700">&#x25CF;</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.08)">
+            <td style="padding:6px 12px;font-weight:500">Apresentação da intervenção (AV2)</td>
+            <td></td><td></td><td style="text-align:center;color:var(--gold);font-weight:700">&#x25CF;</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 12px;font-weight:500">Entrega do Relatório Final</td>
+            <td></td><td></td><td style="text-align:center;color:var(--gold);font-weight:700">&#x25CF;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 11: REFERÊNCIAS ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:rgba(10,22,40,.95)"></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
+      <span class="section-num" style="background:var(--gray)">R</span>
+      <h2 style="margin-bottom:0">Referências Bibliográficas</h2>
+    </div>
+    <div class="anim-up d2 ref-text">
+      <p>BAHIA. Secretaria de Infraestrutura Hídrica e Saneamento. <strong>Relatório do diagnóstico dos serviços de saneamento básico da MSB Bacia do Rio Grande.</strong> Salvador: SIHS, 2022.</p>
+      <p>BRASIL. Agência Nacional de Vigilância Sanitária. <strong>Segurança do paciente em serviços de saúde: higiene das mãos.</strong> Brasília, DF: Anvisa, 2026.</p>
+      <p>GOEL, S.; CHANDRASHEKAR, B. R. Evaluating the efficacy of handwashing demonstration on hand hygiene among school students — an interventional study. <strong>Journal of Education and Health Promotion,</strong> v. 9, p. 226, 2020.</p>
+      <p>INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE). <strong>Barreiras: Cidades e Estados.</strong> Rio de Janeiro: IBGE, [s.d.].</p>
+      <p>ÖNCÜ, E. et al. Comparison of Interactive Education Versus Fluorescent Concretization on Hand Hygiene Compliance Among Primary School Students. <strong>The Journal of School Nursing,</strong> v. 35, n. 5, p. 337–347, 2019.</p>
+      <p>WORLD HEALTH ORGANIZATION (WHO); UNITED NATIONS CHILDREN'S FUND (UNICEF). <strong>Guidelines on hand hygiene in community settings.</strong> Geneva: WHO; UNICEF, 2025.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 12: ENCERRAMENTO ==================== -->
+<div class="slide">
+  <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
+  <div class="overlay-dark" style="background:linear-gradient(135deg,rgba(10,22,40,.9),rgba(0,131,143,.4))"></div>
+  <div class="content" style="text-align:center">
+    <h1 class="anim-up d1" style="color:var(--teal);font-size:clamp(2rem,5vw,3.5rem)">Obrigado!</h1>
+    <div class="divider anim-in d2" style="margin:1vh auto;background:linear-gradient(90deg,var(--teal),var(--green))"></div>
+    <p class="subtitle anim-up d3" style="margin-top:1vh;font-weight:400">Conhecendo o Mundo Micro</p>
+    <p class="anim-up d4" style="margin-top:2vh;font-size:clamp(.7rem,1vw,.82rem);opacity:.5">
+      UNINASSAU Barreiras-BA &bull; Extensão I &bull; 2026.2
+    </p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+const slides=document.querySelectorAll('.slide'),total=slides.length;
+let cur=0;
+function show(n){
+  if(n<0||n>=total)return;
+  slides[cur].classList.remove('active');
+  slides[n].classList.add('active');
+  slides[n].querySelectorAll('[class*="anim-"]').forEach(el=>{
+    el.style.animation='none';el.offsetHeight;el.style.animation='';
+  });
+  cur=n;
+  document.getElementById('progress').style.width=((cur+1)/total*100)+'%';
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+}
+function advance(){if(cur<total-1)show(cur+1)}
+function goBack(){if(cur>0)show(cur-1)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter')advance();
+  if(e.key==='ArrowLeft'||e.key==='Backspace')goBack();
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-tx;if(dx<-50)advance();if(dx>50)goBack()},{passive:true});
+document.addEventListener('click',e=>{if(e.clientX>window.innerWidth/2)advance();else goBack()});
+show(0);
+</script>
+</body>
+</html>
