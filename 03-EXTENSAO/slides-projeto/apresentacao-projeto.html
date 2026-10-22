@@ -20,23 +20,23 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
   --accent:#00BCD4;
 }
 
-h1{font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:900;line-height:1.15;text-shadow:2px 3px 10px rgba(0,0,0,.6)}
-h2{font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:1.5vh}
-h3{font-size:clamp(1rem,1.8vw,1.3rem);font-weight:700;margin-bottom:.6vh}
-p{font-size:clamp(.85rem,1.4vw,1.05rem);line-height:1.6;font-weight:400}
-.subtitle{font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:500;opacity:.85;line-height:1.5}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.15;text-shadow:2px 3px 10px rgba(0,0,0,.6)}
+h2{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:1.5vh}
+h3{font-size:clamp(1.15rem,2.2vw,1.5rem);font-weight:700;margin-bottom:.6vh}
+p{font-size:clamp(1rem,1.7vw,1.25rem);line-height:1.6;font-weight:400}
+.subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:500;opacity:.85;line-height:1.5}
 
-.label{display:inline-block;padding:5px 16px;border-radius:50px;font-size:clamp(.6rem,1vw,.75rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2vh;background:var(--teal)}
-.section-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(32px,3vw,44px);height:clamp(32px,3vw,44px);border-radius:50%;background:var(--teal);color:#fff;font-size:clamp(.9rem,1.5vw,1.2rem);font-weight:900;margin-right:12px;flex-shrink:0}
+.label{display:inline-block;padding:6px 18px;border-radius:50px;font-size:clamp(.75rem,1.2vw,.9rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2vh;background:var(--teal)}
+.section-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(38px,3.5vw,52px);height:clamp(38px,3.5vw,52px);border-radius:50%;background:var(--teal);color:#fff;font-size:clamp(1rem,1.7vw,1.4rem);font-weight:900;margin-right:12px;flex-shrink:0}
 
-.card{background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:clamp(10px,1.5vw,18px)}
+.card{background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:clamp(14px,1.8vw,22px)}
 .card-accent{border-left:3px solid var(--teal)}
 
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,18px)}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.2vw,14px)}
 
 ul.obj{list-style:none;margin:0}
-ul.obj li{font-size:clamp(.78rem,1.2vw,.95rem);font-weight:500;padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+ul.obj li{font-size:clamp(.95rem,1.5vw,1.15rem);font-weight:500;padding:6px 0;display:flex;align-items:flex-start;gap:10px;line-height:1.5}
 ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1em;flex-shrink:0;margin-top:1px}
 
 .anim-up{animation:slideUp .7s ease both}
@@ -59,10 +59,10 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
 .step-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);margin-top:5px;flex-shrink:0}
 .step-line{width:2px;background:rgba(0,188,212,.3);margin-left:4px;flex-shrink:0}
 
-.ref-text{font-size:clamp(.6rem,.9vw,.72rem);line-height:1.5;text-align:left;color:rgba(255,255,255,.7)}
+.ref-text{font-size:clamp(.78rem,1.1vw,.92rem);line-height:1.55;text-align:left;color:rgba(255,255,255,.7)}
 .ref-text p{margin-bottom:4px;text-indent:-8mm;padding-left:8mm;font-size:inherit}
 
-.data-pill{display:inline-block;background:rgba(0,188,212,.15);border:1px solid rgba(0,188,212,.3);border-radius:8px;padding:4px 12px;margin:3px 4px;font-size:clamp(.7rem,1.1vw,.85rem);font-weight:600}
+.data-pill{display:inline-block;background:rgba(0,188,212,.15);border:1px solid rgba(0,188,212,.3);border-radius:8px;padding:5px 14px;margin:3px 5px;font-size:clamp(.85rem,1.3vw,1rem);font-weight:600}
 </style>
 </head>
 <body>
@@ -79,16 +79,16 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
   <div class="content" style="text-align:center">
     <div class="label anim-up d1">Projeto de Extensão</div>
     <h1 class="anim-up d2" style="margin-bottom:.5vh">CONHECENDO O MUNDO MICRO</h1>
-    <p class="subtitle anim-up d3" style="max-width:85%;margin:0 auto;font-weight:400;font-size:clamp(.8rem,1.3vw,1rem)">A simulação fluorescente da contaminação cruzada como método ativo de ensino em Barreiras-BA</p>
+    <p class="subtitle anim-up d3" style="max-width:85%;margin:0 auto;font-weight:400;font-size:clamp(1rem,1.6vw,1.2rem)">A simulação fluorescente da contaminação cruzada como método ativo de ensino em Barreiras-BA</p>
     <div class="divider anim-in d3" style="margin:.8vh auto"></div>
-    <div class="anim-up d4" style="margin-top:1.5vh;font-size:clamp(.65rem,1vw,.78rem);line-height:1.8;opacity:.75;font-weight:400">
+    <div class="anim-up d4" style="margin-top:1.5vh;font-size:clamp(.82rem,1.2vw,.95rem);line-height:1.8;opacity:.75;font-weight:400">
       Charles Yure da Silva Ribeiro &bull; Davidson Soledade Pereira &bull; Iane Dias Gomes<br>
       Jeicy de Jesus Pereira &bull; Kleber Alves dos Santos &bull; Marcos Vinicius Modesto Campos<br>
       Maria Carminha Rodrigues da Silva &bull; Natally Santana Aguiar<br>
       Thayama da Silva Rodrigues &bull; Vinicius Jorge de Amorim Francischini
     </div>
     <div class="anim-up d5" style="margin-top:2vh">
-      <p style="font-size:clamp(.6rem,.9vw,.72rem);opacity:.5;font-weight:500">Centro Universitário Maurício de Nassau — UNINASSAU Barreiras<br>Atividades Práticas Interdisciplinares de Extensão I<br>Biomedicina &bull; Fisioterapia &bull; Nutrição &bull; Farmácia &bull; Enfermagem</p>
+      <p style="font-size:clamp(.75rem,1.1vw,.88rem);opacity:.5;font-weight:500">Centro Universitário Maurício de Nassau — UNINASSAU Barreiras<br>Atividades Práticas Interdisciplinares de Extensão I<br>Biomedicina &bull; Fisioterapia &bull; Nutrição &bull; Farmácia &bull; Enfermagem</p>
     </div>
   </div>
 </div>
@@ -129,7 +129,7 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
       <h2 style="margin-bottom:0">Objetivo Geral</h2>
     </div>
     <div class="card anim-up d2" style="border:2px solid var(--teal);padding:clamp(16px,2.5vw,30px);text-align:center">
-      <p style="font-size:clamp(1rem,1.6vw,1.25rem);font-weight:600;line-height:1.7;color:var(--white)">
+      <p style="font-size:clamp(1.2rem,1.9vw,1.5rem);font-weight:600;line-height:1.7;color:var(--white)">
         Promover a conscientização de estudantes do Ensino Fundamental sobre a presença e a disseminação de microrganismos no cotidiano e sobre a importância da higienização correta das mãos para a prevenção de doenças.
       </p>
     </div>
@@ -197,7 +197,7 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
     </div>
     <div style="max-width:55%" class="anim-up d2">
       <div class="card" style="border:2px solid var(--teal);margin-bottom:clamp(8px,1.5vh,16px)">
-        <h3 style="color:var(--teal);font-size:clamp(.9rem,1.4vw,1.1rem)">Cooperativa Educacional de Barreiras — COOPEB</h3>
+        <h3 style="color:var(--teal);font-size:clamp(1.1rem,1.7vw,1.3rem)">Cooperativa Educacional de Barreiras — COOPEB</h3>
         <p style="margin-top:4px">Rede Privada &bull; Barreiras-BA<br>Aproximadamente 572 estudantes<br>Oferta: maternal ao 3.º ano do Ensino Médio</p>
       </div>
       <div class="card card-accent" style="margin-bottom:clamp(8px,1.5vh,16px)">
@@ -222,7 +222,7 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
         <span class="section-num">5</span>
         <h2 style="margin-bottom:0">Materiais e Métodos</h2>
       </div>
-      <p class="anim-up d2" style="font-size:clamp(.75rem,1.1vw,.88rem);opacity:.7;margin-bottom:1.5vh">Duração total estimada: 120 minutos (2h)</p>
+      <p class="anim-up d2" style="font-size:clamp(.92rem,1.4vw,1.05rem);opacity:.7;margin-bottom:1.5vh">Duração total estimada: 120 minutos (2h)</p>
       <div class="step-timeline anim-up d3">
         <div class="step-item">
           <div class="card card-accent" style="flex:1">
@@ -333,7 +333,7 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
       <h2 style="margin-bottom:0">Cronograma</h2>
     </div>
     <div class="anim-up d2" style="overflow-x:auto">
-      <table style="width:100%;border-collapse:collapse;font-size:clamp(.7rem,1.1vw,.85rem);color:#fff">
+      <table style="width:100%;border-collapse:collapse;font-size:clamp(.9rem,1.3vw,1.05rem);color:#fff">
         <thead>
           <tr style="background:rgba(0,188,212,.2)">
             <th style="text-align:left;padding:8px 12px;border-bottom:2px solid var(--teal);width:45%">Atividade</th>
@@ -414,10 +414,10 @@ ul.obj li::before{content:'•';color:var(--teal);font-weight:900;font-size:1.1e
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
   <div class="overlay-dark" style="background:linear-gradient(135deg,rgba(10,22,40,.9),rgba(0,131,143,.4))"></div>
   <div class="content" style="text-align:center">
-    <h1 class="anim-up d1" style="color:var(--teal);font-size:clamp(2rem,5vw,3.5rem)">Obrigado!</h1>
+    <h1 class="anim-up d1" style="color:var(--teal);font-size:clamp(2.5rem,6vw,4.2rem)">Obrigado!</h1>
     <div class="divider anim-in d2" style="margin:1vh auto;background:linear-gradient(90deg,var(--teal),var(--green))"></div>
     <p class="subtitle anim-up d3" style="margin-top:1vh;font-weight:400">Conhecendo o Mundo Micro</p>
-    <p class="anim-up d4" style="margin-top:2vh;font-size:clamp(.7rem,1vw,.82rem);opacity:.5">
+    <p class="anim-up d4" style="margin-top:2vh;font-size:clamp(.88rem,1.2vw,1rem);opacity:.5">
       UNINASSAU Barreiras-BA &bull; Extensão I &bull; 2026.2
     </p>
   </div>
