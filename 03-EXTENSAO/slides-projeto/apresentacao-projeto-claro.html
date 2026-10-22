@@ -20,11 +20,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
   --accent:#0097A7;
 }
 
-h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.15;text-shadow:1px 1px 4px rgba(0,0,0,.08)}
-h2{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:1.5vh}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.15;text-shadow:0 0 18px rgba(255,255,255,.95),0 0 36px rgba(255,255,255,.7)}
+h2{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:1.5vh;text-shadow:0 0 14px rgba(255,255,255,.9),0 0 28px rgba(255,255,255,.6)}
 h3{font-size:clamp(1.15rem,2.2vw,1.5rem);font-weight:700;margin-bottom:.6vh}
 p{font-size:clamp(1rem,1.7vw,1.25rem);line-height:1.6;font-weight:400}
-.subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:500;opacity:.85;line-height:1.5}
+.subtitle{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:500;opacity:.85;line-height:1.5;text-shadow:0 0 12px rgba(255,255,255,.9)}
 
 .label{display:inline-block;padding:6px 18px;border-radius:50px;font-size:clamp(.75rem,1.2vw,.9rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2vh;background:var(--teal);color:#fff}
 .section-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(38px,3.5vw,52px);height:clamp(38px,3.5vw,52px);border-radius:50%;background:var(--teal);color:#fff;font-size:clamp(1rem,1.7vw,1.4rem);font-weight:900;margin-right:12px;flex-shrink:0;text-shadow:none}
@@ -75,7 +75,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 1: CAPA ==================== -->
 <div class="slide active">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(to top,rgba(240,242,245,.97) 15%,rgba(240,242,245,.82) 50%,rgba(240,242,245,.93))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to top,rgba(255,255,255,.82) 10%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.72))"></div>
   <div class="content" style="text-align:center">
     <div class="label anim-up d1">Projeto de Extensão</div>
     <h1 class="anim-up d2" style="margin-bottom:.5vh">CONHECENDO O MUNDO MICRO</h1>
@@ -96,7 +96,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 2: INTRODUÇÃO ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.94)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.7)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">1</span>
@@ -125,7 +125,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 3: OBJETIVO GERAL ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.95)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.7)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">2</span>
@@ -142,13 +142,13 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 4: OBJETIVOS ESPECÍFICOS ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.95)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.72)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">2</span>
       <h2 style="margin-bottom:0">Objetivos Específicos</h2>
     </div>
-    <div class="anim-up d2">
+    <div class="anim-up d2" style="background:rgba(255,255,255,.88);border-radius:12px;padding:clamp(14px,2vw,22px);box-shadow:0 1px 4px rgba(0,0,0,.06)">
       <ul class="obj">
         <li>Apresentar conceitos básicos de microbiologia, com ênfase na microbiota humana, nos microrganismos potencialmente patogênicos e nas principais vias de transmissão por contato e feco-oral no cotidiano escolar.</li>
         <li>Demonstrar a dinâmica da contaminação cruzada entre mãos, pessoas, objetos e superfícies mediante recurso fluorescente e luz negra/UV-A.</li>
@@ -163,7 +163,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 5: CARACTERIZAÇÃO DA ÁREA ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/barreiras-city.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(240,242,245,.96) 45%,rgba(240,242,245,.7))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(255,255,255,.82) 40%,rgba(255,255,255,.25))"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">3</span>
@@ -192,7 +192,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 6: LOCAL E PÚBLICO-ALVO ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/school-building.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(240,242,245,.95) 40%,rgba(240,242,245,.6))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(255,255,255,.82) 35%,rgba(255,255,255,.2))"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">4</span>
@@ -218,7 +218,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 7: MATERIAIS E MÉTODOS (1/2) ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/uv-fluorescence.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(to left,rgba(240,242,245,.96) 50%,rgba(240,242,245,.75))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to left,rgba(255,255,255,.82) 45%,rgba(255,255,255,.2))"></div>
   <div class="content" style="display:flex;justify-content:flex-end">
     <div style="max-width:55%">
       <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
@@ -253,7 +253,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 8: MATERIAIS E MÉTODOS (2/2) ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/uv-fluorescence.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(240,242,245,.96) 50%,rgba(240,242,245,.75))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(to right,rgba(255,255,255,.82) 45%,rgba(255,255,255,.2))"></div>
   <div class="content">
     <div style="max-width:55%">
       <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
@@ -295,7 +295,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 9: RESULTADOS ESPERADOS ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.95)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.68)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">6</span>
@@ -329,13 +329,13 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 10: CRONOGRAMA ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.95)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.68)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num">7</span>
       <h2 style="margin-bottom:0">Cronograma</h2>
     </div>
-    <div class="anim-up d2" style="overflow-x:auto">
+    <div class="anim-up d2" style="overflow-x:auto;background:rgba(255,255,255,.85);border-radius:12px;padding:clamp(10px,1.5vw,18px);box-shadow:0 1px 4px rgba(0,0,0,.06)">
       <table style="width:100%;border-collapse:collapse;font-size:clamp(.9rem,1.3vw,1.05rem);color:#1a1a2e">
         <thead>
           <tr style="background:rgba(0,151,167,.1)">
@@ -395,13 +395,13 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 11: REFERÊNCIAS ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:rgba(240,242,245,.97)"></div>
+  <div class="overlay-dark" style="background:rgba(255,255,255,.68)"></div>
   <div class="content">
     <div style="display:flex;align-items:center;margin-bottom:1.5vh" class="anim-up d1">
       <span class="section-num" style="background:var(--gray)">R</span>
       <h2 style="margin-bottom:0">Referências Bibliográficas</h2>
     </div>
-    <div class="anim-up d2 ref-text">
+    <div class="anim-up d2 ref-text" style="background:rgba(255,255,255,.88);border-radius:12px;padding:clamp(14px,2vw,22px);box-shadow:0 1px 4px rgba(0,0,0,.06)">
       <p>BAHIA. Secretaria de Infraestrutura Hídrica e Saneamento. <strong>Relatório do diagnóstico dos serviços de saneamento básico da MSB Bacia do Rio Grande.</strong> Salvador: SIHS, 2022.</p>
       <p>BRASIL. Agência Nacional de Vigilância Sanitária. <strong>Segurança do paciente em serviços de saúde: higiene das mãos.</strong> Brasília, DF: Anvisa, 2026.</p>
       <p>GOEL, S.; CHANDRASHEKAR, B. R. Evaluating the efficacy of handwashing demonstration on hand hygiene among school students — an interventional study. <strong>Journal of Education and Health Promotion,</strong> v. 9, p. 226, 2020.</p>
@@ -415,7 +415,7 @@ ul.obj li::before{content:'•';color:#0097A7;font-weight:900;font-size:1.1em;fl
 <!-- ==================== SLIDE 12: ENCERRAMENTO ==================== -->
 <div class="slide">
   <div class="slide-bg" style="background-image:url('img/cover-academic.png')"></div>
-  <div class="overlay-dark" style="background:linear-gradient(135deg,rgba(240,242,245,.92),rgba(0,151,167,.15))"></div>
+  <div class="overlay-dark" style="background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(0,151,167,.2))"></div>
   <div class="content" style="text-align:center">
     <h1 class="anim-up d1" style="color:#0097A7;font-size:clamp(2.5rem,6vw,4.2rem)">Obrigado!</h1>
     <div class="divider anim-in d2" style="margin:1vh auto;background:linear-gradient(90deg,var(--teal),var(--green))"></div>
