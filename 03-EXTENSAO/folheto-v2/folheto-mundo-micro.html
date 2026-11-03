@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folheto — Conhecendo o Mundo Micro</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4 landscape;margin:0}
+html,body{font-family:'Montserrat',sans-serif;background:#e8e8e8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.page{
+  width:297mm;height:210mm;
+  margin:8mm auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.15);
+  page-break-after:always;
+  position:relative;
+}
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none}
+  .no-print{display:none!important}
+}
+
+.panel{padding:7mm;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+/* ===== CORES ===== */
+:root{
+  --teal:#0097A7;--teal-light:#e0f7fa;
+  --green:#2ECC71;--green-light:#e8f8f0;
+  --purple:#9B59B6;--purple-light:#f3e8fa;
+  --orange:#F39C12;--orange-light:#fef5e7;
+  --pink:#E91E63;--pink-light:#fce4ec;
+  --blue:#3498DB;--blue-light:#eaf2fd;
+  --dark:#1a1a2e;
+}
+
+/* ===== CAPA ===== */
+.capa{
+  background:linear-gradient(160deg,#0097A7 0%,#00BCD4 35%,#2ECC71 100%);
+  color:#fff;align-items:center;justify-content:center;text-align:center;
+  border-right:1px dashed rgba(0,0,0,.08);
+}
+.capa-img{width:72mm;height:72mm;border-radius:16px;object-fit:cover;border:3px solid rgba(255,255,255,.5);box-shadow:0 4px 16px rgba(0,0,0,.25);margin-bottom:4mm}
+.capa h1{font-size:19pt;font-weight:900;line-height:1.15;margin-bottom:2mm;text-shadow:1px 2px 4px rgba(0,0,0,.2)}
+.capa .sub{font-size:10pt;font-weight:600;opacity:.92;line-height:1.4}
+.capa .badge{display:inline-block;background:rgba(255,255,255,.2);padding:2mm 5mm;border-radius:20px;font-size:7pt;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:3mm}
+.capa .footer-capa{position:absolute;bottom:4mm;left:0;right:0;text-align:center;font-size:6pt;opacity:.6;line-height:1.4}
+
+/* ===== PAINEL GERMES ===== */
+.germes-panel{
+  background:linear-gradient(180deg,#f3e8fa 0%,#fff 100%);
+  border-right:1px dashed rgba(0,0,0,.08);
+}
+.germes-img{width:100%;border-radius:12px;object-fit:cover;margin-bottom:3mm;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.germes-panel h2{font-size:13pt;font-weight:900;color:var(--purple);margin-bottom:2mm;text-align:center}
+
+/* ===== PAINEL EXPERIMENTO ===== */
+.exp-panel{
+  background:linear-gradient(180deg,#ede7f6 0%,#fff 100%);
+}
+.exp-img{width:100%;border-radius:12px;object-fit:cover;margin-bottom:3mm;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.exp-panel h2{font-size:13pt;font-weight:900;color:#6A1B9A;margin-bottom:2mm;text-align:center}
+
+/* ===== INTERIOR ===== */
+
+/* Lavagem das mãos */
+.lavagem-panel{
+  background:linear-gradient(180deg,var(--teal-light) 0%,#fff 40%);
+  border-right:1px dashed rgba(0,0,0,.08);
+}
+.lavagem-panel h2{font-size:14pt;font-weight:900;color:var(--teal);margin-bottom:2mm}
+.wash-img{width:100%;border-radius:10px;margin-bottom:3mm;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+
+/* Quando lavar */
+.quando-panel{
+  background:linear-gradient(180deg,var(--green-light) 0%,#fff 40%);
+  border-right:1px dashed rgba(0,0,0,.08);
+}
+.quando-panel h2{font-size:14pt;font-weight:900;color:var(--green);margin-bottom:3mm}
+
+/* Kit + Curiosidades */
+.kit-panel{
+  background:linear-gradient(180deg,var(--blue-light) 0%,#fff 40%);
+}
+.kit-panel h2{font-size:13pt;font-weight:900;margin-bottom:2mm}
+
+/* ===== COMPONENTES ===== */
+.step-row{display:flex;align-items:flex-start;gap:2.5mm;margin-bottom:2mm}
+.step-num{
+  width:6.5mm;height:6.5mm;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8pt;font-weight:900;color:#fff;flex-shrink:0;margin-top:.3mm;
+}
+.step-text{font-size:8.5pt;font-weight:500;line-height:1.35;color:var(--dark)}
+
+.icon-row{display:flex;align-items:center;gap:2.5mm;margin-bottom:2.2mm}
+.icon-circle{
+  width:8mm;height:8mm;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11pt;flex-shrink:0;
+}
+.icon-text{font-size:8.5pt;font-weight:500;line-height:1.35;color:var(--dark)}
+
+.fact-box{
+  background:var(--purple-light);
+  border:2px solid var(--purple);
+  border-radius:10px;padding:3mm;margin-bottom:2.5mm;
+}
+.fact-box p{font-size:8pt;font-weight:600;line-height:1.4;color:var(--dark)}
+
+.tip-card{
+  border-radius:10px;padding:3mm;margin-bottom:2mm;
+  display:flex;align-items:flex-start;gap:2mm;
+}
+.tip-card .tip-icon{font-size:14pt;flex-shrink:0}
+.tip-card p{font-size:8pt;font-weight:500;line-height:1.35;color:var(--dark)}
+.tip-card strong{font-weight:700}
+
+.section-tag{
+  display:inline-block;background:var(--teal);color:#fff;
+  padding:1.5mm 4mm;border-radius:6px;font-size:8pt;font-weight:800;
+  margin-bottom:2mm;letter-spacing:.5px;
+}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,#ddd,transparent);margin:2.5mm 0}
+
+.kit-item{
+  display:flex;align-items:center;gap:2.5mm;
+  background:#fff;border:1.5px solid #ddd;border-radius:8px;
+  padding:2mm 3mm;margin-bottom:1.5mm;
+}
+.kit-item .kit-emoji{font-size:14pt;flex-shrink:0}
+.kit-item p{font-size:8pt;font-weight:600;line-height:1.3;color:var(--dark)}
+
+.superhero-box{
+  background:linear-gradient(135deg,#e8f5e9,#e0f7fa);
+  border:2px solid var(--green);border-radius:10px;
+  padding:3mm;text-align:center;
+}
+.superhero-box p{font-size:8.5pt;font-weight:700;line-height:1.4;color:var(--dark)}
+
+.no-print{position:fixed;top:10px;right:10px;z-index:100}
+.no-print button{
+  background:var(--teal);color:#fff;border:none;padding:10px 20px;
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;
+  border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.no-print button:hover{background:#00838f}
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <button onclick="window.print()">Imprimir / Salvar PDF</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 1 — FRENTE (dobra em 3: Capa + Germes + Experimento)  -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <!-- PAINEL 1: CAPA -->
+  <div class="panel capa">
+    <img src="img/cover-kids.png" alt="Crianças lavando as mãos" class="capa-img">
+    <h1>Conhecendo o<br>Mundo Micro</h1>
+    <p class="sub">Aprenda sobre os bichinhos<br>invisíveis e como se proteger!</p>
+    <div class="badge">Projeto de Extensão Universitária</div>
+    <p class="footer-capa">
+      UNINASSAU Barreiras &bull; Extensão I &bull; 2026<br>
+      Biomedicina &bull; Fisioterapia &bull; Nutrição &bull; Farmácia &bull; Enfermagem
+    </p>
+  </div>
+
+  <!-- PAINEL 2: ONDE ESTÃO OS GERMES? -->
+  <div class="panel germes-panel">
+    <h2>Onde estão os germes?</h2>
+    <img src="img/cute-germs.png" alt="Germes fofos escondidos" class="germes-img">
+    <p style="font-size:8.5pt;font-weight:600;color:var(--dark);line-height:1.4;margin-bottom:2mm;text-align:center">
+      Os <strong style="color:var(--purple)">microrganismos</strong> são tão pequenos que não dá pra ver! Mas estão em todo lugar:
+    </p>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--purple-light)">🚪</div>
+      <p class="icon-text">Nas <strong>maçanetas</strong> das portas</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--orange-light)">✏️</div>
+      <p class="icon-text">Nos <strong>lápis e cadernos</strong> da escola</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--pink-light)">📱</div>
+      <p class="icon-text">Na <strong>tela do celular</strong></p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--teal-light)">🪑</div>
+      <p class="icon-text">Nas <strong>mesas e cadeiras</strong></p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🤝</div>
+      <p class="icon-text">Quando damos <strong>a mão</strong> pros amigos</p>
+    </div>
+    <div style="margin-top:auto">
+      <div class="fact-box">
+        <p>🔬 Existem mais de <strong style="color:var(--purple)">800 tipos</strong> de bactérias vivendo nas nossas mãos agora mesmo!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAINEL 3: EXPERIMENTO UV -->
+  <div class="panel exp-panel">
+    <h2>O Experimento Mágico!</h2>
+    <img src="img/uv-experiment.png" alt="Experimento com luz UV" class="exp-img">
+    <p style="font-size:8.5pt;font-weight:600;color:var(--dark);line-height:1.4;margin-bottom:3mm;text-align:center">
+      Com um <strong style="color:#6A1B9A">gel especial</strong> e uma <strong style="color:#6A1B9A">luz mágica</strong>, conseguimos ver os "germes" nas suas mãos!
+    </p>
+    <div class="tip-card" style="background:var(--purple-light);border:1.5px solid var(--purple)">
+      <span class="tip-icon">🧴</span>
+      <p>O <strong>gel fluorescente</strong> brilha no escuro e mostra como os germes passam de uma mão pra outra!</p>
+    </div>
+    <div class="tip-card" style="background:#ede7f6;border:1.5px solid #7E57C2">
+      <span class="tip-icon">🔦</span>
+      <p>A <strong>luz negra</strong> revela tudo que os olhos não veem. Depois de lavar as mãos, vamos ver se ficou limpo de verdade!</p>
+    </div>
+    <div style="margin-top:auto">
+      <div style="background:linear-gradient(135deg,#ede7f6,#e8eaf6);border-radius:10px;padding:3mm;text-align:center">
+        <p style="font-size:8.5pt;font-weight:800;color:#4A148C;line-height:1.4">
+          Isso se chama<br><span style="font-size:10pt;color:#6A1B9A">contaminação cruzada!</span>
+        </p>
+        <p style="font-size:7.5pt;font-weight:500;color:#555;margin-top:1mm;line-height:1.3">
+          Quando os germes vão de um lugar pra outro pelas nossas mãos.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PÁGINA 2 — VERSO (interior aberto: Lavagem + Quando + Kit)   -->
+<!-- ============================================================ -->
+<div class="page">
+
+  <!-- PAINEL 4: COMO LAVAR AS MÃOS -->
+  <div class="panel lavagem-panel">
+    <span class="section-tag" style="background:var(--teal)">PASSO A PASSO</span>
+    <h2>Como lavar as mãos</h2>
+    <img src="img/handwash-steps.png" alt="5 passos da lavagem" class="wash-img">
+
+    <div class="step-row">
+      <div class="step-num" style="background:var(--teal)">1</div>
+      <p class="step-text"><strong>Molhe</strong> as mãos com água limpa</p>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#00897B">2</div>
+      <p class="step-text">Coloque <strong>sabão</strong> e esfregue as palmas</p>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#00796B">3</div>
+      <p class="step-text">Esfregue <strong>entre os dedos</strong>, o dedão e as unhas por <strong>20 segundos</strong></p>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#00695C">4</div>
+      <p class="step-text"><strong>Enxágue</strong> bem com água corrente</p>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#004D40">5</div>
+      <p class="step-text"><strong>Seque</strong> com toalha limpa ou papel</p>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="tip-card" style="background:var(--teal-light);border:1.5px solid var(--teal)">
+        <span class="tip-icon">🎵</span>
+        <p><strong>Dica:</strong> Cante "Parabéns" 2 vezes enquanto esfrega. Quando acabar a música, já deu os 20 segundos!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAINEL 5: QUANDO LAVAR + ÁLCOOL GEL -->
+  <div class="panel quando-panel">
+    <span class="section-tag" style="background:var(--green)">IMPORTANTE</span>
+    <h2>Quando lavar as mãos?</h2>
+
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🍽️</div>
+      <p class="icon-text"><strong>Antes</strong> de comer qualquer coisa</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🚽</div>
+      <p class="icon-text"><strong>Depois</strong> de usar o banheiro</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🤧</div>
+      <p class="icon-text"><strong>Depois</strong> de espirrar ou tossir</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🐕</div>
+      <p class="icon-text"><strong>Depois</strong> de brincar ou tocar animais</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🏠</div>
+      <p class="icon-text">Ao <strong>chegar em casa</strong> da rua ou escola</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-circle" style="background:var(--green-light)">🎮</div>
+      <p class="icon-text"><strong>Depois</strong> de mexer no celular ou tablet</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <span class="section-tag" style="background:var(--blue)">ÁLCOOL EM GEL</span>
+    <div class="tip-card" style="background:var(--blue-light);border:1.5px solid var(--blue)">
+      <span class="tip-icon">🧴</span>
+      <div>
+        <p><strong>Use quando não tiver pia por perto!</strong></p>
+        <p style="margin-top:1mm">No ônibus, na rua, na fila do lanche...</p>
+        <p style="margin-top:1mm;color:var(--pink)"><strong>Mas ele não substitui água e sabão!</strong></p>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="tip-card" style="background:var(--orange-light);border:1.5px solid var(--orange)">
+        <span class="tip-icon">🍎</span>
+        <div>
+          <p><strong>Frutas e verduras</strong> também precisam ser lavadas antes de comer!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAINEL 6: CURIOSIDADES + KIT + DESPEDIDA -->
+  <div class="panel kit-panel">
+    <span class="section-tag" style="background:var(--purple)">VOCÊ SABIA?</span>
+    <h2 style="color:var(--purple)">Curiosidades incríveis!</h2>
+
+    <div class="fact-box" style="display:flex;gap:2mm;align-items:center">
+      <span style="font-size:14pt;flex-shrink:0">🦠</span>
+      <p><strong style="color:var(--purple)">80%</strong> das doenças comuns são transmitidas pelas mãos!</p>
+    </div>
+    <div class="fact-box" style="display:flex;gap:2mm;align-items:center">
+      <span style="font-size:14pt;flex-shrink:0">💪</span>
+      <p>Lavar as mãos pode evitar <strong style="color:var(--purple)">metade</strong> das infecções!</p>
+    </div>
+    <div class="fact-box" style="display:flex;gap:2mm;align-items:center">
+      <span style="font-size:14pt;flex-shrink:0">🔬</span>
+      <p>Os microrganismos são <strong style="color:var(--purple)">1.000 vezes</strong> menores que a ponta de um lápis!</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <span class="section-tag" style="background:var(--teal)">SEU KIT DE HIGIENE</span>
+    <div class="kit-item">
+      <span class="kit-emoji">🧼</span>
+      <p>Sabonete líquido</p>
+    </div>
+    <div class="kit-item">
+      <span class="kit-emoji">🧴</span>
+      <p>Álcool em gel 70%</p>
+    </div>
+    <div class="kit-item">
+      <span class="kit-emoji">📖</span>
+      <p>Este folheto — pra lembrar sempre!</p>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="superhero-box">
+        <p style="font-size:12pt">🦸‍♂️🦸‍♀️</p>
+        <p>Agora você é um<br><span style="font-size:11pt;color:var(--green)">Super-Herói da Higiene!</span></p>
+        <p style="font-size:7.5pt;font-weight:500;color:#555;margin-top:1.5mm">Ensine sua família e amigos também!</p>
+      </div>
+      <p style="text-align:center;font-size:6pt;color:#999;margin-top:2mm;line-height:1.4">
+        Material educativo — Projeto de Extensão Universitária<br>
+        UNINASSAU Barreiras &bull; COOPEB &bull; 2026
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
