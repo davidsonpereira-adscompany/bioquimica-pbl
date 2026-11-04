@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adesivos para Bisnagas — Conhecendo o Mundo Micro</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4 portrait;margin:8mm}
+html,body{font-family:'Montserrat',sans-serif;background:#e8e8e8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.sheet{
+  width:210mm;
+  min-height:297mm;
+  margin:6mm auto;
+  padding:8mm;
+  background:#fff;
+  box-shadow:0 2px 16px rgba(0,0,0,.12);
+  display:flex;
+  flex-wrap:wrap;
+  align-content:flex-start;
+  gap:4mm;
+  justify-content:center;
+}
+@media print{
+  body{background:#fff}
+  .sheet{margin:0;box-shadow:none;padding:5mm}
+  .no-print{display:none!important}
+}
+
+.sticker{
+  width:45mm;
+  height:50mm;
+  border-radius:3mm;
+  overflow:hidden;
+  position:relative;
+  border:0.3mm dashed #ccc;
+  flex-shrink:0;
+}
+.sticker-bg{
+  position:absolute;inset:0;
+  background-image:url('img/sticker-bg.png');
+  background-size:cover;
+  background-position:center;
+  z-index:0;
+}
+.sticker-content{
+  position:relative;z-index:1;
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:3mm 2.5mm 1mm;
+}
+.sticker-title{
+  font-size:7.5pt;
+  font-weight:900;
+  color:#fff;
+  text-align:center;
+  line-height:1.2;
+  text-shadow:0 1px 3px rgba(0,0,0,.4);
+  margin-bottom:1mm;
+}
+.sticker-subtitle{
+  font-size:5pt;
+  font-weight:700;
+  color:rgba(255,255,255,.85);
+  text-align:center;
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+  letter-spacing:.3px;
+  margin-bottom:2mm;
+}
+.sticker-product{
+  background:rgba(255,255,255,.92);
+  border-radius:2mm;
+  padding:1.5mm 4mm;
+  text-align:center;
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
+}
+.sticker-product .product-name{
+  font-size:8pt;
+  font-weight:900;
+  color:#0097A7;
+  line-height:1.2;
+}
+.sticker-product .product-detail{
+  font-size:5.5pt;
+  font-weight:600;
+  color:#555;
+  margin-top:.3mm;
+}
+.sticker-footer{
+  margin-top:auto;
+  margin-bottom:12mm;
+  text-align:center;
+}
+.sticker-footer p{
+  font-size:4pt;
+  font-weight:600;
+  color:rgba(255,255,255,.7);
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+  line-height:1.3;
+}
+
+.page-title{
+  width:100%;text-align:center;margin-bottom:3mm;
+}
+.page-title h1{font-size:14pt;font-weight:800;color:#333}
+.page-title p{font-size:9pt;color:#777;margin-top:1mm}
+
+.cut-guide{
+  width:100%;text-align:center;margin-top:4mm;
+  font-size:7pt;color:#aaa;font-weight:500;
+}
+
+.no-print{position:fixed;top:10px;right:10px;z-index:100}
+.no-print button{
+  background:#0097A7;color:#fff;border:none;padding:10px 20px;
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;
+  border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.no-print button:hover{background:#00838f}
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <button onclick="window.print()">Imprimir / Salvar PDF</button>
+</div>
+
+<div class="sheet">
+
+  <div class="page-title no-print">
+    <h1>Adesivos para Bisnagas — Conhecendo o Mundo Micro</h1>
+    <p>Recorte no pontilhado &bull; Tamanho: 4,5 cm &times; 5,0 cm</p>
+  </div>
+
+  <!-- 20 adesivos (4 colunas x 5 linhas) cabem em uma folha A4 -->
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <div class="sticker"><div class="sticker-bg"></div><div class="sticker-content">
+    <p class="sticker-title">Conhecendo o<br>Mundo Micro</p>
+    <p class="sticker-subtitle">Projeto de Extensão</p>
+    <div class="sticker-product">
+      <p class="product-name">Álcool em Gel</p>
+      <p class="product-detail">70% &bull; Uso externo</p>
+    </div>
+    <div class="sticker-footer"><p>UNINASSAU &bull; COOPEB<br>Barreiras-BA &bull; 2026</p></div>
+  </div></div>
+
+  <p class="cut-guide no-print">Recorte no pontilhado &bull; 20 adesivos por folha A4</p>
+
+</div>
+
+</body>
+</html>
