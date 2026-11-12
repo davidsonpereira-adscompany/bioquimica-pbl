@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Conhecendo o Mundo Micro!</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="img/kids-microbial-world.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-serif;background:#000}
@@ -295,7 +298,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
   <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center">
     <h1 class="in1" style="font-size:clamp(40px,6.5vw,88px)">Conhecendo o<br>Mundo Micro!</h1>
     <p class="in2" style="font-size:clamp(18px,2.5vw,32px);margin:14px 0 22px;opacity:.95">Uma aventura pelo mundo dos bichinhos invisíveis</p>
-    <div class="img-frame pop1"><img src="img/kids-microbial-world.png" alt="Crianças descobrindo microrganismos" style="max-height:52vh;max-width:70vw"></div>
+    <div class="img-frame pop1"><img fetchpriority="high" decoding="sync" src="img/kids-microbial-world.webp" alt="Crianças descobrindo microrganismos" style="max-height:52vh;max-width:70vw"></div>
     <p class="in4" style="margin-top:18px;font-size:clamp(13px,1.6vw,20px);opacity:.8;letter-spacing:1px">UNINASSAU &bull; COOPEB &bull; Barreiras-BA</p>
   </div>
 </div>
@@ -304,7 +307,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-rosa">
   <div class="stars"><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2728;</b><b>&#x2B50;</b></div>
   <div class="q-badge in1" style="position:relative;z-index:1">PERGUNTA 1 DE 5</div>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/quiz-raise-hands.png" alt="Crianças levantando a mão" style="max-height:42vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/quiz-raise-hands.webp" alt="Crianças levantando a mão" style="max-height:42vh"></div>
   <div class="q-card in3" style="position:relative;z-index:1;margin-top:20px">
     <h2>Quem sabe o que é um microrganismo?</h2>
   </div>
@@ -341,7 +344,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-sol">
   <div class="stars"><b>&#x1F440;</b><b>&#x2728;</b><b>&#x1F440;</b><b>&#x2728;</b><b>&#x2728;</b><b>&#x1F440;</b></div>
   <div class="q-badge in1" style="position:relative;z-index:1;border-color:rgba(74,44,0,.4);background:rgba(255,255,255,.5)">PERGUNTA 4 DE 5</div>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/hands-check.png" alt="Mãos com germes invisíveis" style="max-height:42vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/hands-check.webp" alt="Mãos com germes invisíveis" style="max-height:42vh"></div>
   <div class="q-card in3" style="position:relative;z-index:1;margin-top:20px">
     <h2>Será que as suas mãos estão limpas agora?</h2>
   </div>
@@ -377,7 +380,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
     <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
   </div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">O que são microrganismos?</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/germs-magnified.png" alt="Germes vistos pela lupa" style="max-height:57vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/germs-magnified.webp" alt="Germes vistos pela lupa" style="max-height:57vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Bichinhos <strong>tão pequenos</strong> que só dá<br>para ver com uma super lupa!</p>
 </div>
 
@@ -385,7 +388,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-rosa">
   <div class="stars"><b>&#x1F9A0;</b><b>&#x2728;</b><b>&#x1F9A0;</b><b>&#x2728;</b><b>&#x1F9A0;</b><b>&#x2728;</b></div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">Onde eles se escondem?</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="../folheto-v2/img/cute-germs.png" alt="Germes em objetos do dia a dia" style="max-height:57vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/cute-germs.webp" alt="Germes em objetos do dia a dia" style="max-height:57vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Na maçaneta, no lápis, no celular...<br><strong>em todo lugar!</strong></p>
 </div>
 
@@ -396,7 +399,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
     <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
   </div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">Como eles viajam?</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/contamination-chain.png" alt="Germes passando de um lugar para outro" style="max-height:57vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/contamination-chain.webp" alt="Germes passando de um lugar para outro" style="max-height:57vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Eles pulam da maçaneta para a mão,<br>da mão para o lanche... <strong>e para a boca!</strong></p>
 </div>
 
@@ -404,7 +407,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-fogo">
   <div class="bubbles" data-bubbles="12"></div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">O sabão é um super-herói!</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/soap-hero.png" alt="Sabonete herói espantando os germes" style="max-height:57vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/soap-hero.webp" alt="Sabonete herói espantando os germes" style="max-height:57vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Quando o sabão chega...<br><strong>os germes fogem correndo!</strong></p>
 </div>
 
@@ -412,7 +415,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-menta">
   <div class="bubbles" data-bubbles="10"></div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:16px">Como lavar as mãos direitinho?</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="../folheto-v2/img/handwash-steps.png" alt="Passo a passo da lavagem das mãos" style="max-height:57vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/handwash-steps.webp" alt="Passo a passo da lavagem das mãos" style="max-height:57vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:14px;font-size:clamp(17px,2.4vw,30px)"><strong>5 passinhos mágicos</strong> para espantar os germes!</p>
 </div>
 
@@ -420,7 +423,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-verde">
   <div class="stars"><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b></div>
   <h2 class="in1" style="position:relative;z-index:1;margin-bottom:16px">Quando lavar as mãos?</h2>
-  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/handwash-moments.png" alt="Momentos de lavar as mãos" style="max-height:55vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img loading="lazy" decoding="async" src="img/handwash-moments.webp" alt="Momentos de lavar as mãos" style="max-height:55vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:14px;font-size:clamp(16px,2.2vw,28px)">Antes de comer &bull; Depois do banheiro<br>Depois de brincar com animais &bull; Quando espirrar</p>
 </div>
 
@@ -428,7 +431,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-noite">
   <div class="stars"><b>&#x2728;</b><b>&#x1F31F;</b><b>&#x2728;</b><b>&#x1F31F;</b><b>&#x2728;</b><b>&#x1F31F;</b></div>
   <h1 class="in1" style="position:relative;z-index:1;font-size:clamp(36px,6vw,76px)">Hora do Experimento!</h1>
-  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img src="img/uv-light-activity.png" alt="Experimento com luz ultravioleta" style="max-height:54vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img loading="lazy" decoding="async" src="img/uv-light-activity.webp" alt="Experimento com luz ultravioleta" style="max-height:54vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(18px,2.5vw,32px)">Vamos ver o que está<br><strong>escondido nas suas mãos!</strong></p>
 </div>
 
@@ -436,7 +439,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
 <div class="slide bg-azul">
   <div class="bubbles" data-bubbles="14"></div>
   <h1 class="in1" style="position:relative;z-index:1;font-size:clamp(36px,6vw,72px)">Agora é sua vez!</h1>
-  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img src="img/cover-kids-washing.png" alt="Crianças lavando as mãos" style="max-height:54vh"></div>
+  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img loading="lazy" decoding="async" src="img/cover-kids-washing.webp" alt="Crianças lavando as mãos" style="max-height:54vh"></div>
   <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(18px,2.5vw,32px)">Vamos lavar as mãos<br>e <strong>espantar os germes!</strong></p>
 </div>
 
@@ -459,7 +462,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-s
   <div class="bubbles" data-bubbles="8"></div>
   <div style="position:relative;z-index:3;display:flex;flex-direction:column;align-items:center">
     <h1 class="in1" style="font-size:clamp(44px,7.5vw,96px)">Obrigado!</h1>
-    <div class="img-frame pop1" style="margin:14px 0"><img src="img/thank-you-gifts.png" alt="Entrega dos kits" style="max-height:44vh"></div>
+    <div class="img-frame pop1" style="margin:14px 0"><img loading="lazy" decoding="async" src="img/thank-you-gifts.webp" alt="Entrega dos kits" style="max-height:44vh"></div>
     <p class="in3" style="font-size:clamp(18px,2.5vw,30px)">Agora cada um de vocês vai receber<br><strong>um kit especial!</strong></p>
     <p class="in4" style="margin-top:14px;font-size:clamp(13px,1.6vw,20px);opacity:.8;letter-spacing:1px">Projeto de Extensão &bull; UNINASSAU &bull; 2026</p>
   </div>
