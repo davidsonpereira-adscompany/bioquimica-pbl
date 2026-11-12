@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Conhecendo o Mundo Micro!</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-serif;background:#000}
+
+/* ============ SLIDES BASE ============ */
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:36px 60px;
+  opacity:0;pointer-events:none;
+  transition:opacity .55s ease;
+  overflow:hidden;
+  background-size:300% 300%!important;
+  animation:bgShift 14s ease-in-out infinite;
+}
+.slide.active{opacity:1;pointer-events:auto}
+@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* ============ TIPOGRAFIA ============ */
+.slide h1{
+  font-size:clamp(34px,5.8vw,78px);
+  font-weight:900;text-align:center;line-height:1.12;
+  text-shadow:0 5px 18px rgba(0,0,0,.28);
+}
+.slide h2{
+  font-size:clamp(26px,4.2vw,56px);
+  font-weight:900;text-align:center;line-height:1.15;
+  text-shadow:0 4px 14px rgba(0,0,0,.2);
+}
+.slide p{
+  font-size:clamp(16px,2.2vw,28px);
+  font-weight:700;text-align:center;line-height:1.4;
+}
+
+/* ============ MOLDURA DE IMAGEM ============ */
+.img-frame{
+  animation:bob 4.5s ease-in-out infinite;
+  display:flex;justify-content:center;
+}
+.img-frame img{
+  max-width:84vw;max-height:56vh;
+  border-radius:26px;
+  border:7px solid rgba(255,255,255,.95);
+  box-shadow:0 18px 50px rgba(0,0,0,.32);
+  object-fit:contain;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ============ ENTRADAS (efeito mola) ============ */
+.slide.active .in1{animation:springUp .85s cubic-bezier(.34,1.56,.64,1) both}
+.slide.active .in2{animation:springUp .85s cubic-bezier(.34,1.56,.64,1) .18s both}
+.slide.active .in3{animation:springUp .85s cubic-bezier(.34,1.56,.64,1) .36s both}
+.slide.active .in4{animation:springUp .85s cubic-bezier(.34,1.56,.64,1) .54s both}
+@keyframes springUp{
+  0%{opacity:0;transform:translateY(70px) scale(.75)}
+  60%{opacity:1;transform:translateY(-10px) scale(1.05)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.slide.active .pop1{animation:popIn .9s cubic-bezier(.34,1.56,.64,1) .2s both}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(.25) rotate(-8deg)}
+  65%{opacity:1;transform:scale(1.07) rotate(2deg)}
+  100%{opacity:1;transform:scale(1) rotate(0)}
+}
+
+/* ============ FUNDOS ============ */
+.bg-roxo{background:linear-gradient(135deg,#7F7FD5,#86A8E7,#91EAE4);color:#fff}
+.bg-rosa{background:linear-gradient(135deg,#FF6FD8,#F857A6,#FF5858);color:#fff}
+.bg-azul{background:linear-gradient(135deg,#36D1DC,#5B86E5,#36D1DC);color:#fff}
+.bg-verde{background:linear-gradient(135deg,#11998e,#38ef7d,#a8ff78);color:#073b32}
+.bg-sol{background:linear-gradient(135deg,#F7971E,#FFD200,#FFA751);color:#4a2c00}
+.bg-lilas{background:linear-gradient(135deg,#B06AB3,#4568DC,#B06AB3);color:#fff}
+.bg-pessego{background:linear-gradient(135deg,#FF9966,#FF5E62,#FFC371);color:#fff}
+.bg-ceu{background:linear-gradient(135deg,#56CCF2,#2F80ED,#6DD5FA);color:#fff}
+.bg-uva{background:linear-gradient(135deg,#654ea3,#eaafc8,#654ea3);color:#fff}
+.bg-menta{background:linear-gradient(135deg,#43C6AC,#F8FFAE,#43C6AC);color:#0b4038}
+.bg-noite{background:linear-gradient(135deg,#0F2027,#2C5364,#24C6DC);color:#fff}
+.bg-fogo{background:linear-gradient(135deg,#f12711,#f5af19,#f12711);color:#fff}
+.bg-festa{background:linear-gradient(135deg,#FC466B,#3F5EFB,#FC466B);color:#fff}
+
+/* ============ CARD DE PERGUNTA ============ */
+.q-badge{
+  background:rgba(255,255,255,.25);
+  border:3px solid rgba(255,255,255,.7);
+  border-radius:999px;
+  padding:8px 26px;
+  font-size:clamp(14px,1.8vw,22px);
+  font-weight:800;letter-spacing:2px;
+  margin-bottom:18px;
+  backdrop-filter:blur(4px);
+}
+.q-card{
+  background:rgba(255,255,255,.96);
+  color:#1f2340;
+  border-radius:30px;
+  padding:clamp(22px,3.5vw,46px) clamp(30px,5vw,70px);
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
+  max-width:82%;
+}
+.q-card h2{color:#1f2340;text-shadow:none}
+.hand-wave{
+  display:inline-block;
+  font-size:clamp(54px,8vw,110px);
+  animation:wave 1.3s ease-in-out infinite;
+  transform-origin:70% 80%;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
+}
+@keyframes wave{
+  0%,100%{transform:rotate(0)}
+  20%{transform:rotate(22deg)}
+  45%{transform:rotate(-14deg)}
+  70%{transform:rotate(16deg)}
+}
+.cta-pill{
+  margin-top:22px;
+  background:rgba(255,255,255,.95);
+  color:#e8336d;
+  font-size:clamp(18px,2.6vw,34px);
+  font-weight:900;
+  padding:12px 42px;border-radius:999px;
+  box-shadow:0 10px 26px rgba(0,0,0,.25);
+  animation:heartbeat 1.6s ease infinite;
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  12%{transform:scale(1.1)}
+  24%{transform:scale(1)}
+  36%{transform:scale(1.08)}
+}
+.emoji-row{
+  display:flex;gap:clamp(14px,3vw,44px);
+  margin-top:26px;
+}
+.emoji-row span{
+  font-size:clamp(50px,7.5vw,100px);
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.28));
+  animation:bounceJoy 1.8s ease-in-out infinite;
+}
+.emoji-row span:nth-child(2){animation-delay:.25s}
+.emoji-row span:nth-child(3){animation-delay:.5s}
+@keyframes bounceJoy{
+  0%,100%{transform:translateY(0) rotate(0)}
+  30%{transform:translateY(-22px) rotate(-8deg)}
+  60%{transform:translateY(0) rotate(0)}
+  75%{transform:translateY(-8px) rotate(6deg)}
+}
+
+/* ============ GERMES FLUTUANTES ============ */
+.germs{position:absolute;inset:0;pointer-events:none;z-index:0}
+.germs span{
+  position:absolute;
+  font-size:clamp(34px,4.5vw,64px);
+  opacity:.5;
+  animation:germDrift 7s ease-in-out infinite, germSpin 9s linear infinite;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.2));
+}
+.germs span:nth-child(1){top:8%;left:6%;animation-delay:0s}
+.germs span:nth-child(2){top:14%;right:8%;animation-delay:1.2s;font-size:clamp(26px,3.2vw,46px)}
+.germs span:nth-child(3){bottom:14%;left:9%;animation-delay:2.1s;font-size:clamp(30px,3.8vw,54px)}
+.germs span:nth-child(4){bottom:20%;right:6%;animation-delay:.7s}
+.germs span:nth-child(5){top:48%;left:3%;animation-delay:3s;font-size:clamp(24px,3vw,42px)}
+.germs span:nth-child(6){top:42%;right:3%;animation-delay:1.8s;font-size:clamp(28px,3.4vw,48px)}
+@keyframes germDrift{
+  0%,100%{transform:translate(0,0)}
+  25%{transform:translate(14px,-20px)}
+  50%{transform:translate(-10px,-34px)}
+  75%{transform:translate(18px,-12px)}
+}
+@keyframes germSpin{
+  0%{rotate:0deg}50%{rotate:14deg}100%{rotate:0deg}
+}
+
+/* ============ BOLHAS DE SABÃO ============ */
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bubbles i{
+  position:absolute;bottom:-70px;
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95),rgba(255,255,255,.28) 42%,rgba(255,255,255,.08) 70%);
+  border:1px solid rgba(255,255,255,.5);
+  animation:rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:0}
+  8%{opacity:1}
+  100%{transform:translateY(-115vh) translateX(30px) scale(.55);opacity:0}
+}
+
+/* ============ ESTRELINHAS ============ */
+.stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+.stars b{
+  position:absolute;
+  font-size:clamp(16px,2vw,30px);
+  animation:twinkle 2s ease infinite;
+}
+.stars b:nth-child(1){top:12%;left:16%;animation-delay:0s}
+.stars b:nth-child(2){top:22%;right:14%;animation-delay:.5s}
+.stars b:nth-child(3){bottom:22%;left:12%;animation-delay:1s}
+.stars b:nth-child(4){bottom:14%;right:18%;animation-delay:1.4s}
+.stars b:nth-child(5){top:50%;left:6%;animation-delay:.8s}
+.stars b:nth-child(6){top:44%;right:7%;animation-delay:.2s}
+@keyframes twinkle{
+  0%,100%{opacity:1;transform:scale(1) rotate(0)}
+  50%{opacity:.25;transform:scale(.5) rotate(30deg)}
+}
+
+/* ============ CONFETE ============ */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.confetti i{
+  position:absolute;top:-6vh;
+  width:14px;height:22px;
+  border-radius:3px;
+  animation:confettiFall linear infinite;
+}
+@keyframes confettiFall{
+  0%{transform:translateY(0) rotate(0) translateX(0)}
+  25%{transform:translateY(28vh) rotate(180deg) translateX(24px)}
+  50%{transform:translateY(56vh) rotate(360deg) translateX(-18px)}
+  75%{transform:translateY(84vh) rotate(540deg) translateX(20px)}
+  100%{transform:translateY(118vh) rotate(720deg) translateX(-10px)}
+}
+
+/* ============ RECAPITULAÇÃO ============ */
+.recap-grid{
+  display:flex;gap:clamp(14px,2.6vw,36px);
+  flex-wrap:wrap;justify-content:center;
+  margin:20px 0;
+}
+.recap-card{
+  background:rgba(255,255,255,.95);
+  color:#1f2340;
+  border-radius:24px;
+  padding:clamp(16px,2.2vw,30px) clamp(14px,2vw,26px);
+  width:clamp(140px,16vw,220px);
+  text-align:center;
+  box-shadow:0 14px 34px rgba(0,0,0,.25);
+  animation:bob 4s ease-in-out infinite;
+}
+.recap-card:nth-child(2){animation-delay:.4s}
+.recap-card:nth-child(3){animation-delay:.8s}
+.recap-card:nth-child(4){animation-delay:1.2s}
+.recap-card .ico{font-size:clamp(42px,5.5vw,76px);margin-bottom:8px}
+.recap-card p{font-size:clamp(13px,1.5vw,19px);font-weight:800;line-height:1.3}
+
+/* ============ PROGRESSO ============ */
+#progress{
+  position:fixed;bottom:0;left:0;height:7px;
+  background:linear-gradient(90deg,#FFD200,#FF5E62,#FF6FD8);
+  transition:width .4s ease;z-index:100;
+  border-radius:0 4px 4px 0;
+  box-shadow:0 0 12px rgba(255,255,255,.5);
+}
+#counter{
+  position:fixed;bottom:16px;right:24px;
+  font-size:16px;font-weight:800;
+  color:rgba(255,255,255,.65);
+  z-index:100;text-shadow:0 1px 5px rgba(0,0,0,.4);
+}
+
+/* ============ RESPONSIVO ============ */
+@media(max-width:768px){
+  .slide{padding:22px 18px}
+  .img-frame img{max-width:94%;max-height:48vh;border-radius:18px;border-width:5px}
+  .q-card{max-width:94%}
+  #counter{font-size:13px;bottom:12px;right:14px}
+}
+@media print{
+  .slide{position:relative!important;opacity:1!important;pointer-events:auto!important;
+    animation:none!important;page-break-after:always;height:100vh;width:100vw}
+  #progress,#counter{display:none}
+  @page{size:A4 landscape;margin:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" style="width:0%"></div>
+<div id="counter">1 / 17</div>
+
+<!-- ============ 1. CAPA ============ -->
+<div class="slide bg-roxo active">
+  <div class="bubbles" data-bubbles="14"></div>
+  <div class="germs" aria-hidden="true">
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+  </div>
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center">
+    <h1 class="in1" style="font-size:clamp(40px,6.5vw,88px)">Conhecendo o<br>Mundo Micro!</h1>
+    <p class="in2" style="font-size:clamp(18px,2.5vw,32px);margin:14px 0 22px;opacity:.95">Uma aventura pelo mundo dos bichinhos invisíveis</p>
+    <div class="img-frame pop1"><img src="img/kids-microbial-world.png" alt="Crianças descobrindo microrganismos" style="max-height:52vh;max-width:70vw"></div>
+    <p class="in4" style="margin-top:18px;font-size:clamp(13px,1.6vw,20px);opacity:.8;letter-spacing:1px">UNINASSAU &bull; COOPEB &bull; Barreiras-BA</p>
+  </div>
+</div>
+
+<!-- ============ 2. PERGUNTA 1 ============ -->
+<div class="slide bg-rosa">
+  <div class="stars"><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2728;</b><b>&#x2B50;</b></div>
+  <div class="q-badge in1" style="position:relative;z-index:1">PERGUNTA 1 DE 5</div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/quiz-raise-hands.png" alt="Crianças levantando a mão" style="max-height:42vh"></div>
+  <div class="q-card in3" style="position:relative;z-index:1;margin-top:20px">
+    <h2>Quem sabe o que é um microrganismo?</h2>
+  </div>
+  <div class="cta-pill in4" style="position:relative;z-index:1"><span class="hand-wave" style="font-size:clamp(22px,3vw,40px)">&#x270B;</span>&nbsp;Levanta a mão!</div>
+</div>
+
+<!-- ============ 3. PERGUNTA 2 ============ -->
+<div class="slide bg-azul">
+  <div class="bubbles" data-bubbles="8"></div>
+  <div class="q-badge in1" style="position:relative;z-index:1">PERGUNTA 2 DE 5</div>
+  <div class="hand-wave in2" style="position:relative;z-index:1">&#x270B;</div>
+  <div class="q-card in3" style="position:relative;z-index:1">
+    <h2>Quem lava as mãos antes de comer?</h2>
+  </div>
+  <div class="emoji-row in4" style="position:relative;z-index:1">
+    <span>&#x1F354;</span><span>&#x1F34E;</span><span>&#x1F96A;</span>
+  </div>
+</div>
+
+<!-- ============ 4. PERGUNTA 3 ============ -->
+<div class="slide bg-verde">
+  <div class="stars"><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b></div>
+  <div class="q-badge in1" style="position:relative;z-index:1;border-color:rgba(7,59,50,.4);background:rgba(255,255,255,.5)">PERGUNTA 3 DE 5</div>
+  <div class="hand-wave in2" style="position:relative;z-index:1">&#x270B;</div>
+  <div class="q-card in3" style="position:relative;z-index:1">
+    <h2>Quem lava as mãos depois de ir ao banheiro?</h2>
+  </div>
+  <div class="emoji-row in4" style="position:relative;z-index:1">
+    <span>&#x1F6BD;</span><span>&#x1F9FC;</span><span>&#x1F4A6;</span>
+  </div>
+</div>
+
+<!-- ============ 5. PERGUNTA 4 ============ -->
+<div class="slide bg-sol">
+  <div class="stars"><b>&#x1F440;</b><b>&#x2728;</b><b>&#x1F440;</b><b>&#x2728;</b><b>&#x2728;</b><b>&#x1F440;</b></div>
+  <div class="q-badge in1" style="position:relative;z-index:1;border-color:rgba(74,44,0,.4);background:rgba(255,255,255,.5)">PERGUNTA 4 DE 5</div>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/hands-check.png" alt="Mãos com germes invisíveis" style="max-height:42vh"></div>
+  <div class="q-card in3" style="position:relative;z-index:1;margin-top:20px">
+    <h2>Será que as suas mãos estão limpas agora?</h2>
+  </div>
+</div>
+
+<!-- ============ 6. PERGUNTA 5 ============ -->
+<div class="slide bg-lilas">
+  <div class="bubbles" data-bubbles="10"></div>
+  <div class="q-badge in1" style="position:relative;z-index:1">PERGUNTA 5 DE 5</div>
+  <div class="hand-wave in2" style="position:relative;z-index:1">&#x270B;</div>
+  <div class="q-card in3" style="position:relative;z-index:1">
+    <h2>Quem sabe lavar as mãos direitinho?</h2>
+  </div>
+  <div class="emoji-row in4" style="position:relative;z-index:1">
+    <span>&#x1F9FC;</span><span>&#x1FAE7;</span><span>&#x1F44D;</span>
+  </div>
+</div>
+
+<!-- ============ 7. TRANSIÇÃO ============ -->
+<div class="slide bg-pessego">
+  <div class="stars"><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b></div>
+  <h1 class="in1" style="position:relative;z-index:1">Vamos descobrir juntos!</h1>
+  <p class="in2" style="position:relative;z-index:1;font-size:clamp(20px,3vw,40px);margin-top:18px;opacity:.95">Preparem-se para conhecer<br>os bichinhos invisíveis...</p>
+  <div class="emoji-row in3" style="position:relative;z-index:1;margin-top:30px">
+    <span>&#x1F50D;</span><span>&#x1F9A0;</span><span>&#x1F52C;</span>
+  </div>
+</div>
+
+<!-- ============ 8. O QUE SÃO ============ -->
+<div class="slide bg-uva">
+  <div class="germs" aria-hidden="true">
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+  </div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">O que são microrganismos?</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/germs-magnified.png" alt="Germes vistos pela lupa" style="max-height:57vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Bichinhos <strong>tão pequenos</strong> que só dá<br>para ver com uma super lupa!</p>
+</div>
+
+<!-- ============ 9. ONDE SE ESCONDEM ============ -->
+<div class="slide bg-rosa">
+  <div class="stars"><b>&#x1F9A0;</b><b>&#x2728;</b><b>&#x1F9A0;</b><b>&#x2728;</b><b>&#x1F9A0;</b><b>&#x2728;</b></div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">Onde eles se escondem?</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="../folheto-v2/img/cute-germs.png" alt="Germes em objetos do dia a dia" style="max-height:57vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Na maçaneta, no lápis, no celular...<br><strong>em todo lugar!</strong></p>
+</div>
+
+<!-- ============ 10. COMO ELES VIAJAM ============ -->
+<div class="slide bg-ceu">
+  <div class="germs" aria-hidden="true">
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+    <span>&#x1F9A0;</span><span>&#x1F9A0;</span><span>&#x1F9A0;</span>
+  </div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">Como eles viajam?</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/contamination-chain.png" alt="Germes passando de um lugar para outro" style="max-height:57vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Eles pulam da maçaneta para a mão,<br>da mão para o lanche... <strong>e para a boca!</strong></p>
+</div>
+
+<!-- ============ 11. SABÃO SUPER-HERÓI ============ -->
+<div class="slide bg-fogo">
+  <div class="bubbles" data-bubbles="12"></div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:18px">O sabão é um super-herói!</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/soap-hero.png" alt="Sabonete herói espantando os germes" style="max-height:57vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(17px,2.4vw,30px)">Quando o sabão chega...<br><strong>os germes fogem correndo!</strong></p>
+</div>
+
+<!-- ============ 12. COMO LAVAR ============ -->
+<div class="slide bg-menta">
+  <div class="bubbles" data-bubbles="10"></div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:16px">Como lavar as mãos direitinho?</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="../folheto-v2/img/handwash-steps.png" alt="Passo a passo da lavagem das mãos" style="max-height:57vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:14px;font-size:clamp(17px,2.4vw,30px)"><strong>5 passinhos mágicos</strong> para espantar os germes!</p>
+</div>
+
+<!-- ============ 13. QUANDO LAVAR ============ -->
+<div class="slide bg-verde">
+  <div class="stars"><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b><b>&#x2728;</b><b>&#x1F4A7;</b></div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:16px">Quando lavar as mãos?</h2>
+  <div class="img-frame pop1" style="position:relative;z-index:1"><img src="img/handwash-moments.png" alt="Momentos de lavar as mãos" style="max-height:55vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:14px;font-size:clamp(16px,2.2vw,28px)">Antes de comer &bull; Depois do banheiro<br>Depois de brincar com animais &bull; Quando espirrar</p>
+</div>
+
+<!-- ============ 14. EXPERIMENTO ============ -->
+<div class="slide bg-noite">
+  <div class="stars"><b>&#x2728;</b><b>&#x1F31F;</b><b>&#x2728;</b><b>&#x1F31F;</b><b>&#x2728;</b><b>&#x1F31F;</b></div>
+  <h1 class="in1" style="position:relative;z-index:1;font-size:clamp(36px,6vw,76px)">Hora do Experimento!</h1>
+  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img src="img/uv-light-activity.png" alt="Experimento com luz ultravioleta" style="max-height:54vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(18px,2.5vw,32px)">Vamos ver o que está<br><strong>escondido nas suas mãos!</strong></p>
+</div>
+
+<!-- ============ 15. AGORA É SUA VEZ ============ -->
+<div class="slide bg-azul">
+  <div class="bubbles" data-bubbles="14"></div>
+  <h1 class="in1" style="position:relative;z-index:1;font-size:clamp(36px,6vw,72px)">Agora é sua vez!</h1>
+  <div class="img-frame pop1" style="position:relative;z-index:1;margin-top:16px"><img src="img/cover-kids-washing.png" alt="Crianças lavando as mãos" style="max-height:54vh"></div>
+  <p class="in3" style="position:relative;z-index:1;margin-top:16px;font-size:clamp(18px,2.5vw,32px)">Vamos lavar as mãos<br>e <strong>espantar os germes!</strong></p>
+</div>
+
+<!-- ============ 16. O QUE APRENDEMOS ============ -->
+<div class="slide bg-sol">
+  <div class="stars"><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b><b>&#x2B50;</b><b>&#x2728;</b></div>
+  <h2 class="in1" style="position:relative;z-index:1;margin-bottom:14px">O que aprendemos hoje?</h2>
+  <div class="recap-grid in2" style="position:relative;z-index:1">
+    <div class="recap-card"><div class="ico">&#x1F9A0;</div><p>Os germes são invisíveis e estão em todo lugar</p></div>
+    <div class="recap-card"><div class="ico">&#x1F9FC;</div><p>O sabão espanta os germes para longe</p></div>
+    <div class="recap-card"><div class="ico">&#x1F4A6;</div><p>Lavar direitinho protege a nossa saúde</p></div>
+    <div class="recap-card"><div class="ico">&#x1F4AA;</div><p>Agora somos heróis da saúde!</p></div>
+  </div>
+  <p class="in3" style="position:relative;z-index:1;font-size:clamp(22px,3.2vw,44px);font-weight:900;margin-top:10px">Vocês são demais!</p>
+</div>
+
+<!-- ============ 17. OBRIGADO ============ -->
+<div class="slide bg-festa">
+  <div class="confetti" data-confetti="26"></div>
+  <div class="bubbles" data-bubbles="8"></div>
+  <div style="position:relative;z-index:3;display:flex;flex-direction:column;align-items:center">
+    <h1 class="in1" style="font-size:clamp(44px,7.5vw,96px)">Obrigado!</h1>
+    <div class="img-frame pop1" style="margin:14px 0"><img src="img/thank-you-gifts.png" alt="Entrega dos kits" style="max-height:44vh"></div>
+    <p class="in3" style="font-size:clamp(18px,2.5vw,30px)">Agora cada um de vocês vai receber<br><strong>um kit especial!</strong></p>
+    <p class="in4" style="margin-top:14px;font-size:clamp(13px,1.6vw,20px);opacity:.8;letter-spacing:1px">Projeto de Extensão &bull; UNINASSAU &bull; 2026</p>
+  </div>
+</div>
+
+<script>
+// Gera bolhas de sabão
+document.querySelectorAll('.bubbles').forEach(box => {
+  const n = +box.dataset.bubbles || 10;
+  for(let i = 0; i < n; i++){
+    const b = document.createElement('i');
+    const size = 14 + Math.random() * 42;
+    b.style.width = size + 'px';
+    b.style.height = size + 'px';
+    b.style.left = Math.random() * 100 + '%';
+    b.style.animationDuration = (6 + Math.random() * 7) + 's';
+    b.style.animationDelay = (Math.random() * 8) + 's';
+    box.appendChild(b);
+  }
+});
+
+// Gera confetes
+const CORES = ['#FFD200','#FF5E62','#6DD5FA','#38ef7d','#FF6FD8','#B06AB3','#fff'];
+document.querySelectorAll('.confetti').forEach(box => {
+  const n = +box.dataset.confetti || 24;
+  for(let i = 0; i < n; i++){
+    const c = document.createElement('i');
+    c.style.left = Math.random() * 100 + '%';
+    c.style.background = CORES[i % CORES.length];
+    c.style.animationDuration = (3.5 + Math.random() * 4) + 's';
+    c.style.animationDelay = (Math.random() * 5) + 's';
+    c.style.width = (8 + Math.random() * 10) + 'px';
+    c.style.height = (14 + Math.random() * 12) + 'px';
+    box.appendChild(c);
+  }
+});
+
+// Navegação
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+function goTo(n){
+  if(n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current+1)/total*100)+'%';
+  document.getElementById('counter').textContent = (current+1)+' / '+total;
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter') goTo(current+1);
+  if(e.key==='ArrowLeft'||e.key==='Backspace') goTo(current-1);
+  if(e.key==='Home') goTo(0);
+  if(e.key==='End') goTo(total-1);
+});
+
+let touchX = 0;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(Math.abs(dx) > 50) dx < 0 ? goTo(current+1) : goTo(current-1);
+});
+
+document.addEventListener('click', e => {
+  const w = window.innerWidth;
+  if(e.clientX > w * 0.65) goTo(current+1);
+  else if(e.clientX < w * 0.35) goTo(current-1);
+});
+
+const hash = parseInt(location.hash.replace('#',''));
+goTo(hash > 0 && hash <= total ? hash - 1 : 0);
+</script>
+</body>
+</html>
