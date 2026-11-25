@@ -46,7 +46,7 @@ h2{font-size:clamp(25px,3.2vw,44px);font-weight:900;line-height:1.16;text-align:
 .kicker.violet{color:var(--violet)}
 .kicker.pink{color:var(--pink)}
 .kicker.gold{color:var(--gold)}
-.sub{font-size:clamp(14px,1.55vw,21px);font-weight:600;color:var(--mut);text-align:center;line-height:1.55}
+.sub{font-size:clamp(14px,1.55vw,21px);font-weight:600;color:var(--mut);text-align:center;line-height:1.55;text-wrap:balance}
 
 .slide.active .in1{animation:up .7s cubic-bezier(.22,1,.36,1) both}
 .slide.active .in2{animation:up .7s cubic-bezier(.22,1,.36,1) .15s both}
@@ -264,14 +264,14 @@ video{
     <div class="card violet"><div class="ic">🏫</div><h3>COOPEB</h3><p>Cooperativa Educacional de Barreiras: rede privada, ~572 estudantes, do maternal ao ensino médio</p></div>
     <div class="card pink"><div class="ic">🧒</div><h3>A turma</h3><p>2º ano do Ensino Fundamental — crianças de 7 a 8 anos, acompanhadas pela equipe pedagógica</p></div>
   </div>
-  <p class="sub in4" style="margin-top:20px;max-width:880px">Saneamento ainda é desafio na região: cerca de 9% da população usa fossas rudimentares —<br>mais um motivo para educar em higiene desde cedo.</p>
+  <p class="sub in4" style="margin-top:20px;max-width:880px">Saneamento ainda é desafio na região: cerca de 9% da população usa fossas rudimentares — mais um motivo para educar em higiene desde cedo.</p>
 </div>
 
 <!-- ========== 6. OBJETIVOS ========== -->
 <div class="slide">
   <p class="kicker in1">Parte 1 — O projeto</p>
   <h2 class="in2">O que fomos fazer lá</h2>
-  <p class="sub in2" style="margin-top:10px;max-width:900px"><b style="color:var(--neon)">Objetivo geral:</b> conscientizar os escolares sobre a presença e a disseminação<br>de microrganismos no cotidiano e a importância da higienização correta das mãos.</p>
+  <p class="sub in2" style="margin-top:10px;max-width:900px"><b style="color:var(--neon)">Objetivo geral:</b> conscientizar os escolares sobre a presença e a disseminação de microrganismos no cotidiano e a importância da higienização correta das mãos.</p>
   <div class="cards in3">
     <div class="card neon"><div class="ic">1️⃣</div><h3>Apresentar</h3><p>Conceitos básicos de microbiologia e vias de transmissão</p></div>
     <div class="card violet"><div class="ic">2️⃣</div><h3>Demonstrar</h3><p>A contaminação cruzada entre mãos, objetos e superfícies</p></div>
@@ -291,7 +291,7 @@ video{
     <div class="card pink"><div class="ic">🧪</div><h3>Dinâmicas práticas</h3><p>Experimento com pó rosa comestível e lavagem real das mãos, com a turma como protagonista</p></div>
     <div class="card gold"><div class="ic">📝</div><h3>Sondagem antes e depois</h3><p>Perguntas orais no início e no fim medem o que a turma já sabia e o que aprendeu</p></div>
   </div>
-  <p class="sub in4" style="margin-top:18px;max-width:880px">Base científica: estudos mostram que a concretização fluorescente melhora a adesão<br>à higiene das mãos em escolares (Öncü et al., 2019; Goel &amp; Chandrashekar, 2020).</p>
+  <p class="sub in4" style="margin-top:18px;max-width:880px">Base científica: estudos mostram que a concretização fluorescente melhora a adesão à higiene das mãos em escolares (Öncü et al., 2019; Goel &amp; Chandrashekar, 2020).</p>
 </div>
 
 <!-- ========== 8. MATERIAIS ========== -->
@@ -343,11 +343,10 @@ video{
 <div class="slide">
   <p class="kicker pink in1">Parte 3 — A intervenção</p>
   <h2 class="in2">Momento 2 — A luz negra revela</h2>
-  <div class="frame in3" style="margin-top:14px">
-    <img loading="lazy" decoding="sync" src="img/capa-maoverde.webp" alt="Mão brilhando sob luz negra" style="max-height:44vh">
-    <img loading="lazy" decoding="sync" src="img/maoverde-2.webp" alt="Contaminação simulada visível na luz negra" style="max-height:44vh">
+  <div class="frame single in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/capa-maoverde.webp" alt="Mão brilhando sob luz negra" style="max-height:56vh">
   </div>
-  <p class="sub in4" style="margin-top:16px;max-width:900px">A loção fluorescente passou de mão em mão e de objeto em objeto — e, dentro da caixa escura,<br>as crianças <b style="color:var(--neon)">viram com os próprios olhos</b> o caminho da contaminação cruzada.<br><span style="opacity:.8">Sempre esclarecendo: o brilho simula, não detecta microrganismos reais.</span></p>
+  <p class="sub in4" style="margin-top:16px;max-width:980px">A loção fluorescente passou de mão em mão e de objeto em objeto — e, dentro da caixa escura, as crianças <b style="color:var(--neon)">viram com os próprios olhos</b> o caminho da contaminação cruzada. <span style="opacity:.8">Sempre esclarecendo: o brilho simula, não detecta microrganismos reais.</span></p>
 </div>
 
 <!-- ========== 12. MOMENTO 3 ========== -->
@@ -359,7 +358,7 @@ video{
     <img loading="lazy" decoding="sync" src="img/maos-rosa.webp" alt="Mãos com pó rosa" style="max-height:42vh">
     <img loading="lazy" decoding="sync" src="img/lavagem-balde.webp" alt="Lavagem das mãos" style="max-height:42vh">
   </div>
-  <p class="sub in4" style="margin-top:16px;max-width:920px">Uma voluntária, de olhos vendados, lavou as mãos como faz em casa. O pó rosa mostrou o resultado:<br>boa técnica geral — e a deixa perfeita para reforçar <b style="color:var(--pink)">unhas, pontas dos dedos e espaços entre os dedos</b>.</p>
+  <p class="sub in4" style="margin-top:16px;max-width:920px">Uma voluntária, de olhos vendados, lavou as mãos como faz em casa. O pó rosa mostrou o resultado: boa técnica geral — e a deixa perfeita para reforçar <b style="color:var(--pink)">unhas, pontas dos dedos e espaços entre os dedos</b>.</p>
 </div>
 
 <!-- ========== 13. ENCERRAMENTO DA AÇÃO ========== -->
@@ -370,7 +369,7 @@ video{
     <img loading="lazy" decoding="sync" src="img/entrega-kit.webp" alt="Entrega de kit a uma criança" style="max-height:44vh">
     <img loading="lazy" decoding="sync" src="img/equipe-jalecos.webp" alt="Equipe reunida na escola" style="max-height:44vh">
   </div>
-  <p class="sub in4" style="margin-top:16px;max-width:920px">No fim, as perguntas vieram delas: "qual o tamanho de um micróbio?", "dá pra matar esfregando?",<br>"o sabonete é seguro?" — <b style="color:var(--neon)">curiosidade científica genuína</b>, respondida em linguagem acessível.<br>Cada criança levou folder educativo e kit com álcool em gel.</p>
+  <p class="sub in4" style="margin-top:16px;max-width:920px">No fim, as perguntas vieram delas: "qual o tamanho de um micróbio?", "dá pra matar esfregando?", "o sabonete é seguro?" — <b style="color:var(--neon)">curiosidade científica genuína</b>, respondida em linguagem acessível. Cada criança levou folder educativo e kit com álcool em gel.</p>
 </div>
 
 <!-- ========== 14. RESULTADOS EM NÚMEROS ========== -->
@@ -384,7 +383,7 @@ video{
     <div class="stat g"><div class="n">20</div><div class="l">kits de donativos entregues</div></div>
     <div class="stat"><div class="n">1h30</div><div class="l">de intervenção teórico-prática</div></div>
   </div>
-  <p class="sub in4" style="margin-top:28px;max-width:860px">Uma atividade, uma instituição beneficiada — e uma turma inteira<br>que agora sabe explicar por que lavar as mãos importa.</p>
+  <p class="sub in4" style="margin-top:28px;max-width:860px">Uma atividade, uma instituição beneficiada — e uma turma inteira que agora sabe explicar por que lavar as mãos importa.</p>
 </div>
 
 <!-- ========== 15. RESULTADOS QUALITATIVOS ========== -->
