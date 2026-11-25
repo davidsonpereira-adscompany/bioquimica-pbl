@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Conhecendo o Mundo Micro — Apresentação Final</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="img/capa-maoverde.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#060B18;
+  --navy2:#0B1430;
+  --neon:#39FFA0;
+  --violet:#BE78FF;
+  --pink:#FF5CA8;
+  --gold:#FFC53D;
+  --txt:#EDF3FF;
+  --mut:rgba(237,243,255,.74);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--txt)}
+
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:46px 70px;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+  overflow:hidden;
+  background:
+    radial-gradient(1100px 620px at 88% -12%, rgba(190,120,255,.14), transparent 60%),
+    radial-gradient(900px 600px at -8% 112%, rgba(57,255,160,.10), transparent 60%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
+}
+.slide.active{opacity:1;pointer-events:auto}
+
+h1{font-size:clamp(34px,4.6vw,64px);font-weight:900;line-height:1.12;text-align:center}
+h2{font-size:clamp(25px,3.2vw,44px);font-weight:900;line-height:1.16;text-align:center}
+.kicker{
+  font-size:clamp(11px,1.1vw,15px);font-weight:800;letter-spacing:4px;
+  text-transform:uppercase;color:var(--neon);margin-bottom:14px;text-align:center;
+}
+.kicker.violet{color:var(--violet)}
+.kicker.pink{color:var(--pink)}
+.kicker.gold{color:var(--gold)}
+.sub{font-size:clamp(14px,1.55vw,21px);font-weight:600;color:var(--mut);text-align:center;line-height:1.55}
+
+.slide.active .in1{animation:up .7s cubic-bezier(.22,1,.36,1) both}
+.slide.active .in2{animation:up .7s cubic-bezier(.22,1,.36,1) .15s both}
+.slide.active .in3{animation:up .7s cubic-bezier(.22,1,.36,1) .3s both}
+.slide.active .in4{animation:up .7s cubic-bezier(.22,1,.36,1) .45s both}
+@keyframes up{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:translateY(0)}}
+
+.frame{display:flex;justify-content:center;gap:clamp(12px,1.6vw,24px)}
+.frame img{
+  max-height:52vh;max-width:44vw;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 22px 60px rgba(0,0,0,.55);
+  object-fit:cover;
+}
+.frame.single img{max-width:80vw}
+
+.cards{display:flex;gap:clamp(12px,1.7vw,24px);flex-wrap:wrap;justify-content:center;margin-top:24px}
+.card{
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:clamp(15px,1.9vw,26px) clamp(15px,1.7vw,24px);
+  width:clamp(200px,21vw,300px);
+  backdrop-filter:blur(6px);
+}
+.card .ic{font-size:clamp(25px,2.5vw,38px);margin-bottom:10px}
+.card h3{font-size:clamp(14px,1.45vw,19px);font-weight:800;margin-bottom:8px}
+.card p{font-size:clamp(12px,1.18vw,16px);font-weight:500;color:var(--mut);line-height:1.5}
+.card.neon{border-color:rgba(57,255,160,.45)}
+.card.violet{border-color:rgba(190,120,255,.5)}
+.card.pink{border-color:rgba(255,92,168,.5)}
+.card.gold{border-color:rgba(255,197,61,.5)}
+
+.pill{
+  display:inline-block;
+  background:rgba(57,255,160,.1);
+  border:1px solid rgba(57,255,160,.5);
+  color:var(--neon);
+  font-weight:800;font-size:clamp(12px,1.2vw,16px);
+  padding:8px 22px;border-radius:999px;
+}
+
+.big-stat{font-size:clamp(54px,7.5vw,110px);font-weight:900;color:var(--neon);line-height:1}
+.stats{display:flex;gap:clamp(16px,3vw,54px);flex-wrap:wrap;justify-content:center;margin-top:22px}
+.stat{text-align:center}
+.stat .n{font-size:clamp(42px,5.2vw,84px);font-weight:900;color:var(--neon);line-height:1.05}
+.stat.v .n{color:var(--violet)}
+.stat.p .n{color:var(--pink)}
+.stat.g .n{color:var(--gold)}
+.stat .l{font-size:clamp(12px,1.25vw,17px);font-weight:700;color:var(--mut);margin-top:8px;max-width:220px}
+
+.equipe{display:grid;grid-template-columns:repeat(3,minmax(220px,300px));gap:clamp(8px,1.1vw,16px);margin-top:22px}
+.membro{
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:clamp(10px,1.2vw,16px) clamp(12px,1.4vw,20px);text-align:left;
+}
+.membro b{font-size:clamp(12px,1.25vw,17px);font-weight:800;display:block}
+.membro span{font-size:clamp(10px,1vw,14px);font-weight:600;color:var(--neon)}
+.membro.v span{color:var(--violet)}
+.membro.p span{color:var(--pink)}
+.membro.g span{color:var(--gold)}
+
+.timeline{display:flex;gap:clamp(8px,1vw,16px);flex-wrap:wrap;justify-content:center;margin-top:26px}
+.tl{
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;padding:clamp(12px,1.4vw,20px);width:clamp(150px,15vw,210px);text-align:center;
+}
+.tl .mes{font-weight:900;color:var(--neon);font-size:clamp(13px,1.3vw,18px);letter-spacing:2px}
+.tl p{font-size:clamp(11px,1.1vw,15px);font-weight:600;color:var(--mut);margin-top:8px;line-height:1.45}
+
+.germ{position:absolute;font-size:clamp(22px,2.6vw,42px);opacity:.14;animation:flo 9s ease-in-out infinite;pointer-events:none}
+@keyframes flo{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-26px) rotate(8deg)}}
+
+video{
+  max-height:66vh;max-width:84vw;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 26px 70px rgba(0,0,0,.6);
+  background:#000;
+}
+
+#progress{
+  position:fixed;bottom:0;left:0;height:5px;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  transition:width .35s ease;z-index:100;
+}
+#counter{
+  position:fixed;bottom:14px;right:22px;
+  font-size:14px;font-weight:700;color:rgba(237,243,255,.4);z-index:100;
+}
+
+@media(max-width:768px){
+  .slide{padding:26px 16px}
+  .frame{flex-direction:column;align-items:center}
+  .frame img{max-width:92vw;max-height:38vh}
+  .card{width:86vw}
+  .equipe{grid-template-columns:1fr}
+}
+@media print{
+  html,body{overflow:visible!important;height:auto!important}
+  .slide{position:relative!important;opacity:1!important;animation:none!important;
+    page-break-after:always;height:100vh;width:100vw}
+  #progress,#counter{display:none}
+  @page{size:A4 landscape;margin:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" style="width:0%"></div>
+<div id="counter">1 / 19</div>
+
+<!-- ========== 1. CAPA ========== -->
+<div class="slide active">
+  <span class="germ" style="top:12%;left:8%">🦠</span>
+  <span class="germ" style="top:70%;left:86%;animation-delay:2s">🧫</span>
+  <span class="germ" style="top:20%;left:88%;animation-delay:4s">🔬</span>
+  <p class="kicker in1">Atividades Práticas Interdisciplinares de Extensão I &bull; UNINASSAU Barreiras</p>
+  <h1 class="in2">🦠 Conhecendo o Mundo Micro</h1>
+  <p class="sub in3" style="max-width:920px;margin-top:14px">A simulação fluorescente da contaminação cruzada<br>como método ativo de ensino em Barreiras-BA</p>
+  <div class="frame in4" style="margin-top:22px"><img fetchpriority="high" decoding="sync" src="img/capa-maoverde.webp" alt="Mão sob luz negra com marcador fluorescente" style="max-height:40vh"></div>
+  <p class="sub in4" style="margin-top:16px;font-size:clamp(12px,1.2vw,16px)">Professora: Jainara Cristine Lima Leitão &bull; Grupo Thayama &bull; 2026.2</p>
+</div>
+
+<!-- ========== 2. EQUIPE ========== -->
+<div class="slide">
+  <p class="kicker in1">Quem fez acontecer</p>
+  <h2 class="in2">9 acadêmicos, 4 cursos, 1 missão</h2>
+  <div class="equipe in3">
+    <div class="membro"><b>Charles Yure da Silva Ribeiro</b><span>Biomedicina</span></div>
+    <div class="membro"><b>Davidson Soledade Pereira</b><span style="color:var(--gold)">Nutrição</span></div>
+    <div class="membro v"><b>Iane Dias Gomes</b><span>Farmácia</span></div>
+    <div class="membro p"><b>Jeicy de Jesus Pereira</b><span>Fisioterapia</span></div>
+    <div class="membro v"><b>Kleber Alves dos Santos</b><span>Farmácia</span></div>
+    <div class="membro v"><b>Marcos Vinicius Modesto Campos</b><span>Farmácia</span></div>
+    <div class="membro p"><b>Maria Carminha Rodrigues da Silva</b><span>Fisioterapia</span></div>
+    <div class="membro"><b>Thayama da Silva Rodrigues</b><span>Biomedicina</span></div>
+    <div class="membro"><b>Vinicius Jorge de A. Francischini</b><span>Biomedicina</span></div>
+  </div>
+  <p class="sub in4" style="margin-top:20px">Cada integrante assumiu uma frente: escrita, materiais, logística, compras, dinâmica e apresentação.</p>
+</div>
+
+<!-- ========== 3. ROTEIRO ========== -->
+<div class="slide">
+  <p class="kicker in1">Roteiro</p>
+  <h2 class="in2">O caminho desta apresentação</h2>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">💡</div><h3>1. O projeto</h3><p>O problema, o contexto e os objetivos</p></div>
+    <div class="card violet"><div class="ic">🛠️</div><h3>2. A preparação</h3><p>Método ativo e materiais produzidos</p></div>
+    <div class="card pink"><div class="ic">🏫</div><h3>3. A intervenção</h3><p>Os três momentos na COOPEB</p></div>
+    <div class="card gold"><div class="ic">📊</div><h3>4. Resultados</h3><p>Números e o que observamos</p></div>
+    <div class="card neon"><div class="ic">🎬</div><h3>5. O registro</h3><p>Vídeo do dia da ação</p></div>
+  </div>
+</div>
+
+<!-- ========== 4. O PROBLEMA ========== -->
+<div class="slide">
+  <p class="kicker in1">Parte 1 — O projeto</p>
+  <h2 class="in2">O inimigo que ninguém enxerga</h2>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">🦠</div><h3>Invisível a olho nu</h3><p>Microrganismos estão em mãos, objetos e superfícies — e a criança não consegue vê-los, o que dificulta entender a contaminação</p></div>
+    <div class="card violet"><div class="ic">🤝</div><h3>Contaminação cruzada</h3><p>O contato transfere agentes contaminantes entre mãos, pessoas e objetos compartilhados do dia a dia escolar</p></div>
+    <div class="card pink"><div class="ic">🧼</div><h3>Higiene das mãos</h3><p>É uma das medidas mais eficazes de prevenção de doenças — e um hábito que se forma na infância</p></div>
+    <div class="card gold"><div class="ic">🏫</div><h3>A escola é o lugar</h3><p>98,3% das crianças de 6 a 14 anos estão na escola: espaço estratégico para educação em saúde</p></div>
+  </div>
+  <p class="sub in4" style="margin-top:20px;max-width:860px">Nossa resposta: <b style="color:var(--neon)">tornar o invisível visível</b> com uma simulação fluorescente, lúdica e segura.</p>
+</div>
+
+<!-- ========== 5. CONTEXTO ========== -->
+<div class="slide">
+  <p class="kicker in1">Parte 1 — O projeto</p>
+  <h2 class="in2">Onde a ação aconteceu</h2>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">📍</div><h3>Barreiras-BA</h3><p>159.734 habitantes (Censo 2022), polo do Oeste baiano — IDHM 0,721 e forte rede educacional</p></div>
+    <div class="card violet"><div class="ic">🏫</div><h3>COOPEB</h3><p>Cooperativa Educacional de Barreiras: rede privada, ~572 estudantes, do maternal ao ensino médio</p></div>
+    <div class="card pink"><div class="ic">🧒</div><h3>A turma</h3><p>2º ano do Ensino Fundamental — crianças de 7 a 8 anos, acompanhadas pela equipe pedagógica</p></div>
+  </div>
+  <p class="sub in4" style="margin-top:20px;max-width:880px">Saneamento ainda é desafio na região: cerca de 9% da população usa fossas rudimentares —<br>mais um motivo para educar em higiene desde cedo.</p>
+</div>
+
+<!-- ========== 6. OBJETIVOS ========== -->
+<div class="slide">
+  <p class="kicker in1">Parte 1 — O projeto</p>
+  <h2 class="in2">O que fomos fazer lá</h2>
+  <p class="sub in2" style="margin-top:10px;max-width:900px"><b style="color:var(--neon)">Objetivo geral:</b> conscientizar os escolares sobre a presença e a disseminação<br>de microrganismos no cotidiano e a importância da higienização correta das mãos.</p>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">1️⃣</div><h3>Apresentar</h3><p>Conceitos básicos de microbiologia e vias de transmissão</p></div>
+    <div class="card violet"><div class="ic">2️⃣</div><h3>Demonstrar</h3><p>A contaminação cruzada entre mãos, objetos e superfícies</p></div>
+    <div class="card pink"><div class="ic">3️⃣</div><h3>Ensinar</h3><p>A técnica correta de higienização das mãos</p></div>
+    <div class="card gold"><div class="ic">4️⃣</div><h3>Multiplicar</h3><p>Incentivar boas práticas na escola e em casa</p></div>
+    <div class="card neon"><div class="ic">5️⃣</div><h3>Avaliar</h3><p>O conhecimento antes e depois da intervenção</p></div>
+  </div>
+</div>
+
+<!-- ========== 7. METODOLOGIA ========== -->
+<div class="slide">
+  <p class="kicker violet in1">Parte 2 — A preparação</p>
+  <h2 class="in2">Método ativo: aprender fazendo</h2>
+  <div class="cards in3">
+    <div class="card violet"><div class="ic">🗣️</div><h3>Exposição dialogada</h3><p>Slides lúdicos e perguntas — nunca aula expositiva pura: a criança participa o tempo todo</p></div>
+    <div class="card neon"><div class="ic">🔦</div><h3>Simulação fluorescente</h3><p>Loção que brilha na luz negra simula a contaminação — sem nenhum microrganismo real envolvido</p></div>
+    <div class="card pink"><div class="ic">🧪</div><h3>Dinâmicas práticas</h3><p>Experimento com pó rosa comestível e lavagem real das mãos, com a turma como protagonista</p></div>
+    <div class="card gold"><div class="ic">📝</div><h3>Sondagem antes e depois</h3><p>Perguntas orais no início e no fim medem o que a turma já sabia e o que aprendeu</p></div>
+  </div>
+  <p class="sub in4" style="margin-top:18px;max-width:880px">Base científica: estudos mostram que a concretização fluorescente melhora a adesão<br>à higiene das mãos em escolares (Öncü et al., 2019; Goel &amp; Chandrashekar, 2020).</p>
+</div>
+
+<!-- ========== 8. MATERIAIS ========== -->
+<div class="slide">
+  <p class="kicker violet in1">Parte 2 — A preparação</p>
+  <h2 class="in2">Tudo feito pelo grupo</h2>
+  <div class="frame in3">
+    <img loading="lazy" decoding="sync" src="img/caixa-escura.webp" alt="Caixa escura personalizada do projeto" style="max-width:38vw;max-height:38vh">
+    <img loading="lazy" decoding="sync" src="img/kits.webp" alt="Kits de lembrancinhas" style="max-width:18vw;max-height:38vh">
+    <img loading="lazy" decoding="sync" src="img/entrega-panfletos.webp" alt="Equipe entregando os folders educativos aos alunos" style="max-width:34vw;max-height:38vh">
+  </div>
+  <div class="cards in4" style="margin-top:18px">
+    <div class="card violet" style="width:clamp(170px,16vw,230px)"><h3>📦 Caixa escura</h3><p>Personalizada com luz negra interna para o experimento</p></div>
+    <div class="card neon" style="width:clamp(170px,16vw,230px)"><h3>🧴 Loção fluorescente</h3><p>Própria para treinamento de higiene</p></div>
+    <div class="card pink" style="width:clamp(170px,16vw,230px)"><h3>📄 20 folders</h3><p>Material didático sobre lavagem das mãos</p></div>
+    <div class="card gold" style="width:clamp(170px,16vw,230px)"><h3>🎁 20 kits</h3><p>Bombom, balas e álcool em gel de lembrança</p></div>
+  </div>
+</div>
+
+<!-- ========== 9. A INTERVENÇÃO (DADOS) ========== -->
+<div class="slide">
+  <p class="kicker pink in1">Parte 3 — A intervenção</p>
+  <h2 class="in2">12 de novembro de 2026</h2>
+  <div class="frame in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/equipe-corredor.webp" alt="Equipe de jaleco na escola" style="max-height:44vh">
+    <img loading="lazy" decoding="sync" src="img/sala-turma.webp" alt="Turma do 2º ano em sala" style="max-height:44vh">
+  </div>
+  <div class="stats in4">
+    <div class="stat"><div class="n">15h30</div><div class="l">às 17h, na COOPEB</div></div>
+    <div class="stat v"><div class="n">16</div><div class="l">crianças do 2º ano presentes</div></div>
+    <div class="stat p"><div class="n">9</div><div class="l">acadêmicos de jaleco em ação</div></div>
+  </div>
+</div>
+
+<!-- ========== 10. MOMENTO 1 ========== -->
+<div class="slide">
+  <p class="kicker pink in1">Parte 3 — A intervenção</p>
+  <h2 class="in2">Momento 1 — Sondagem e conversa</h2>
+  <div class="frame in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/slide-projetado.webp" alt="Slide projetado para a turma" style="max-height:46vh">
+  </div>
+  <div class="cards in4" style="margin-top:16px">
+    <div class="card pink" style="width:clamp(240px,26vw,360px)"><h3>❓ O que a turma já sabia</h3><p>Perguntamos o que são microrganismos e bactérias e para que serve o microscópio — e a turma surpreendeu, respondendo muito bem</p></div>
+    <div class="card neon" style="width:clamp(240px,26vw,360px)"><h3>🔁 Ajuste em tempo real</h3><p>Com a base boa, avançamos da teoria para a aplicação prática — exatamente o que um método ativo permite fazer</p></div>
+  </div>
+</div>
+
+<!-- ========== 11. MOMENTO 2 ========== -->
+<div class="slide">
+  <p class="kicker pink in1">Parte 3 — A intervenção</p>
+  <h2 class="in2">Momento 2 — A luz negra revela</h2>
+  <div class="frame in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/capa-maoverde.webp" alt="Mão brilhando sob luz negra" style="max-height:44vh">
+    <img loading="lazy" decoding="sync" src="img/maoverde-2.webp" alt="Contaminação simulada visível na luz negra" style="max-height:44vh">
+  </div>
+  <p class="sub in4" style="margin-top:16px;max-width:900px">A loção fluorescente passou de mão em mão e de objeto em objeto — e, dentro da caixa escura,<br>as crianças <b style="color:var(--neon)">viram com os próprios olhos</b> o caminho da contaminação cruzada.<br><span style="opacity:.8">Sempre esclarecendo: o brilho simula, não detecta microrganismos reais.</span></p>
+</div>
+
+<!-- ========== 12. MOMENTO 3 ========== -->
+<div class="slide">
+  <p class="kicker pink in1">Parte 3 — A intervenção</p>
+  <h2 class="in2">Momento 3 — A dinâmica do pó rosa</h2>
+  <div class="frame in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/venda-guiada.webp" alt="Estudante vendada na dinâmica" style="max-height:42vh">
+    <img loading="lazy" decoding="sync" src="img/maos-rosa.webp" alt="Mãos com pó rosa" style="max-height:42vh">
+    <img loading="lazy" decoding="sync" src="img/lavagem-balde.webp" alt="Lavagem das mãos" style="max-height:42vh">
+  </div>
+  <p class="sub in4" style="margin-top:16px;max-width:920px">Uma voluntária, de olhos vendados, lavou as mãos como faz em casa. O pó rosa mostrou o resultado:<br>boa técnica geral — e a deixa perfeita para reforçar <b style="color:var(--pink)">unhas, pontas dos dedos e espaços entre os dedos</b>.</p>
+</div>
+
+<!-- ========== 13. ENCERRAMENTO DA AÇÃO ========== -->
+<div class="slide">
+  <p class="kicker pink in1">Parte 3 — A intervenção</p>
+  <h2 class="in2">Perguntas, folders e lembranças</h2>
+  <div class="frame in3" style="margin-top:14px">
+    <img loading="lazy" decoding="sync" src="img/entrega-kit.webp" alt="Entrega de kit a uma criança" style="max-height:44vh">
+    <img loading="lazy" decoding="sync" src="img/equipe-jalecos.webp" alt="Equipe reunida na escola" style="max-height:44vh">
+  </div>
+  <p class="sub in4" style="margin-top:16px;max-width:920px">No fim, as perguntas vieram delas: "qual o tamanho de um micróbio?", "dá pra matar esfregando?",<br>"o sabonete é seguro?" — <b style="color:var(--neon)">curiosidade científica genuína</b>, respondida em linguagem acessível.<br>Cada criança levou folder educativo e kit com álcool em gel.</p>
+</div>
+
+<!-- ========== 14. RESULTADOS EM NÚMEROS ========== -->
+<div class="slide">
+  <p class="kicker gold in1">Parte 4 — Resultados</p>
+  <h2 class="in2">A ação em números</h2>
+  <div class="stats in3" style="margin-top:30px">
+    <div class="stat"><div class="n">16</div><div class="l">escolares beneficiados diretamente</div></div>
+    <div class="stat v"><div class="n">9</div><div class="l">acadêmicos envolvidos, de 4 cursos</div></div>
+    <div class="stat p"><div class="n">20</div><div class="l">materiais didáticos produzidos</div></div>
+    <div class="stat g"><div class="n">20</div><div class="l">kits de donativos entregues</div></div>
+    <div class="stat"><div class="n">1h30</div><div class="l">de intervenção teórico-prática</div></div>
+  </div>
+  <p class="sub in4" style="margin-top:28px;max-width:860px">Uma atividade, uma instituição beneficiada — e uma turma inteira<br>que agora sabe explicar por que lavar as mãos importa.</p>
+</div>
+
+<!-- ========== 15. RESULTADOS QUALITATIVOS ========== -->
+<div class="slide">
+  <p class="kicker gold in1">Parte 4 — Resultados</p>
+  <h2 class="in2">O que observamos na turma</h2>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">🙋</div><h3>Participação ativa</h3><p>As crianças responderam, perguntaram e disputaram espaço para participar das dinâmicas</p></div>
+    <div class="card violet"><div class="ic">🧠</div><h3>Base acima do esperado</h3><p>A sondagem inicial mostrou conhecimentos prévios sólidos — a abordagem subiu de nível na hora</p></div>
+    <div class="card pink"><div class="ic">🔍</div><h3>Curiosidade científica</h3><p>Perguntas espontâneas sobre tamanho de microrganismos e segurança dos produtos de higiene</p></div>
+    <div class="card gold"><div class="ic">🏠</div><h3>Efeito multiplicador</h3><p>Autocuidado reforçado e hábitos levados para casa — a essência da extensão universitária</p></div>
+  </div>
+</div>
+
+<!-- ========== 16. O QUE LEVAMOS ========== -->
+<div class="slide">
+  <p class="kicker gold in1">Parte 4 — Resultados</p>
+  <h2 class="in2">O que a experiência deixou em nós</h2>
+  <div class="cards in3">
+    <div class="card neon"><div class="ic">🗣️</div><h3>Tradução do saber</h3><p>Adaptar microbiologia e biossegurança para a linguagem de crianças de 7 anos é um exercício raro — e transformador</p></div>
+    <div class="card violet"><div class="ic">🤝</div><h3>Trabalho coletivo</h3><p>9 pessoas, 4 cursos, uma só entrega: divisão de papéis, escuta ativa e organização</p></div>
+    <div class="card pink"><div class="ic">⚡</div><h3>Jogo de cintura</h3><p>Responder perguntas espontâneas exige domínio do conteúdo e capacidade de improviso</p></div>
+    <div class="card gold"><div class="ic">❤️</div><h3>Responsabilidade social</h3><p>A formação ganha sentido quando o conhecimento sai do campus e chega à comunidade</p></div>
+  </div>
+</div>
+
+<!-- ========== 17. CRONOGRAMA ========== -->
+<div class="slide">
+  <p class="kicker in1">Linha do tempo</p>
+  <h2 class="in2">Do papel à sala de aula</h2>
+  <div class="timeline in3">
+    <div class="tl"><div class="mes">AGO</div><p>Planejamento e pré-projeto</p></div>
+    <div class="tl"><div class="mes">SET</div><p>Contato com a COOPEB e ajustes da proposta</p></div>
+    <div class="tl"><div class="mes">OUT</div><p>Produção dos materiais e entrega acadêmica do projeto</p></div>
+    <div class="tl"><div class="mes">NOV</div><p>Testes, logística e a intervenção em 12/11</p></div>
+    <div class="tl"><div class="mes">NOV–DEZ</div><p>Avaliação dos resultados, relatório final e esta apresentação</p></div>
+  </div>
+  <p class="sub in4" style="margin-top:24px">Cada etapa cumprida dentro do cronograma proposto no projeto.</p>
+</div>
+
+<!-- ========== 18. VÍDEO ========== -->
+<div class="slide">
+  <p class="kicker in1">Parte 5 — O registro</p>
+  <h2 class="in2">O dia, em 2 minutos</h2>
+  <div class="in3" style="margin-top:18px;display:flex;justify-content:center">
+    <video controls preload="metadata" src="video/video-intervencao.mp4#t=2.5"></video>
+  </div>
+</div>
+
+<!-- ========== 19. OBRIGADO ========== -->
+<div class="slide">
+  <span class="germ" style="top:14%;left:7%">🦠</span>
+  <span class="germ" style="top:72%;left:88%;animation-delay:3s">🧼</span>
+  <p class="kicker in1">Conhecendo o Mundo Micro &bull; 2026.2</p>
+  <h1 class="in2">Obrigado! 🧼✨</h1>
+  <div class="frame single in3" style="margin-top:18px"><img loading="lazy" decoding="sync" src="img/grupo-final.webp" alt="Equipe e turma da COOPEB reunidas" style="max-height:46vh"></div>
+  <p class="sub in4" style="margin-top:16px;max-width:900px">Referências: Öncü et al. (2019) &bull; Goel &amp; Chandrashekar (2020) &bull; ANVISA (2026) &bull; OMS/UNICEF (2025) &bull; IBGE (2022)<br><b style="color:var(--neon)">Extensão é isso: a universidade de mãos dadas com a comunidade.</b></p>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+function goTo(n){
+  if(n < 0 || n >= total) return;
+  const vid = slides[current].querySelector('video');
+  if(vid) vid.pause();
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current+1)/total*100)+'%';
+  document.getElementById('counter').textContent = (current+1)+' / '+total;
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){ if(e.target.tagName!=='VIDEO'){ goTo(current+1); e.preventDefault(); } }
+  if(e.key==='ArrowLeft'||e.key==='Backspace') goTo(current-1);
+  if(e.key==='Home') goTo(0);
+  if(e.key==='End') goTo(total-1);
+});
+
+let touchX = 0;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(Math.abs(dx) > 50) dx < 0 ? goTo(current+1) : goTo(current-1);
+});
+
+document.addEventListener('click', e => {
+  if(e.target.tagName === 'VIDEO') return;
+  const w = window.innerWidth;
+  if(e.clientX > w * 0.7) goTo(current+1);
+  else if(e.clientX < w * 0.3) goTo(current-1);
+});
+
+const hash = parseInt(location.hash.replace('#',''));
+goTo(hash > 0 && hash <= total ? hash - 1 : 0);
+</script>
+</body>
+</html>
